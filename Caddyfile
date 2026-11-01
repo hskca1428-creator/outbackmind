@@ -1,0 +1,9 @@
+app.outbackmind.au {
+    encode gzip
+    reverse_proxy frontend:80
+}
+
+api.outbackmind.au {
+    encode gzip
+    reverse_proxy api:8000
+}

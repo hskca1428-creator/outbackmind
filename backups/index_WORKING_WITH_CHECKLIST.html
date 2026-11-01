@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NomadMate | OutbackMind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --muted-2: #94a3b8;
+      --accent: #d97706;
+      --accent-2: #f59e0b;
+      --danger: #b91c1c;
+      --danger-2: #7f1d1d;
+      --ok: #065f46;
+      --ok-2: #10b981;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(245,158,11,0.08), transparent 28%),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 18px 60px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-left h1 {
+      font-size: 42px;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-left p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .brand-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    .hero-card {
+      min-width: 260px;
+      background: linear-gradient(180deg, rgba(245,158,11,0.12), rgba(217,119,6,0.05));
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      color: #fde68a;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: #fef3c7;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(17,24,39,0.92);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .label {
+      font-size: 12px;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(217,119,6,0.15);
+    }
+
+    .mode-wrap {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .mode-pill:hover {
+      border-color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.08s ease, opacity 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #0b1220;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .status {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #fbbf24;
+      min-height: 22px;
+    }
+
+    .output {
+      margin-top: 18px;
+      padding: 0;
+      border-radius: 16px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .output-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      font-size: 13px;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: bold;
+    }
+
+    .output-body {
+      padding: 18px;
+      white-space: pre-wrap;
+      line-height: 1.7;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .output.emergency {
+      border-color: rgba(185,28,28,0.6);
+      box-shadow: 0 0 0 1px rgba(185,28,28,0.15);
+    }
+
+    .output.emergency .output-header {
+      background: rgba(185,28,28,0.14);
+      color: #fecaca;
+      border-bottom-color: rgba(185,28,28,0.3);
+    }
+
+    .side-card-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .mini-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 0;
+    }
+
+    .history {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .history-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .history-q {
+      font-weight: bold;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .history-a {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 8px;
+      white-space: pre-wrap;
+    }
+
+    .history-time {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted-2);
+    }
+
+    .emergency-badge {
+      display: inline-block;
+      padding: 5px 9px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--danger), var(--danger-2));
+      color: #fff;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .normal-badge {
+      display: inline-block;
+      padding: 5px 9px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: #d1fae5;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .helper-list {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .checklist-output {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .checklist-output:empty {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-left">
+        <h1>NomadMate</h1>
+        <p>Your OutbackMind assistant for Australian camping, caravans, remote travel, and emergency guidance. Ask in Normal Mode for planning, or Emergency Mode for urgent step-by-step help.</p>
+
+        <div class="brand-badges">
+          <div class="badge">🧠 AI + RAG</div>
+          <div class="badge">🚐 Caravan-ready</div>
+          <div class="badge">⚠️ Emergency Mode</div>
+          <div class="badge">🇦🇺 Australia-focused</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-title">Current Setup</div>
+        <p>Live frontend, live API, structured answers, saved history, RAG knowledge, and emergency-specific responses.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Ask OutbackMind</div>
+        <textarea id="question" placeholder="Example: Someone has signs of heatstroke while camping remotely. What should I do right now?"></textarea>
+
+        <div class="mode-wrap">
+          <label class="mode-pill">
+            <input type="radio" name="mode" value="normal" checked />
+            <span>Normal Mode</span>
+          </label>
+
+          <label class="mode-pill">
+            <input type="radio" name="mode" value="emergency" />
+            <span>Emergency Mode</span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="askBtn" class="btn-primary">Ask OutbackMind</button>
+          <button id="refreshBtn" class="btn-secondary">Refresh History</button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="output" id="outputCard">
+          <div class="output-header" id="outputHeader">Latest Answer</div>
+          <div class="output-body" id="output">Your answer will appear here.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="side-card-title">How to use it</h3>
+        <p class="mini-note">Use Normal Mode for planning, gear, routes, and caravan travel. Use Emergency Mode when the situation needs immediate, action-first instructions.</p>
+
+        <ul class="helper-list">
+          <li>Use short, direct questions for urgent situations.</li>
+          <li>Ask about water, fuel, heat, wildlife, or breakdowns.</li>
+          <li>Refresh history to review recent guidance.</li>
+          <li>Treat emergency advice as a guide, not a replacement for official emergency services.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 22px;">
+      <div class="label">Recent Questions</div>
+      <div id="history" class="history">Loading history...</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:30px;">
+  <h2 style="margin-bottom:10px;">🗺️ Trip Planner</h2>
+
+  <textarea id="tripInput" placeholder="Plan a 3-day camping trip in Victoria with a 4WD..."
+    style="width:100%; padding:10px; border-radius:8px; background:#111827; color:#fff; border:1px solid #334155;"></textarea>
+
+  <div style="margin-top:10px;">
+    <button id="planBtn">Generate Trip Plan</button>
+    <button id="refreshPlansBtn">Refresh Plans</button>
+  </div>
+
+  <div id="tripStatus" style="margin-top:10px; color:#94a3b8;"></div>
+
+  <div id="tripOutput" style="margin-top:15px;"></div>
+
+  <h3 style="margin-top:25px;">Saved Plans</h3>
+  <div id="tripHistory"></div>
+</div>
+
+<div class="card" style="margin:30px auto 0; max-width:1100px;">
+  <div class="label">Checklist Generator</div>
+  <h2 style="margin:0 0 10px;">📋 Build a trip checklist</h2>
+  <p class="mini-note">Describe the trip, vehicle, travellers, and conditions. OutbackMind will create a practical Australian packing and preparation checklist.</p>
+
+  <textarea id="checklistInput" placeholder="Example: Create a checklist for a 3-day remote camping trip in Western Australia for two people travelling by 4WD"></textarea>
+
+  <div class="actions">
+    <button id="checklistBtn" class="btn-primary">Generate Checklist</button>
+    <button id="copyChecklistBtn" class="btn-secondary" disabled>Copy Checklist</button>
+  </div>
+
+  <div id="checklistStatus" class="status"></div>
+  <div id="checklistOutput" class="checklist-output"></div>
+</div>
+
+ <script>
+  const askBtn = document.getElementById("askBtn");
+  const refreshBtn = document.getElementById("refreshBtn");
+  const questionEl = document.getElementById("question");
+  const outputEl = document.getElementById("output");
+  const outputCardEl = document.getElementById("outputCard");
+  const outputHeaderEl = document.getElementById("outputHeader");
+  const statusEl = document.getElementById("status");
+  const historyEl = document.getElementById("history");
+
+  const planBtn = document.getElementById("planBtn");
+  const tripInput = document.getElementById("tripInput");
+  const tripOutput = document.getElementById("tripOutput");
+  const tripStatus = document.getElementById("tripStatus");
+  const tripHistory = document.getElementById("tripHistory");
+  const refreshPlansBtn = document.getElementById("refreshPlansBtn");
+
+  const checklistBtn = document.getElementById("checklistBtn");
+  const copyChecklistBtn = document.getElementById("copyChecklistBtn");
+  const checklistInput = document.getElementById("checklistInput");
+  const checklistStatus = document.getElementById("checklistStatus");
+  const checklistOutput = document.getElementById("checklistOutput");
+  let latestChecklist = "";
+
+  function getSelectedMode() {
+    const checked = document.querySelector('input[name="mode"]:checked');
+    return checked ? checked.value : "normal";
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
+  function formatAnswer(text) {
+    const linked = escapeHtml(text).replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#f59e0b;">$1</a>'
+    );
+
+    return linked.replace(/\n/g, "<br>");
+  }
+
+  function formatPlan(text) {
+    return escapeHtml(text).replace(/\n/g, "<br>");
+  }
+
+  function formatChecklist(text) {
+    return escapeHtml(text).replace(/\n/g, "<br>");
+  }
+
+function renderRecommendedGear(items) {
+  if (!items || !items.length) {
+    return "";
+  }
+
+  return `
+    <div style="margin-top:18px; padding-top:16px; border-top:1px solid #334155;">
+      <div style="font-size:12px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; font-weight:bold;">
+        🛒 Smart Gear Recommendations
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        ${items.map(item => `
+          <div style="
+            background:#0b1220;
+            border:1px solid #334155;
+            border-radius:12px;
+            padding:10px 12px;
+          ">
+            <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+              <div>
+                <div style="font-size:14px; color:#f59e0b; font-weight:700;">
+                  ${escapeHtml(item.name || "Recommended Gear")}
+                </div>
+                <div style="font-size:12px; color:#cbd5e1; line-height:1.4; margin-top:4px;">
+                  ${escapeHtml(item.use_case || "")}
+                </div>
+              </div>
+
+              <div style="
+                white-space:nowrap;
+                font-size:10px;
+                color:#10b981;
+                border:1px solid rgba(16,185,129,0.4);
+                border-radius:999px;
+                padding:3px 7px;
+                font-weight:700;
+              ">
+                ${escapeHtml(item.priority || "Recommended")}
+              </div>
+            </div>
+
+            <div style="font-size:10px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.06em; margin-top:6px;">
+              ${escapeHtml(item.category || "Gear")}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+  async function loadHistory() {
+    historyEl.textContent = "Loading...";
+    try {
+      const response = await fetch("https://api.outbackmind.au/history");
+      if (!response.ok) {
+        throw new Error(`History API returned ${response.status}`);
+      }
+
+      const items = await response.json();
+
+      if (!items.length) {
+        historyEl.textContent = "No saved questions yet.";
+        return;
+      }
+
+      historyEl.innerHTML = items.map(item => `
+        <div class="history-item">
+          <div class="history-top">
+            <div class="history-q">Q: ${escapeHtml(item.question)}</div>
+            ${item.mode === "emergency"
+              ? '<span class="emergency-badge">EMERGENCY</span>'
+              : '<span class="normal-badge">NORMAL</span>'}
+          </div>
+          <div class="history-a">${formatAnswer(item.answer)}</div>
+          <div class="history-time">${escapeHtml(item.created_at)}</div>
+        </div>
+      `).join("");
+    } catch (error) {
+      historyEl.textContent = `Failed to load history: ${error.message}`;
+    }
+  }
+
+  async function loadTripPlans() {
+  tripHistory.textContent = "Loading...";
+
+  try {
+    const response = await fetch("https://api.outbackmind.au/trip-plans");
+    if (!response.ok) {
+      throw new Error(`Trip Plans API returned ${response.status}`);
+    }
+
+    const items = await response.json();
+
+    if (!items.length) {
+      tripHistory.textContent = "No saved plans yet.";
+      return;
+    }
+
+    tripHistory.innerHTML = items.map(item => `
+      <div class="history-item" style="margin-bottom:15px;">
+        <div><strong>${escapeHtml(item.request)}</strong></div>
+
+        <div id="trip-plan-${item.id}" style="margin-top:5px;">
+          ${formatPlan(item.plan)}
+        </div>
+
+        <div style="margin-top:8px;">
+          <button
+            class="copy-plan-btn"
+            data-plan-id="${item.id}"
+            style="
+              display:inline-block;
+              padding:6px 10px;
+              border-radius:8px;
+              background:#0b1220;
+              border:1px solid #334155;
+              color:#f59e0b;
+              font-weight:600;
+              font-size:12px;
+              margin-right:8px;
+              cursor:pointer;
+            "
+          >
+            📋 Copy Plan
+          </button>
+
+          <a
+            href="https://api.outbackmind.au/trip-plans/${item.id}/pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              display:inline-block;
+              padding:6px 10px;
+              border-radius:8px;
+              background:#0b1220;
+              border:1px solid #334155;
+              color:#f59e0b;
+              text-decoration:none;
+              font-weight:600;
+              font-size:12px;
+            "
+          >
+            📄 Download PDF
+          </a>
+        </div>
+
+        <div style="font-size:12px; color:#94a3b8; margin-top:5px;">
+          ${escapeHtml(item.created_at)}
+        </div>
+      </div>
+    `).join("");
+
+    document.querySelectorAll(".copy-plan-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.getAttribute("data-plan-id");
+    const el = document.getElementById(`trip-plan-${id}`);
+
+    if (!el) {
+      btn.textContent = "❌ Error";
+      return;
+    }
+
+       const rawText = el.innerText;
+
+// Clean + formatted version
+const formatted = `🗺️ Trip Plan\n\n${rawText}\n\nGenerated by OutbackMind`;
+
+navigator.clipboard.writeText(formatted)
+  .then(() => {
+    btn.textContent = "✅ Copied!";
+    setTimeout(() => {
+      btn.textContent = "📋 Copy Plan";
+    }, 1500);
+  })
+  .catch(() => {
+    btn.textContent = "❌ Failed";
+  });
+      });
+    });
+
+  } catch (error) {
+    tripHistory.textContent = `Failed to load plans: ${error.message}`;
+  }
+}
+
+  if (checklistBtn) {
+    checklistBtn.addEventListener("click", async () => {
+      const request = checklistInput.value.trim();
+
+      if (!request) {
+        checklistStatus.textContent = "Please describe the trip first.";
+        return;
+      }
+
+      checklistBtn.disabled = true;
+      copyChecklistBtn.disabled = true;
+      checklistStatus.textContent = "Generating your checklist...";
+      checklistOutput.innerHTML = "";
+
+      try {
+        const response = await fetch("https://api.outbackmind.au/generate-checklist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ request })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || `Checklist API returned ${response.status}`);
+        }
+
+        latestChecklist = data.checklist || "";
+        checklistOutput.innerHTML = formatChecklist(latestChecklist);
+        checklistStatus.textContent = "Checklist generated.";
+        copyChecklistBtn.disabled = !latestChecklist;
+      } catch (error) {
+        checklistStatus.textContent = `Could not generate checklist: ${error.message}`;
+      } finally {
+        checklistBtn.disabled = false;
+      }
+    });
+  }
+
+  if (copyChecklistBtn) {
+    copyChecklistBtn.addEventListener("click", async () => {
+      if (!latestChecklist) {
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(
+          `OutbackMind Trip Checklist\n\n${latestChecklist}\n\nGenerated by OutbackMind`
+        );
+        copyChecklistBtn.textContent = "Copied!";
+        setTimeout(() => {
+          copyChecklistBtn.textContent = "Copy Checklist";
+        }, 1500);
+      } catch (error) {
+        checklistStatus.textContent = "Could not copy the checklist.";
+      }
+    });
+  }
+
+  askBtn.addEventListener("click", async () => {
+    const question = questionEl.value.trim();
+    const mode = getSelectedMode();
+
+    if (!question) {
+      statusEl.textContent = "Please enter a question.";
+      return;
+    }
+
+    askBtn.disabled = true;
+    statusEl.textContent = mode === "emergency"
+      ? "🚨 Generating emergency guidance..."
+      : "⏳ Thinking...";
+
+    outputEl.textContent = "";
+    outputCardEl.classList.toggle("emergency", mode === "emergency");
+    outputHeaderEl.textContent = mode === "emergency"
+      ? "Emergency Response"
+      : "Latest Answer";
+
+    try {
+      const response = await fetch("https://api.outbackmind.au/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question, mode })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        let errorText = `API returned ${response.status}`;
+        if (data.detail) {
+          errorText = data.detail;
+        }
+        throw new Error(errorText);
+      }
+
+      outputEl.innerHTML =
+        formatAnswer(data.answer || "") +
+        renderRecommendedGear(data.recommended_gear || []);
+
+      statusEl.textContent = mode === "emergency"
+        ? "🚨 Emergency response received and saved."
+        : "✅ Response received and saved.";
+
+      questionEl.value = "";
+      await loadHistory();
+    } catch (error) {
+      outputEl.textContent = "Something went wrong while contacting OutbackMind.";
+      statusEl.textContent = "❌ " + error.message;
+    } finally {
+      askBtn.disabled = false;
+    }
+  });
+
+  if (planBtn) {
+    planBtn.addEventListener("click", async () => {
+      const request = tripInput.value.trim();
+
+      if (!request) {
+        tripStatus.textContent = "Please enter a trip request.";
+        return;
+      }
+
+      tripStatus.textContent = "⏳ Planning your trip...";
+      tripOutput.innerHTML = "";
+      planBtn.disabled = true;
+
+      try {
+        const response = await fetch("https://api.outbackmind.au/plan-trip", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ request })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || "Failed to generate trip");
+        }
+
+        tripOutput.innerHTML = formatPlan(data.plan || "");
+        tripStatus.textContent = "✅ Trip plan generated and saved.";
+        tripInput.value = "";
+        await loadTripPlans();
+      } catch (error) {
+        tripStatus.textContent = "❌ " + error.message;
+      } finally {
+        planBtn.disabled = false;
+      }
+    });
+  }
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", loadHistory);
+  }
+
+  if (refreshPlansBtn) {
+    refreshPlansBtn.addEventListener("click", loadTripPlans);
+  }
+
+  loadHistory();
+  loadTripPlans();
+</script>
+</body>
+</html>

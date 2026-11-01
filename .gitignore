@@ -1,0 +1,13 @@
+.env
+.env.*
+*.env
+backups/env*
+db-backups/
+*.sql
+*.sql.gz
+*.dump
+__pycache__/
+*.pyc
+*.swp
+.*.swp
+api/knowledge/
