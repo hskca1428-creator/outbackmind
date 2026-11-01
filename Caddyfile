@@ -7,3 +7,9 @@ api.outbackmind.au {
     encode gzip
     reverse_proxy api:8000
 }
+
+# NomadMate brand domains -> the app (301). Certificates are issued automatically
+# once the nomadmate.au / www A records point at this server.
+nomadmate.au, www.nomadmate.au {
+    redir https://app.outbackmind.au{uri} permanent
+}
