@@ -1,8 +1,13 @@
-from datetime import datetime
+from datetime import datetime, timezone
+import ipaddress
+import logging
 import os
 import re
+import uuid
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
+import redis
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import Column, DateTime, Integer, String, Text, create_engine, text
@@ -16,7 +21,16 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 import textwrap
 
-app = FastAPI()
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logger = logging.getLogger("outbackmind")
+
+ENABLE_DOCS = os.getenv("ENABLE_DOCS", "0") == "1"
+
+app = FastAPI(
+    docs_url="/docs" if ENABLE_DOCS else None,
+    redoc_url="/redoc" if ENABLE_DOCS else None,
+    openapi_url="/openapi.json" if ENABLE_DOCS else None,
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,12 +46,19 @@ app.add_middleware(
 DATABASE_URL = os.getenv("DATABASE_URL")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://qdrant:6333")
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
+
+# Rate limits for the AI endpoints (override in .env / compose environment).
+RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "10"))
+RATE_LIMIT_PER_DAY = int(os.getenv("RATE_LIMIT_PER_DAY", "100"))
+AI_DAILY_CAP = int(os.getenv("AI_DAILY_CAP", "1000"))
 
 if not OPENAI_API_KEY:
     raise RuntimeError("OPENAI_API_KEY is not set")
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 qdrant = QdrantClient(url=QDRANT_URL)
+redis_client = redis.Redis.from_url(REDIS_URL, socket_timeout=2, socket_connect_timeout=2)
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -53,6 +74,7 @@ class QuestionLog(Base):
     question = Column(Text, nullable=False)
     answer = Column(Text, nullable=False)
     mode = Column(String(20), nullable=False, default="normal")
+    client_id = Column(String(64), nullable=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
 class TripPlan(Base):
@@ -61,6 +83,7 @@ class TripPlan(Base):
     id = Column(Integer, primary_key=True, index=True)
     request = Column(Text, nullable=False)
     plan = Column(Text, nullable=False)
+    client_id = Column(String(64), nullable=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
 Base.metadata.create_all(bind=engine)
@@ -72,6 +95,87 @@ with engine.begin() as conn:
             "ADD COLUMN IF NOT EXISTS mode VARCHAR(20) DEFAULT 'normal'"
         )
     )
+    # Anonymous per-browser owner id (nullable; old rows stay NULL = hidden from everyone).
+    conn.execute(text("ALTER TABLE question_logs ADD COLUMN IF NOT EXISTS client_id VARCHAR(64)"))
+    conn.execute(text("ALTER TABLE trip_plans ADD COLUMN IF NOT EXISTS client_id VARCHAR(64)"))
+    conn.execute(text("CREATE INDEX IF NOT EXISTS ix_question_logs_client_id ON question_logs (client_id)"))
+    conn.execute(text("CREATE INDEX IF NOT EXISTS ix_trip_plans_client_id ON trip_plans (client_id)"))
+
+
+def get_client_ip(request: Request) -> str:
+    """Real client IP. The API is only reachable through Caddy (no published port),
+    and Caddy overwrites X-Forwarded-For with the real client address, so only trust
+    X-Forwarded-For when the direct peer is a private (Docker network) address."""
+    peer = request.client.host if request.client else ""
+    try:
+        peer_is_private = ipaddress.ip_address(peer).is_private
+    except ValueError:
+        peer_is_private = False
+    xff = request.headers.get("x-forwarded-for", "")
+    if peer_is_private and xff:
+        candidate = xff.split(",")[-1].strip()
+        try:
+            ipaddress.ip_address(candidate)
+            return candidate
+        except ValueError:
+            pass
+    return peer or "unknown"
+
+
+def get_client_id(request: Request):
+    raw = request.headers.get("x-client-id") or request.query_params.get("client_id") or ""
+    try:
+        return str(uuid.UUID(raw.strip()))
+    except (ValueError, AttributeError):
+        return None
+
+
+class RateLimited(Exception):
+    def __init__(self, message: str):
+        self.message = message
+
+
+@app.exception_handler(RateLimited)
+def rate_limited_handler(request: Request, exc: RateLimited):
+    return JSONResponse(status_code=429, content={"detail": exc.message})
+
+
+def enforce_ai_rate_limit(request: Request):
+    """Per-IP (per minute + per day) and global daily cap on AI calls, stored in Redis.
+    Fails open (with a log line) if Redis is unavailable so the app keeps working."""
+    ip = get_client_ip(request)
+    now = datetime.now(timezone.utc)
+    minute_key = f"rl:ip:{ip}:m:{now:%Y%m%d%H%M}"
+    day_key = f"rl:ip:{ip}:d:{now:%Y%m%d}"
+    global_key = f"rl:global:d:{now:%Y%m%d}"
+    try:
+        pipe = redis_client.pipeline()
+        pipe.incr(minute_key)
+        pipe.expire(minute_key, 120)
+        pipe.incr(day_key)
+        pipe.expire(day_key, 172800)
+        pipe.get(global_key)
+        minute_count, _, day_count, _, global_count = pipe.execute()
+    except redis.RedisError:
+        logger.exception("Rate limiter unavailable (Redis); allowing request")
+        return
+    if minute_count > RATE_LIMIT_PER_MINUTE:
+        raise RateLimited("You're going a bit fast. Please wait a minute and try again.")
+    if day_count > RATE_LIMIT_PER_DAY:
+        raise RateLimited("You've reached today's limit for AI requests. Please come back tomorrow.")
+    if int(global_count or 0) >= AI_DAILY_CAP:
+        logger.warning("Global daily AI cap reached (%s)", AI_DAILY_CAP)
+        raise RateLimited("OutbackMind is very busy today. Please try again tomorrow.")
+    try:
+        pipe = redis_client.pipeline()
+        pipe.incr(global_key)
+        pipe.expire(global_key, 172800)
+        pipe.execute()
+    except redis.RedisError:
+        logger.exception("Could not update global AI counter")
+
+
+GENERIC_ERROR = "Sorry, something went wrong on our side. Please try again in a moment."
 
 
 class Question(BaseModel):
@@ -85,6 +189,35 @@ class TripPlanRequest(BaseModel):
 @app.get("/")
 def root():
     return {"message": "OutbackMind API is running"}
+
+
+@app.get("/health")
+def health():
+    checks = {}
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        checks["database"] = "ok"
+    except Exception:
+        logger.exception("Health check: database failed")
+        checks["database"] = "error"
+    try:
+        qdrant.get_collection(COLLECTION_NAME)
+        checks["qdrant"] = "ok"
+    except Exception:
+        logger.exception("Health check: qdrant failed")
+        checks["qdrant"] = "error"
+    try:
+        redis_client.ping()
+        checks["redis"] = "ok"
+    except Exception:
+        logger.exception("Health check: redis failed")
+        checks["redis"] = "error"
+    healthy = checks["database"] == "ok" and checks["qdrant"] == "ok"
+    return JSONResponse(
+        status_code=200 if healthy else 503,
+        content={"status": "ok" if healthy else "degraded", "checks": checks},
+    )
 
 
 def get_embedding(text_value: str):
@@ -370,7 +503,9 @@ def build_trip_plan_pdf(plan_id: int, request_text: str, plan_text: str) -> str:
     c.save()
     return output_path
 @app.post("/ask")
-def ask(question: Question):
+def ask(question: Question, request: Request):
+    enforce_ai_rate_limit(request)
+    client_id = get_client_id(request)
     db = SessionLocal()
     try:
         answer_text = generate_ai_answer(question.question, question.mode)
@@ -380,6 +515,7 @@ def ask(question: Question):
             question=question.question,
             answer=answer_text,
             mode=question.mode,
+            client_id=client_id,
         )
         db.add(entry)
         db.commit()
@@ -393,14 +529,17 @@ def ask(question: Question):
             "created_at": entry.created_at.isoformat(),
             "recommended_gear": recommended_gear,
         }
-    except Exception as e:
+    except Exception:
         db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Request failed")
+        raise HTTPException(status_code=500, detail=GENERIC_ERROR)
     finally:
         db.close()
 
 @app.post("/plan-trip")
-def plan_trip(payload: TripPlanRequest):
+def plan_trip(payload: TripPlanRequest, request: Request):
+    enforce_ai_rate_limit(request)
+    client_id = get_client_id(request)
     db = SessionLocal()
     try:
         plan_text = generate_trip_plan(payload.request)
@@ -408,6 +547,7 @@ def plan_trip(payload: TripPlanRequest):
         entry = TripPlan(
             request=payload.request,
             plan=plan_text,
+            client_id=client_id,
         )
         db.add(entry)
         db.commit()
@@ -419,19 +559,24 @@ def plan_trip(payload: TripPlanRequest):
             "plan": entry.plan,
             "created_at": entry.created_at.isoformat(),
         }
-    except Exception as e:
+    except Exception:
         db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Request failed")
+        raise HTTPException(status_code=500, detail=GENERIC_ERROR)
     finally:
         db.close()
 
 
 @app.get("/trip-plans")
-def get_trip_plans():
+def get_trip_plans(request: Request):
+    client_id = get_client_id(request)
+    if not client_id:
+        return []
     db = SessionLocal()
     try:
         rows = (
             db.query(TripPlan)
+            .filter(TripPlan.client_id == client_id)
             .order_by(TripPlan.id.desc())
             .limit(20)
             .all()
@@ -449,10 +594,17 @@ def get_trip_plans():
     finally:
         db.close()
 @app.get("/trip-plans/{plan_id}/pdf")
-def download_trip_plan_pdf(plan_id: int):
+def download_trip_plan_pdf(plan_id: int, request: Request):
+    client_id = get_client_id(request)
+    if not client_id:
+        raise HTTPException(status_code=404, detail="Trip plan not found")
     db = SessionLocal()
     try:
-        row = db.query(TripPlan).filter(TripPlan.id == plan_id).first()
+        row = (
+            db.query(TripPlan)
+            .filter(TripPlan.id == plan_id, TripPlan.client_id == client_id)
+            .first()
+        )
         if not row:
             raise HTTPException(status_code=404, detail="Trip plan not found")
 
@@ -467,11 +619,15 @@ def download_trip_plan_pdf(plan_id: int):
         db.close()  
            
 @app.get("/history")
-def history():
+def history(request: Request):
+    client_id = get_client_id(request)
+    if not client_id:
+        return []
     db = SessionLocal()
     try:
         rows = (
             db.query(QuestionLog)
+            .filter(QuestionLog.client_id == client_id)
             .order_by(QuestionLog.id.desc())
             .limit(20)
             .all()
@@ -496,7 +652,8 @@ class ChecklistRequest(BaseModel):
 
 
 @app.post("/generate-checklist")
-def generate_checklist(payload: ChecklistRequest):
+def generate_checklist(payload: ChecklistRequest, request: Request):
+    enforce_ai_rate_limit(request)
     try:
         prompt = f"""
 You are OutbackMind, an Australian camping, caravan, 4WD, and remote-travel assistant.
@@ -539,5 +696,6 @@ Do not include product links.
             "checklist": response.output_text.strip()
         }
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except Exception:
+        logger.exception("Checklist generation failed")
+        raise HTTPException(status_code=500, detail=GENERIC_ERROR)
