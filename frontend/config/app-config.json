@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "brand": {
+    "name": "NomadMate",
+    "short_name": "NomadMate",
+    "parent": "OutbackMind",
+    "full_name": "NomadMate by OutbackMind",
+    "locale": "en-AU",
+    "timezone_note": "Dates and times are shown in the phone's local time zone."
+  },
+  "apiBase": "https://api.outbackmind.au",
+  "appOrigin": "https://app.outbackmind.au",
+  "offline": {
+    "enabled": true,
+    "kill_switch_note": "Set enabled to false to make every installed copy unregister its service worker and clear its offline caches on the next online visit."
+  },
+  "review_max_age_days": 365,
+  "probe": {
+    "path": "/config/app-config.json",
+    "interval_ms": 30000,
+    "timeout_ms": 4000
+  },
+  "gps": {
+    "good_accuracy_m": 50,
+    "stale_after_s": 60,
+    "timeout_ms": 30000
+  }
+}

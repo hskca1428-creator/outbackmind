@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER ICON - NomadMate by OutbackMind.
+     Generated stand-in artwork so the app is installable. Replace with the real logo:
+     edit this file (or drop in your own 512x512 artwork) and run: python3 scripts/make_icons.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="NomadMate placeholder icon">
+  <title>NomadMate (placeholder icon)</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="0.62" stop-color="#3b1d12"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <circle cx="256" cy="268" r="92" fill="#f59e0b"/>
+  <circle cx="256" cy="268" r="92" fill="none" stroke="#fde68a" stroke-width="6" opacity="0.6"/>
+  <path d="M0 360 C90 318 170 330 256 352 C342 374 430 330 512 346 L512 512 L0 512 Z" fill="#b45309"/>
+  <path d="M0 410 C100 372 190 396 280 412 C370 428 440 396 512 404 L512 512 L0 512 Z" fill="#7c2d12"/>
+  <path d="M0 460 C120 436 220 456 320 462 C400 466 460 450 512 452 L512 512 L0 512 Z" fill="#431407"/>
+</svg>

@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "version": "cd300356512e",
+  "built_at": "2026-11-17T11:07:20Z",
+  "content_reviewed_from": "2026-11-17",
+  "content_reviewed_to": "2026-11-17",
+  "draft_items": [
+    "cpr-drsabcd",
+    "snake-bite",
+    "heatstroke",
+    "severe-bleeding",
+    "burns",
+    "spider-bite",
+    "stranded-vehicle",
+    "flood-driving",
+    "bushfire-travelling"
+  ],
+  "files": [
+    {
+      "url": "/config/app-config.json",
+      "path": "config/app-config.json",
+      "hash": "7ce7f95cf84b3e11",
+      "size": 788
+    },
+    {
+      "url": "/css/offline.css",
+      "path": "css/offline.css",
+      "hash": "adf8c1e95c7b1383",
+      "size": 12649
+    },
+    {
+      "url": "/data/emergency.json",
+      "path": "data/emergency.json",
+      "hash": "b40f8df1336bfab7",
+      "size": 28202
+    },
+    {
+      "url": "/icons/apple-touch-icon.png",
+      "path": "icons/apple-touch-icon.png",
+      "hash": "6db6b8202761e580",
+      "size": 5163
+    },
+    {
+      "url": "/icons/favicon-32.png",
+      "path": "icons/favicon-32.png",
+      "hash": "6c19ace581ea86a5",
+      "size": 460
+    },
+    {
+      "url": "/icons/favicon.ico",
+      "path": "icons/favicon.ico",
+      "hash": "f650280085f4b347",
+      "size": 2641
+    },
+    {
+      "url": "/icons/favicon.svg",
+      "path": "icons/favicon.svg",
+      "hash": "bb57b63f52c7a493",
+      "size": 429
+    },
+    {
+      "url": "/icons/icon-192.png",
+      "path": "icons/icon-192.png",
+      "hash": "f7c6af2d7b3c4501",
+      "size": 5535
+    },
+    {
+      "url": "/icons/icon-512.png",
+      "path": "icons/icon-512.png",
+      "hash": "8a3830c17488a94c",
+      "size": 18210
+    },
+    {
+      "url": "/icons/icon-maskable-512.png",
+      "path": "icons/icon-maskable-512.png",
+      "hash": "8a3830c17488a94c",
+      "size": 18210
+    },
+    {
+      "url": "/icons/icon.svg",
+      "path": "icons/icon.svg",
+      "hash": "1c700ab37c53e6a8",
+      "size": 1221
+    },
+    {
+      "url": "/",
+      "path": "index.html",
+      "hash": "6bfe1d6695e63d28",
+      "size": 37273
+    },
+    {
+      "url": "/index.html",
+      "path": "index.html",
+      "hash": "6bfe1d6695e63d28",
+      "size": 37273
+    },
+    {
+      "url": "/js/emergency.js",
+      "path": "js/emergency.js",
+      "hash": "a651045ec0a62e0f",
+      "size": 22759
+    },
+    {
+      "url": "/js/offline.js",
+      "path": "js/offline.js",
+      "hash": "faac8529c98bef00",
+      "size": 14080
+    },
+    {
+      "url": "/manifest.webmanifest",
+      "path": "manifest.webmanifest",
+      "hash": "5a69f58d9bd493b1",
+      "size": 1130
+    },
+    {
+      "url": "/offline.html",
+      "path": "offline.html",
+      "hash": "a734bc3ae0b6ed95",
+      "size": 1880
+    }
+  ]
+}

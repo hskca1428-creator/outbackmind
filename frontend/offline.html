@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Offline | NomadMate by OutbackMind</title>
+  <style>
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0b1220;color:#f8fafc;line-height:1.6}
+    main{max-width:640px;margin:0 auto;padding:24px 18px 48px}
+    h1{font-size:28px;margin:0 0 8px}
+    a.call{display:block;margin:12px 0;padding:18px;border-radius:14px;background:#b91c1c;color:#fff;text-decoration:none;font-size:22px;font-weight:bold;text-align:center;min-height:44px}
+    a.call.secondary{background:#1f2937;border:1px solid #475569;font-size:18px}
+    a:focus-visible,button:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+    p.note{color:#cbd5e1}
+    button{font:inherit;padding:12px 18px;border-radius:12px;border:1px solid #475569;background:#111827;color:#f8fafc;min-height:44px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>You are offline</h1>
+    <p class="note">NomadMate could not load the app screen. Emergency numbers are below. If you are in danger, call now.</p>
+    <a class="call" href="tel:000">Call 000 (Triple Zero)</a>
+    <a class="call secondary" href="tel:112">Call 112 (mobile phones only, same service as 000)</a>
+    <p class="note">With no mobile coverage on any network, a call to 000 or 112 will not connect. A satellite phone can call 000. If you carry a registered PLB or EPIRB, use it.</p>
+    <p><button type="button" id="retry">Try loading the app again</button></p>
+    <p class="note">Guidance only. This page is part of the NomadMate offline pack. Draft safety content pending owner sign-off.</p>
+  </main>
+  <script>document.getElementById('retry').addEventListener('click',function(){location.href='/';});</script>
+</body>
+</html>

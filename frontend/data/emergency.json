@@ -1,0 +1,566 @@
+{
+  "schema": 1,
+  "pack_reviewed": "2026-11-17",
+  "review_max_age_days": 365,
+  "status_label_draft": "DRAFT - needs owner sign-off",
+  "global_caveat": "Guidance only. It does not replace first-aid training or the advice of the 000 operator. Call 000 first and follow the operator.",
+  "coverage_caveat": {
+    "text": "If there is no mobile coverage on any network, you cannot reach Triple Zero from a mobile phone. Your call can use any available mobile network, but not if none has coverage. Calls to 000 can also be made from a satellite phone. If you carry a registered PLB or EPIRB, use it. You cannot contact Triple Zero by SMS.",
+    "source_name": "Triple Zero (Australian Government) and ACMA",
+    "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+    "extra_sources": [
+      {
+        "source_name": "ACMA - Emergency calls",
+        "source_url": "https://www.acma.gov.au/emergency-calls"
+      },
+      {
+        "source_name": "Western Australia Police Force - Outback travel",
+        "source_url": "https://www.wa.gov.au/organisation/western-australia-police-force/outback-travel-bushwalking-and-prospecting"
+      }
+    ],
+    "status": "draft",
+    "last_reviewed": "2026-11-17"
+  },
+  "numbers": [
+    {
+      "id": "000",
+      "label": "Triple Zero",
+      "tel": "000",
+      "display": "000",
+      "primary": true,
+      "when": "Life-threatening or time-critical emergencies. Say police, fire or ambulance.",
+      "detail": "Free. Works from any fixed or mobile phone, satellite phone and certain VoIP services. Needs coverage on a mobile phone.",
+      "source_name": "Triple Zero (Australian Government)",
+      "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "112",
+      "label": "Mobile phones only",
+      "tel": "112",
+      "display": "112",
+      "when": "From a mobile phone only. Reaches the same Triple Zero service as 000.",
+      "detail": "Cannot be called from a landline or satellite phone. It does not work without mobile coverage, just like 000.",
+      "source_name": "Triple Zero (Australian Government)",
+      "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "106",
+      "label": "Text relay (TTY)",
+      "tel": "106",
+      "display": "106",
+      "when": "For people who are deaf or have a hearing or speech difficulty. Needs a TTY (textphone).",
+      "detail": "National Relay Service. The NRS has other ways to reach Triple Zero too.",
+      "source_name": "Triple Zero (Australian Government)",
+      "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "ses",
+      "label": "SES, not life-threatening",
+      "tel": "132500",
+      "display": "132 500",
+      "when": "Flood, storm and tsunami help that is not life-threatening. Life-threatening: call 000.",
+      "detail": "State Emergency Service.",
+      "source_name": "Triple Zero (Australian Government)",
+      "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    }
+  ],
+  "operator_script": {
+    "title": "What to tell the 000 operator",
+    "intro": "Stay calm, speak slowly and clearly, and stay on the line.",
+    "steps": [
+      "Say which service you need: police, fire or ambulance.",
+      "Say exactly where to send help. Read out the coordinates from the My location panel, then the nearest town, state, road name or landmark. The operator may ask for the town and state you are calling from.",
+      "Say what has happened.",
+      "Say how many people are hurt, and whether they are awake and breathing.",
+      "Follow the operator's instructions and do not hang up until told to."
+    ],
+    "source_name": "Triple Zero (Australian Government)",
+    "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+    "extra_sources": [
+      {
+        "source_name": "ACMA - Emergency calls",
+        "source_url": "https://www.acma.gov.au/emergency-calls"
+      }
+    ],
+    "last_reviewed": "2026-11-17",
+    "status": "draft"
+  },
+  "location_note": {
+    "text": "GPS can work with no phone signal, but it can take a minute or more to settle, so wait in the open if you can. This panel only shows where you are. It does not send your location to anyone. You still need mobile coverage, a satellite phone, a CB or HF radio or a beacon to reach help. The free Emergency+ app can also show your location, street address or what3words.",
+    "source_name": "ACMA - Emergency calls",
+    "source_url": "https://www.acma.gov.au/emergency-calls",
+    "extra_sources": [
+      {
+        "source_name": "Western Australia Police Force - Outback travel",
+        "source_url": "https://www.wa.gov.au/organisation/western-australia-police-force/outback-travel-bushwalking-and-prospecting"
+      }
+    ],
+    "last_reviewed": "2026-11-17",
+    "status": "draft"
+  },
+  "warning_levels": {
+    "title": "Australian Warning System",
+    "levels": [
+      {
+        "name": "Advice",
+        "colour": "yellow",
+        "meaning": "An incident has started. No immediate danger. Stay up to date."
+      },
+      {
+        "name": "Watch and Act",
+        "colour": "orange",
+        "meaning": "Conditions are changing. Start taking action now."
+      },
+      {
+        "name": "Emergency Warning",
+        "colour": "red",
+        "meaning": "You may be in danger. Act immediately."
+      }
+    ],
+    "source_name": "NSW Government - Know the warnings",
+    "source_url": "https://www.nsw.gov.au/emergency/get-ready/warnings/warning-system",
+    "last_reviewed": "2026-11-17",
+    "status": "draft"
+  },
+  "cards": [
+    {
+      "id": "cpr-drsabcd",
+      "title": "Unresponsive person: DRSABCD and CPR",
+      "severity": "critical",
+      "call_000_first": true,
+      "when": "Someone is not responding and not breathing normally.",
+      "steps": [
+        "Danger: make sure the area is safe for you and the person. Do not put yourself or others at risk. Remove the danger or the person.",
+        "Response: loudly ask their name and squeeze their shoulders.",
+        "Send for help: if there is no response, call 000 and ask for an ambulance, or ask someone else to call. Do not leave the person.",
+        "Airway: check their mouth and nose are clear. If there is something there, roll them into the recovery position and remove any obvious blockage. Open the airway by gently tilting the head back and lifting the chin.",
+        "Breathing: look, listen and feel for up to 10 seconds. If they are breathing normally, put them in the recovery position, stay with them and keep checking. If they are not breathing normally, start CPR.",
+        "CPR (adult or child over 1 year): 30 chest compressions, then 2 breaths, and repeat. Push on the lower half of the breastbone, with your arms straight, about one third of the chest depth, at about 100 to 120 compressions a minute.",
+        "If you cannot give breaths, keep doing compressions without stopping. Compressions alone may still save a life.",
+        "Defibrillator: if an AED is available, attach it and follow its voice prompts. Do not leave the person alone or stop compressions to fetch one.",
+        "Keep going until they recover, a health professional takes over, or you are too exhausted to continue."
+      ],
+      "do_not": [],
+      "call_000_if": "Always, if the person is unresponsive. Babies under 1 year need a different technique: tell the operator and follow their instructions.",
+      "source_name": "healthdirect - How to perform CPR",
+      "source_url": "https://www.healthdirect.gov.au/treatments-and-self-care/first-aid/how-to-perform-cpr",
+      "source_published": "healthdirect page last reviewed December 2024",
+      "extra_sources": [
+        {
+          "source_name": "St John Australia - CPR (adult or child over 1 year)",
+          "source_url": "https://stjohn.org.au/fact-sheet/cpr-adult-or-child-over-1-year/"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft",
+      "review_notes": "Check compression depth/rate wording against the current Australian Resuscitation Council guidelines before approval."
+    },
+    {
+      "id": "snake-bite",
+      "title": "Snake bite",
+      "severity": "critical",
+      "call_000_first": true,
+      "when": "Any known or suspected snake bite. Treat every bite as life-threatening, even if the person seems well.",
+      "steps": [
+        "Get the person away from the snake. Do not try to catch or kill it.",
+        "Call 000 and ask for an ambulance.",
+        "Lie the person down, keep them still and calm.",
+        "If the bite is on an arm or leg, put a wide (10 to 15 cm) elastic roller bandage firmly over the bite as soon as possible.",
+        "Put a second roller bandage on, starting just above the fingers or toes and moving up the limb as far as you can reach. It should be tight: you should not be able to easily slide a finger under it.",
+        "Keep the limb still with a splint.",
+        "Write down the time of the bite and the time the bandage went on. If you can, mark the bite site on the bandage or skin with a pen, or take a photo.",
+        "If the person is unresponsive and not breathing normally, start CPR (see the DRSABCD card).",
+        "Stay with the person until the ambulance arrives."
+      ],
+      "do_not": [
+        "Do not wash the bite area. Venom on the skin and clothes helps identify the snake.",
+        "Do not use a tourniquet.",
+        "Do not cut the wound or try to suck the venom out.",
+        "Do not try to catch or kill the snake."
+      ],
+      "call_000_if": "Always.",
+      "source_name": "healthdirect - Snake bites",
+      "source_url": "https://www.healthdirect.gov.au/accidents-and-injuries/bites-and-stings/snake-bites",
+      "source_published": "Wording follows the healthdirect page and the St John Australia fact sheet",
+      "extra_sources": [
+        {
+          "source_name": "St John Australia - Snake bite",
+          "source_url": "https://stjohn.org.au/fact-sheet/snake-bite/"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "heatstroke",
+      "title": "Heatstroke (very hot, confused or collapsed)",
+      "severity": "critical",
+      "call_000_first": true,
+      "when": "Someone is very hot and has confusion, strange behaviour, seizures or has collapsed. Skin may be hot, red and dry, with little or no sweating.",
+      "steps": [
+        "Call 000 and ask for an ambulance. Heatstroke is a life-threatening emergency.",
+        "Move the person to a cool or shady place. Loosen and remove extra clothing.",
+        "Start cooling them straight away. Best: put their whole body from the neck down in cold water for 15 minutes.",
+        "Or wet them with cold or cool water using a shower, hose, wet cloth or spray, and fan them continuously.",
+        "Put ice packs on the groin, armpits, cheeks, palms and soles of the feet.",
+        "Only give cool drinks if they are fully awake and can swallow.",
+        "If they stop breathing, start CPR (see the DRSABCD card)."
+      ],
+      "do_not": [
+        "Do not give paracetamol, aspirin or ibuprofen. They do not lower body temperature in heatstroke."
+      ],
+      "call_000_if": "Always, if heatstroke is suspected.",
+      "source_name": "healthdirect - Heatstroke",
+      "source_url": "https://www.healthdirect.gov.au/healthy-living/weather-and-environment/heatstroke",
+      "extra_sources": [],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "severe-bleeding",
+      "title": "Severe bleeding",
+      "severity": "critical",
+      "call_000_first": true,
+      "when": "Bleeding that cannot be controlled with firm pressure, or signs of shock (pale, cold, clammy skin, fast weak pulse, faintness).",
+      "steps": [
+        "Call 000 early. Follow DRSABCD.",
+        "Wear gloves if you have them. Lie the person down and expose the wound.",
+        "Press firmly, directly and continuously on the wound with your hands until bleeding stops. The person or a bystander can do this.",
+        "When you have a pad or dressing, put it on or in the wound and keep pressing.",
+        "If an object is stuck in the wound, press on either side of it and pad around it before bandaging.",
+        "Once bleeding is controlled, bandage the pad firmly in place. Watch for new bleeding.",
+        "If bleeding on an arm or leg is not controlled, apply an arterial tourniquet if you have one and tighten it until the bleeding stops. Warn the person it will hurt.",
+        "If bleeding is not on a limb and not controlled, use a haemostatic dressing if you have one, with firm pressure.",
+        "Keep checking their consciousness, breathing and pulse."
+      ],
+      "do_not": [
+        "Do not give the person anything to eat or drink."
+      ],
+      "call_000_if": "Always, for severe or uncontrolled bleeding.",
+      "source_name": "St John Australia - Severe bleeding",
+      "source_url": "https://stjohn.org.au/fact-sheet/severe-bleeding/",
+      "extra_sources": [],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "burns",
+      "title": "Burns and scalds",
+      "severity": "high",
+      "call_000_first": true,
+      "when": "Burns from fire, hot water or steam, hot objects, chemicals or electricity.",
+      "steps": [
+        "If clothing is on fire: stop the person moving, drop them to the ground, cover or wrap them in a blanket and roll them until the flames are out.",
+        "Remove the cause. Electrical burn: turn off the power if it is safe. Chemical burn: remove contaminated clothing and wash with water (you can keep going for up to 60 minutes). Dry chemicals: brush them off first.",
+        "As soon as possible, hold the burn under cool running water for at least 20 minutes. It can still help for up to 3 hours after the burn.",
+        "Take off clothing and jewellery from the area, unless it is stuck to the burn.",
+        "Cover the burn with a light, loose, non-stick dressing. Plastic cling film is a good choice, but do not use it on the face.",
+        "Watch for signs of shock."
+      ],
+      "do_not": [
+        "Do not use ice.",
+        "Do not put lotion, cream, ointment or fat on a burn.",
+        "Do not remove anything stuck to the burn.",
+        "Do not burst blisters."
+      ],
+      "call_000_if": "The burn is deep (even if it does not hurt), is on the face, hands or genitals, has white, brown or black patches, was caused by chemicals or electricity, or affects the airway or breathing. Also get medical help for any burn bigger than a 20 cent coin.",
+      "source_name": "healthdirect - Burns and scalds",
+      "source_url": "https://www.healthdirect.gov.au/accidents-and-injuries/burns-and-scalds",
+      "source_published": "healthdirect page last reviewed September 2025",
+      "extra_sources": [
+        {
+          "source_name": "St John Australia - Burn or scald",
+          "source_url": "https://stjohn.org.au/fact-sheet/burn-or-scald/"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "spider-bite",
+      "title": "Spider bite",
+      "severity": "high",
+      "call_000_first": false,
+      "when": "Bitten by a spider. Funnel-web and other big black spiders are dangerous. Redbacks are painful but not life-threatening.",
+      "steps": [
+        "Funnel-web or any big black spider: call 000 and ask for an ambulance. Lie the person down and keep them still.",
+        "Funnel-web or big black spider: wrap a wide (10 to 15 cm) elastic roller bandage over the bite, then a second one over the whole limb from just above the fingers or toes upwards. Firm, but not cutting off circulation. Keep the limb still with a splint. Mark the bite site and write down the time.",
+        "Redback: wash the bite with soap and water and put a cold pack on it for 15 minutes. See a doctor if symptoms are bad, and go to an emergency department if the pain is very bad.",
+        "Other spiders: wash with soap and water and apply an ice pack wrapped in a cloth (never directly on skin). See a doctor if it gets worse.",
+        "Severe allergic reaction (difficult or noisy breathing, swollen tongue, tight throat, collapse): call 000. Use an adrenaline autoinjector if one is available."
+      ],
+      "do_not": [
+        "Only use the pressure bandage for funnel-web or mouse spider bites, not for redback or other spiders."
+      ],
+      "call_000_if": "Funnel-web or other big black spider bite, difficulty breathing, collapse or confusion.",
+      "source_name": "healthdirect - Spider bites",
+      "source_url": "https://www.healthdirect.gov.au/accidents-and-injuries/bites-and-stings/spider-bites",
+      "source_published": "healthdirect page last reviewed October 2024",
+      "extra_sources": [],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "stranded-vehicle",
+      "title": "Broken down or lost in a remote area",
+      "severity": "high",
+      "call_000_first": false,
+      "when": "Your vehicle is bogged or has broken down, or you are lost, far from help.",
+      "steps": [
+        "Stay with your vehicle. It gives shade and shelter, and it is much easier for searchers to find than a person on foot, especially from the air.",
+        "Call for help if you can: 000 by satellite phone or mobile if you have coverage. If you carry a registered PLB or EPIRB, activate it.",
+        "Make your position easy to see from the air, for example by spelling a word in large letters on the ground.",
+        "Use the water and supplies you carry carefully. In hot, dry conditions, running short of water becomes life-threatening quickly.",
+        "Only leave the vehicle if you must. Leave a note that says the direction you are going, what supplies you have, and the date and time you left.",
+        "If you move, leave marks on the ground (such as rock piles or stick arrows) so trackers can follow you."
+      ],
+      "do_not": [],
+      "call_000_if": "Anyone is injured or in danger, or you cannot get back to safety.",
+      "source_name": "Western Australia Police Force - Outback travel, bushwalking and prospecting",
+      "source_url": "https://www.wa.gov.au/organisation/western-australia-police-force/outback-travel-bushwalking-and-prospecting",
+      "extra_sources": [
+        {
+          "source_name": "Queensland Police - Travelling through outback, remote or isolated areas",
+          "source_url": "https://mypolice.qld.gov.au/farnorth/2023/08/24/travelling-through-outback-remote-or-isolated-areas-of-queensland/"
+        },
+        {
+          "source_name": "NSW National Parks - Outback safety",
+          "source_url": "https://www.nationalparks.nsw.gov.au/safety/outback-safety"
+        },
+        {
+          "source_name": "WA Government - Missing prospector rescued from Goldfields",
+          "source_url": "https://www.wa.gov.au/government/announcements/missing-prospector-rescued-goldfields"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft",
+      "review_notes": "Stay-with-vehicle, PLB and note-leaving advice is from state police and parks pages. The ground-signal and marker-pile suggestions come from the WA Government media release; confirm you are happy with them."
+    },
+    {
+      "id": "flood-driving",
+      "title": "Flood and flooded roads",
+      "severity": "high",
+      "call_000_first": false,
+      "when": "Water over a road or creek crossing, flash flooding, or rising water around you.",
+      "steps": [
+        "Never drive, walk, ride or play in floodwater. If it is flooded, forget it. Turn around and find another route, or wait.",
+        "Floodwater can be deeper and faster than it looks. It can take just 15 cm of flowing water to float a car.",
+        "Stay away from drains, culverts, creeks, causeways and low-lying areas.",
+        "If you are driving when flash flooding starts, avoid flooded roads and stop on the highest nearby ground, away from trees.",
+        "If you are trapped by rising water, get to the safest, highest place you can (this may be on the car roof or higher ground) and keep moving to stay above the water. Call 000. This is life-threatening.",
+        "For flood help that is not life-threatening, call the SES on 132 500."
+      ],
+      "do_not": [
+        "Do not drive through floodwater."
+      ],
+      "call_000_if": "You or someone else is trapped by floodwater or in danger.",
+      "source_name": "NSW SES - During a flood",
+      "source_url": "https://www.ses.nsw.gov.au/during-emergency/during-flood",
+      "extra_sources": [
+        {
+          "source_name": "Victoria SES - Flood",
+          "source_url": "https://www.ses.vic.gov.au/plan-and-stay-safe/emergencies/flood"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft"
+    },
+    {
+      "id": "bushfire-travelling",
+      "title": "Bushfire while travelling",
+      "severity": "high",
+      "call_000_first": true,
+      "when": "You see smoke or flames ahead, or a fire is threatening the road. Sheltering in a vehicle is a last resort and is extremely dangerous.",
+      "steps": [
+        "If you see smoke or flames while driving, turn around and drive away from the fire. Do not drive towards it.",
+        "Call 000 if your life is at risk, and check official warnings when you have signal.",
+        "If you cannot escape in a vehicle: park off the road in a clear area away from trees, scrub and tall grass, ideally behind a solid barrier such as a wall or rock outcrop. Face the front of the vehicle towards the fire.",
+        "Turn on the headlights and hazard lights. Close all windows, doors and air vents (switch off air conditioning). Turn off the engine.",
+        "Stay in the vehicle. Get down below window level, for example in the footwell, and cover yourself with a woollen blanket. Drink water and cover your mouth with a damp cloth.",
+        "Stay down until the sound of the fire has passed. Then get out carefully, because the vehicle will be hot, and move to burnt ground.",
+        "On foot: do not try to outrun a fire. Find a cleared area, or rocks, hollows, an embankment, a stream or a road. Avoid hilltops. Keep low and cover exposed skin."
+      ],
+      "do_not": [
+        "Do not drive into smoke or towards a fire. Smoke can make it very dark and hard to see, and roads may be blocked."
+      ],
+      "call_000_if": "Your life is at risk, or once the fire front has passed if people are hurt.",
+      "source_name": "NSW Rural Fire Service - Bush fire safety for travellers",
+      "source_url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0009/187038/Information-For-Travellers.pdf",
+      "extra_sources": [
+        {
+          "source_name": "CFA Victoria - Stay safe in your car in a bushfire",
+          "source_url": "https://www.cfa.vic.gov.au/ArticleDocuments/565/Easy-English-CFA-Stay-Safe-In-A-Car-Feb-2024.pdf.aspx"
+        },
+        {
+          "source_name": "CFS South Australia - During a bushfire checklist",
+          "source_url": "https://www.cfs.sa.gov.au/plan-prepare/during-a-fire-what-to-do/during-a-bushfire-checklist/"
+        }
+      ],
+      "last_reviewed": "2026-11-17",
+      "status": "draft",
+      "review_notes": "NSW RFS, CFA and CFS say turn the engine off. The Queensland government page says leave it running. This card follows NSW RFS, CFA and CFS. Please confirm."
+    }
+  ],
+  "states": {
+    "NSW": {
+      "name": "New South Wales and ACT region",
+      "links": [
+        {
+          "label": "Hazards Near Me NSW (warnings, fires, floods)",
+          "url": "https://www.nsw.gov.au/emergency/hazards-near-me-app",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "NSW State Emergency Service",
+          "url": "https://www.ses.nsw.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "NSW Rural Fire Service",
+          "url": "https://www.rfs.nsw.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "ACT": {
+      "name": "Australian Capital Territory",
+      "links": [
+        {
+          "label": "ACT Emergency Services Agency",
+          "url": "https://esa.act.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "VIC": {
+      "name": "Victoria",
+      "links": [
+        {
+          "label": "VicEmergency (hotline 1800 226 226)",
+          "url": "https://www.emergency.vic.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "Victoria SES",
+          "url": "https://www.ses.vic.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "CFA Victoria",
+          "url": "https://www.cfa.vic.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "QLD": {
+      "name": "Queensland",
+      "links": [
+        {
+          "label": "Queensland Disaster Management (warnings)",
+          "url": "https://www.disaster.qld.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "Queensland Fire Department",
+          "url": "https://www.fire.qld.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "Queensland SES",
+          "url": "https://www.ses.qld.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "SA": {
+      "name": "South Australia",
+      "links": [
+        {
+          "label": "SA Country Fire Service",
+          "url": "https://www.cfs.sa.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "SA State Emergency Service",
+          "url": "https://www.ses.sa.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "SAFECOM - Australian Warning System",
+          "url": "https://www.safecom.sa.gov.au/emergencies/australian-warning-system-aws/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "WA": {
+      "name": "Western Australia",
+      "links": [
+        {
+          "label": "Emergency WA (warnings and incidents)",
+          "url": "https://www.emergency.wa.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "DFES Western Australia",
+          "url": "https://www.dfes.wa.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "TAS": {
+      "name": "Tasmania",
+      "links": [
+        {
+          "label": "TasALERT",
+          "url": "https://alert.tas.gov.au/",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "Tasmania SES",
+          "url": "https://www.ses.tas.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    },
+    "NT": {
+      "name": "Northern Territory",
+      "links": [
+        {
+          "label": "NT Emergency Warnings",
+          "url": "https://nt.gov.au/emergency/emergencies/emergency-warnings-nt",
+          "last_reviewed": "2026-11-17"
+        },
+        {
+          "label": "NT Police, Fire and Emergency Services",
+          "url": "https://pfes.nt.gov.au/",
+          "last_reviewed": "2026-11-17"
+        }
+      ]
+    }
+  },
+  "national_links": [
+    {
+      "label": "Bureau of Meteorology warnings",
+      "url": "https://www.bom.gov.au/weather-and-climate/warnings-and-alerts",
+      "last_reviewed": "2026-11-17"
+    },
+    {
+      "label": "Emergency+ app information (Triple Zero)",
+      "url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
+      "last_reviewed": "2026-11-17"
+    },
+    {
+      "label": "Emergency calls (ACMA)",
+      "url": "https://www.acma.gov.au/emergency-calls",
+      "last_reviewed": "2026-11-17"
+    }
+  ]
+}
