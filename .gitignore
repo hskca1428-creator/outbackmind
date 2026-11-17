@@ -11,3 +11,7 @@ __pycache__/
 *.swp
 .*.swp
 api/knowledge/
+
+# Rollback backups made at deploy time (kept on the server, not in git)
+backups/frontend-pre-offline-*/
+backups/Caddyfile.*

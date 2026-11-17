@@ -1,5 +1,25 @@
 app.outbackmind.au {
     encode gzip
+
+    # Safe hardening headers (no CSP: the app has inline JS)
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+
+    # Entry points, service worker, manifests, config/data and (unhashed) js/css: always revalidate
+    @nocache {
+        path / /index.html /offline.html /sw.js /sw-killswitch.js /manifest.webmanifest /precache-manifest.json /config/*.json /data/*.json /js/* /css/*
+    }
+    header @nocache Cache-Control "no-cache"
+
+    # Icons: cache for a day (filenames are not hashed, so no immutable/long cache)
+    @icons path /icons/*
+    header @icons Cache-Control "public, max-age=86400"
+
+    @manifest path /manifest.webmanifest
+    header @manifest >Content-Type "application/manifest+json"
+
     reverse_proxy frontend:80
 }
 
