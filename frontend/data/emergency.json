@@ -170,8 +170,8 @@
         "source_url": "https://www.wa.gov.au/organisation/western-australia-police-force/outback-travel-bushwalking-and-prospecting"
       }
     ],
-    "last_reviewed": "2026-11-17",
-    "status": "draft"
+    "last_reviewed": "2026-11-18",
+    "status": "approved"
   },
   "warning_levels": {
     "title": "Australian Warning System",
@@ -194,8 +194,8 @@
     ],
     "source_name": "NSW Government - Know the warnings",
     "source_url": "https://www.nsw.gov.au/emergency/get-ready/warnings/warning-system",
-    "last_reviewed": "2026-11-17",
-    "status": "draft"
+    "last_reviewed": "2026-11-18",
+    "status": "approved"
   },
   "cards": [
     {
@@ -543,8 +543,13 @@
       "source_name": "NSW Rural Fire Service - Bush fire safety for travellers (basis for the shared steps; each state's own source is in the list)",
       "source_url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0009/187038/Information-For-Travellers.pdf",
       "last_reviewed": "2026-11-18",
-      "status": "draft",
-      "review_notes": "Rewritten 18 Nov 2026 to list each state's advice. The agencies disagree on the engine (off: NSW, VIC, SA, WA; running: QLD, NT; TAS sources differ; ACT has none). The WA source is a DFES PDF dated May 2019 hosted by a council; some WA council pages show a version saying leave the engine running, so please check WA. TFS 2021 guide is older than the 2023 guide."
+      "status": "approved",
+      "source_caveats": [
+        "WA: the DFES Bushfire Travellers' Checklist is dated May 2019, and the only copy found is hosted on a WA council website, not the DFES website. Some WA council pages show a version that says leave the engine running. Check Emergency WA (emergency.wa.gov.au) for current advice.",
+        "TAS: the Tasmania Fire Service guide used here is the 2021 edition. Its newer 2023 guide gives no in-car steps. Tasmania Fire Service and Parks and Wildlife Service Tasmania disagree about the engine.",
+        "ACT: no in-car advice was found. Check esa.act.gov.au.",
+        "Advice can change. Follow the agency for where you are, official warnings and the 000 operator."
+      ]
     }
   ],
   "states": {

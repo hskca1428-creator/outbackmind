@@ -243,3 +243,6 @@ a:hover { color: #fde68a; }
 .sv-engine { font-size: 1.02em; }
 .sv-other { color: #cbd5e1; font-size: 14px; }
 .sv-src { font-size: 13px; overflow-wrap: anywhere; }
+.sv-caveats { border-left: 4px solid #f59e0b; background: #1c1917; padding: 8px 12px; border-radius: 6px; margin: 10px 0; }
+.sv-cav-title { margin: 0 0 4px; font-weight: 700; }
+.sv-caveats ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.55; }

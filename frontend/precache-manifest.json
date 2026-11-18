@@ -1,12 +1,10 @@
 {
   "schema": 1,
-  "version": "1dacc0de8709",
-  "built_at": "2026-11-18T07:57:54Z",
+  "version": "ab68886b4aa5",
+  "built_at": "2026-11-18T08:32:47Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
-  "draft_items": [
-    "bushfire-travelling"
-  ],
+  "draft_items": [],
   "files": [
     {
       "url": "/config/app-config.json",
@@ -17,14 +15,14 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "b96d6b516efa63d0",
-      "size": 13396
+      "hash": "53de99f9b185af67",
+      "size": 13659
     },
     {
       "url": "/data/emergency.json",
       "path": "data/emergency.json",
-      "hash": "de223eb1d038b97e",
-      "size": 39141
+      "hash": "343ef4fc74463bda",
+      "size": 39470
     },
     {
       "url": "/icons/apple-touch-icon.png",
@@ -89,8 +87,8 @@
     {
       "url": "/js/emergency.js",
       "path": "js/emergency.js",
-      "hash": "3815d81c1bd367b0",
-      "size": 24738
+      "hash": "94de423886e5f01d",
+      "size": 25109
     },
     {
       "url": "/js/offline.js",

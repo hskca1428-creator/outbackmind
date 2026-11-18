@@ -311,6 +311,14 @@
       ul.appendChild(li);
     });
     w.appendChild(ul);
+    if (c.source_caveats && c.source_caveats.length) {
+      var cv = el("div", { class: "sv-caveats", role: "note" });
+      cv.appendChild(el("p", { class: "sv-cav-title", text: "Source notes" }));
+      var cu = el("ul");
+      c.source_caveats.forEach(function (t) { cu.appendChild(el("li", { text: t })); });
+      cv.appendChild(cu);
+      w.appendChild(cv);
+    }
     return w;
   }
 
