@@ -279,6 +279,30 @@
   }
 
   /* ------------------------------------------------------------- first aid */
+  function stateVariants(c) {
+    var w = el("div", { class: "state-variants" });
+    w.appendChild(el("h3", { class: "sv-title", text: c.state_variants_title || "What each state and territory says" }));
+    if (c.state_variants_intro) w.appendChild(el("p", { class: "sv-intro", text: c.state_variants_intro }));
+    var ul = el("ul", { class: "sv-list" });
+    c.state_variants.forEach(function (v) {
+      var li = el("li", { class: "sv-item" });
+      li.appendChild(el("p", { class: "sv-head" }, [el("span", { class: "sv-state", text: v.state }), " " + v.agency]));
+      li.appendChild(el("p", { class: "sv-engine" }, [el("strong", { text: "Engine: " }), v.engine]));
+      if (v.other) li.appendChild(el("p", { class: "sv-other", text: v.other }));
+      var src = el("p", { class: "sv-src" });
+      src.appendChild(el("span", { class: "src-k", text: "Source: " }));
+      src.appendChild(extLink(v.source_url, v.source_name));
+      (v.extra_sources || []).forEach(function (ex) {
+        src.appendChild(document.createTextNode(" | "));
+        src.appendChild(extLink(ex.source_url, ex.source_name));
+      });
+      li.appendChild(src);
+      ul.appendChild(li);
+    });
+    w.appendChild(ul);
+    return w;
+  }
+
   var SEV = { critical: "Life-threatening", high: "Serious", moderate: "Take care" };
   function buildCards() {
     var s = section("em-aid", "First aid", "Tap a card to open it. " + data.global_caveat);
@@ -313,6 +337,7 @@
         c.do_not.forEach(function (t) { dn.appendChild(el("li", {}, [icon("i-x", "icon-sm"), t])); });
         body.appendChild(dn);
       }
+      if (c.state_variants && c.state_variants.length) body.appendChild(stateVariants(c));
       if (c.call_000_if) body.appendChild(el("p", { class: "aid-call-if" }, [el("strong", { text: "Call 000 if: " }), c.call_000_if]));
       body.appendChild(el("p", { class: "aid-caveat", text: data.global_caveat }));
       body.appendChild(sourceLine(c));
@@ -394,11 +419,14 @@
   function buildBanner() {
     var drafts = data.cards.filter(function (c) { return c.status !== "approved"; }).length;
     if (!drafts) return null;
+    var partial = drafts < data.cards.length;
     var b = el("div", { class: "callout callout-draft", role: "note" });
     b.appendChild(icon("i-alert"));
     b.appendChild(el("div", {}, [
       el("p", { class: "callout-title", text: statusLabel() }),
-      el("p", { text: "The first-aid wording on this screen has not been signed off yet. It follows the cited official sources. Always follow the 000 operator." })
+      el("p", { text: partial
+        ? "Most first-aid cards have been signed off. Cards marked DRAFT have not, and still follow the cited official sources. Always follow the 000 operator."
+        : "The first-aid wording on this screen has not been signed off yet. It follows the cited official sources. Always follow the 000 operator." })
     ]));
     return b;
   }

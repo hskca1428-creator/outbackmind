@@ -231,3 +231,15 @@ a:hover { color: #fde68a; }
 @media (max-width: 480px) {
   .brand-text { display: none; }
 }
+
+/* per-state advice list (bushfire card) */
+.state-variants { margin: 14px 0; padding-top: 10px; border-top: 1px solid #334155; }
+.sv-title { font-size: 17px; margin: 0 0 6px; }
+.sv-intro { margin: 6px 0 10px; color: #e2e8f0; }
+.sv-list { list-style: none; margin: 0; padding: 0; }
+.sv-item { border: 1px solid #475569; border-radius: 10px; padding: 10px 12px; margin: 0 0 10px; background: #0f172a; }
+.sv-item p { margin: 4px 0; }
+.sv-state { display: inline-block; min-width: 2.6em; padding: 1px 8px; border-radius: 6px; background: #1e293b; border: 1px solid #64748b; font-weight: 700; text-align: center; }
+.sv-engine { font-size: 1.02em; }
+.sv-other { color: #cbd5e1; font-size: 14px; }
+.sv-src { font-size: 13px; overflow-wrap: anywhere; }

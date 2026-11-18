@@ -1,18 +1,10 @@
 {
   "schema": 1,
-  "version": "cd300356512e",
-  "built_at": "2026-11-17T11:07:20Z",
-  "content_reviewed_from": "2026-11-17",
-  "content_reviewed_to": "2026-11-17",
+  "version": "4516070b6698",
+  "built_at": "2026-11-18T07:42:32Z",
+  "content_reviewed_from": "2026-11-18",
+  "content_reviewed_to": "2026-11-18",
   "draft_items": [
-    "cpr-drsabcd",
-    "snake-bite",
-    "heatstroke",
-    "severe-bleeding",
-    "burns",
-    "spider-bite",
-    "stranded-vehicle",
-    "flood-driving",
     "bushfire-travelling"
   ],
   "files": [
@@ -25,14 +17,14 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "adf8c1e95c7b1383",
-      "size": 12649
+      "hash": "b96d6b516efa63d0",
+      "size": 13396
     },
     {
       "url": "/data/emergency.json",
       "path": "data/emergency.json",
-      "hash": "b40f8df1336bfab7",
-      "size": 28202
+      "hash": "d533476805b3bdc6",
+      "size": 33564
     },
     {
       "url": "/icons/apple-touch-icon.png",
@@ -97,8 +89,8 @@
     {
       "url": "/js/emergency.js",
       "path": "js/emergency.js",
-      "hash": "a651045ec0a62e0f",
-      "size": 22759
+      "hash": "aa1a7a57b7999c86",
+      "size": 24299
     },
     {
       "url": "/js/offline.js",

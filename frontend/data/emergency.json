@@ -159,9 +159,8 @@
           "source_url": "https://stjohn.org.au/fact-sheet/cpr-adult-or-child-over-1-year/"
         }
       ],
-      "last_reviewed": "2026-11-17",
-      "status": "draft",
-      "review_notes": "Check compression depth/rate wording against the current Australian Resuscitation Council guidelines before approval."
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "snake-bite",
@@ -196,8 +195,8 @@
           "source_url": "https://stjohn.org.au/fact-sheet/snake-bite/"
         }
       ],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "heatstroke",
@@ -221,8 +220,8 @@
       "source_name": "healthdirect - Heatstroke",
       "source_url": "https://www.healthdirect.gov.au/healthy-living/weather-and-environment/heatstroke",
       "extra_sources": [],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "severe-bleeding",
@@ -248,8 +247,8 @@
       "source_name": "St John Australia - Severe bleeding",
       "source_url": "https://stjohn.org.au/fact-sheet/severe-bleeding/",
       "extra_sources": [],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "burns",
@@ -281,8 +280,8 @@
           "source_url": "https://stjohn.org.au/fact-sheet/burn-or-scald/"
         }
       ],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "spider-bite",
@@ -305,8 +304,8 @@
       "source_url": "https://www.healthdirect.gov.au/accidents-and-injuries/bites-and-stings/spider-bites",
       "source_published": "healthdirect page last reviewed October 2024",
       "extra_sources": [],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "stranded-vehicle",
@@ -340,9 +339,8 @@
           "source_url": "https://www.wa.gov.au/government/announcements/missing-prospector-rescued-goldfields"
         }
       ],
-      "last_reviewed": "2026-11-17",
-      "status": "draft",
-      "review_notes": "Stay-with-vehicle, PLB and note-leaving advice is from state police and parks pages. The ground-signal and marker-pile suggestions come from the WA Government media release; confirm you are happy with them."
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "flood-driving",
@@ -370,43 +368,116 @@
           "source_url": "https://www.ses.vic.gov.au/plan-and-stay-safe/emergencies/flood"
         }
       ],
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     },
     {
       "id": "bushfire-travelling",
-      "title": "Bushfire while travelling",
+      "title": "Bushfire while travelling (car)",
       "severity": "high",
       "call_000_first": true,
-      "when": "You see smoke or flames ahead, or a fire is threatening the road. Sheltering in a vehicle is a last resort and is extremely dangerous.",
+      "when": "You see smoke or flames ahead, or a fire is threatening the road. Sheltering in a car is a last resort. It is extremely dangerous.",
       "steps": [
-        "If you see smoke or flames while driving, turn around and drive away from the fire. Do not drive towards it.",
-        "Call 000 if your life is at risk, and check official warnings when you have signal.",
-        "If you cannot escape in a vehicle: park off the road in a clear area away from trees, scrub and tall grass, ideally behind a solid barrier such as a wall or rock outcrop. Face the front of the vehicle towards the fire.",
-        "Turn on the headlights and hazard lights. Close all windows, doors and air vents (switch off air conditioning). Turn off the engine.",
-        "Stay in the vehicle. Get down below window level, for example in the footwell, and cover yourself with a woollen blanket. Drink water and cover your mouth with a damp cloth.",
-        "Stay down until the sound of the fire has passed. Then get out carefully, because the vehicle will be hot, and move to burnt ground.",
-        "On foot: do not try to outrun a fire. Find a cleared area, or rocks, hollows, an embankment, a stream or a road. Avoid hilltops. Keep low and cover exposed skin."
+        "If you see smoke or flames, turn around and drive away from the fire. Do not drive towards it. Do not try to outrun it.",
+        "Call 000 if your life is at risk. Say where you are. Check official warnings when you have signal.",
+        "Only if you cannot escape: park off the road in a clear spot, away from trees, scrub and long grass. If you can, park behind a wall or rock outcrop and face the front of the car towards the fire.",
+        "Turn on the hazard lights (most agencies also say headlights). Close all windows, doors and air vents. Stay in the car. Do not get out and run.",
+        "Get down below window level, for example in the footwell. Cover yourself with a woollen blanket. Drink water.",
+        "ENGINE AND AIR-CON: the agencies do not agree. Read your state's advice in the list below and follow it.",
+        "Stay down until the fire front has passed. Then get out carefully, because the car will be very hot. Move to ground that has already burnt, and check for spot fires."
       ],
       "do_not": [
-        "Do not drive into smoke or towards a fire. Smoke can make it very dark and hard to see, and roads may be blocked."
+        "Do not drive into smoke or towards a fire. Smoke can make it very dark and hard to see, and roads may be blocked.",
+        "Do not get out of the car while the fire front is passing."
       ],
-      "call_000_if": "Your life is at risk, or once the fire front has passed if people are hurt.",
-      "source_name": "NSW Rural Fire Service - Bush fire safety for travellers",
-      "source_url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0009/187038/Information-For-Travellers.pdf",
-      "extra_sources": [
+      "call_000_if": "Your life is at risk, or once the fire front has passed if anyone is hurt.",
+      "state_variants_title": "What each state and territory says about the engine and air-con",
+      "state_variants_intro": "Engine OFF: NSW, VIC, SA, WA (VIC and SA say turn it off when the fire front is close). Engine LEFT RUNNING: QLD, NT. TAS: two Tasmanian sources differ. ACT: no in-car advice found. Advice can change. Follow the agency for where you are, any warnings, and the 000 operator.",
+      "state_variants": [
         {
-          "source_name": "CFA Victoria - Stay safe in your car in a bushfire",
-          "source_url": "https://www.cfa.vic.gov.au/ArticleDocuments/565/Easy-English-CFA-Stay-Safe-In-A-Car-Feb-2024.pdf.aspx"
+          "state": "NSW",
+          "agency": "NSW Rural Fire Service",
+          "engine": "Turn the engine off.",
+          "other": "Also: headlights and hazard lights on, close windows and air vents, face the car towards the fire. Air-con is not mentioned separately.",
+          "source_name": "NSW RFS - Bush fire safety for travellers (PDF)",
+          "source_url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0009/187038/Information-For-Travellers.pdf"
         },
         {
-          "source_name": "CFS South Australia - During a bushfire checklist",
+          "state": "VIC",
+          "agency": "CFA (Country Fire Authority)",
+          "engine": "When the fire front is close: shut all vents, turn off the air-con and turn off the engine.",
+          "other": "CFA calls a stationary car in a clear area a last resort with a high risk of injury or death. Its Easy English guide says to turn the engine off when you park.",
+          "source_name": "CFA - Your Guide to Survival (PDF)",
+          "source_url": "https://www.cfa.vic.gov.au/ArticleDocuments/335/CFA-Your-Guide-to-Survival-V6.pdf",
+          "extra_sources": [
+            {
+              "source_name": "CFA - Stay safe in your car in a bushfire (Easy English PDF)",
+              "source_url": "https://www.cfa.vic.gov.au/ArticleDocuments/565/Easy-English-CFA-Stay-Safe-In-A-Car-Feb-2024.pdf.aspx"
+            }
+          ]
+        },
+        {
+          "state": "SA",
+          "agency": "CFS (Country Fire Service)",
+          "engine": "When the fire front is close: shut all vents, turn off the air-con and turn off the engine.",
+          "other": "Hazard lights on. Park off the roadway. CFS also says do not try to outrun a fire in a car.",
+          "source_name": "CFS SA - During a bushfire checklist",
           "source_url": "https://www.cfs.sa.gov.au/plan-prepare/during-a-fire-what-to-do/during-a-bushfire-checklist/"
+        },
+        {
+          "state": "QLD",
+          "agency": "Queensland Fire Department (QFD, formerly QFES)",
+          "engine": "Leave the engine running.",
+          "other": "Headlights and hazards on, close all vents and windows. Air-con is not mentioned. After the front passes, check for burning fires and do not move the car until it is safe.",
+          "source_name": "Queensland Government - Driving and bushfire awareness (source: Queensland Fire Department)",
+          "source_url": "https://www.qld.gov.au/emergency/dealing-disasters/disaster-types/bushfires/bushfire-aware/driving-and-bushfire-awareness"
+        },
+        {
+          "state": "WA",
+          "agency": "DFES (Department of Fire and Emergency Services)",
+          "engine": "Turn the air-con and the engine off.",
+          "other": "Call 000. Headlights and hazard lights on, close windows, doors and vents. DFES warns that sheltering in a vehicle gives only a slightly higher chance of survival than being caught in the open.",
+          "source_name": "DFES WA - Bushfire Travellers' Checklist, May 2019 (PDF, copy on a WA council site)",
+          "source_url": "https://www.dardanup.wa.gov.au/Profiles/dardanup/Assets/ClientData/Documents/Fire___Emergency/DFES_Bushfire_Travellers_Checklist.pdf"
+        },
+        {
+          "state": "TAS",
+          "agency": "Tasmania Fire Service (TFS)",
+          "engine": "Run the air-con while you can. When the fire front is close, turn the engine off and close all vents.",
+          "other": "Hazard lights on. Park off the road. Be ready to get out as soon as the fire has passed. TFS's newer 2023 guide only lists a stationary car in a clear area as a last resort, with no steps.",
+          "source_name": "TFS - Bushfire Safety Guide 2021 (PDF)",
+          "source_url": "https://www.tfseducation.com.au/sites/default/files/documents/200564-TFS-Bushfire-Safety-Guide-2021_web.pdf"
+        },
+        {
+          "state": "TAS",
+          "agency": "Parks and Wildlife Service Tasmania",
+          "engine": "Air-con off. The engine may be left running so the headlights keep working and the battery does not go flat.",
+          "other": "This differs from the TFS advice above. Headlights and hazards on, close all windows, doors and vents.",
+          "source_name": "Parks and Wildlife Service Tasmania - Bushfire safety",
+          "source_url": "https://parks.tas.gov.au/explore-our-parks/know-before-you-go/bushfire-safety"
+        },
+        {
+          "state": "NT",
+          "agency": "NT Government (Bushfires NT and NT Police, Fire and Emergency Services)",
+          "engine": "Keep the engine running.",
+          "other": "Hazard lights on, close doors, windows and vents, lie on the floor and cover yourself with woollen or cotton fabric. Do not open the doors or windows until the fire front has passed. Air-con is not mentioned.",
+          "source_name": "NT Government - Driving near bushfires",
+          "source_url": "https://nt.gov.au/emergency/bushfire/prepare-and-plan/driving-bushfires"
+        },
+        {
+          "state": "ACT",
+          "agency": "ACT Emergency Services Agency (ESA)",
+          "engine": "No advice about the engine or sheltering in a car found.",
+          "other": "ESA's bushfire pages and Bushfire Survival Plan do not give in-car steps. They say leave early, and if you are caught in a fire, protect yourself from the heat. Check esa.act.gov.au and the nearby NSW RFS advice above.",
+          "source_name": "ACT ESA - Bushfires",
+          "source_url": "https://www.esa.act.gov.au/be-emergency-ready/bushfires"
         }
       ],
-      "last_reviewed": "2026-11-17",
+      "source_name": "NSW Rural Fire Service - Bush fire safety for travellers (basis for the shared steps; each state's own source is in the list)",
+      "source_url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0009/187038/Information-For-Travellers.pdf",
+      "last_reviewed": "2026-11-18",
       "status": "draft",
-      "review_notes": "NSW RFS, CFA and CFS say turn the engine off. The Queensland government page says leave it running. This card follows NSW RFS, CFA and CFS. Please confirm."
+      "review_notes": "Rewritten 18 Nov 2026 to list each state's advice. The agencies disagree on the engine (off: NSW, VIC, SA, WA; running: QLD, NT; TAS sources differ; ACT has none). The WA source is a DFES PDF dated May 2019 hosted by a council; some WA council pages show a version saying leave the engine running, so please check WA. TFS 2021 guide is older than the 2023 guide."
     }
   ],
   "states": {
