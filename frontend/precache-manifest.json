@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "ab68886b4aa5",
-  "built_at": "2026-11-18T08:32:47Z",
+  "version": "c752b47e727f",
+  "built_at": "2026-11-18T10:41:13Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -15,14 +15,26 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "53de99f9b185af67",
-      "size": 13659
+      "hash": "7e85f7706aeb1a9d",
+      "size": 18977
     },
     {
       "url": "/data/emergency.json",
       "path": "data/emergency.json",
       "hash": "343ef4fc74463bda",
       "size": 39470
+    },
+    {
+      "url": "/data/knowledge.json",
+      "path": "data/knowledge.json",
+      "hash": "6a0c6040b6d4cba4",
+      "size": 134902
+    },
+    {
+      "url": "/data/synonyms.json",
+      "path": "data/synonyms.json",
+      "hash": "15ee5e3038283136",
+      "size": 3750
     },
     {
       "url": "/icons/apple-touch-icon.png",
@@ -75,26 +87,38 @@
     {
       "url": "/",
       "path": "index.html",
-      "hash": "6bfe1d6695e63d28",
-      "size": 37273
+      "hash": "0d8141700afe8e3f",
+      "size": 43462
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "6bfe1d6695e63d28",
-      "size": 37273
+      "hash": "0d8141700afe8e3f",
+      "size": 43462
     },
     {
       "url": "/js/emergency.js",
       "path": "js/emergency.js",
-      "hash": "94de423886e5f01d",
-      "size": 25109
+      "hash": "8e28f1b223eb0708",
+      "size": 25686
+    },
+    {
+      "url": "/js/guides.js",
+      "path": "js/guides.js",
+      "hash": "4a89800f0e07e867",
+      "size": 16452
     },
     {
       "url": "/js/offline.js",
       "path": "js/offline.js",
-      "hash": "faac8529c98bef00",
-      "size": 14080
+      "hash": "716634458b2360f8",
+      "size": 14710
+    },
+    {
+      "url": "/js/search.js",
+      "path": "js/search.js",
+      "hash": "131a96a7ac4f48a6",
+      "size": 7059
     },
     {
       "url": "/manifest.webmanifest",

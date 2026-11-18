@@ -1,5 +1,5 @@
 /* NomadMate offline layer: config, connection state, "Needs signal" states, routing between the
- * app and the Emergency screen, service worker registration and the update prompt.
+ * app, the Emergency screen and the Guides screen, service worker registration and the update prompt.
  * No libraries. Exposes window.OM for the inline app script and js/emergency.js.
  */
 (function () {
@@ -136,25 +136,36 @@
   }
 
   /* --------------------------------------------------------------- routing */
-  function currentView() { return location.hash === "#emergency" ? "emergency" : "home"; }
+  function currentView() {
+    var h = location.hash || "";
+    if (h === "#emergency") return "emergency";
+    if (/^#guides(\/|$)/.test(h)) return "guides";
+    return "home";
+  }
   var lastView = null;
+  var TITLES = { emergency: "Emergency | NomadMate by OutbackMind", guides: "Guides | NomadMate by OutbackMind", home: "NomadMate by OutbackMind" };
   function route() {
     var v = currentView();
-    var home = $("view-home"), em = $("view-emergency");
+    var home = $("view-home"), em = $("view-emergency"), gd = $("view-guides");
     if (!home || !em) return;
     home.hidden = v !== "home";
     em.hidden = v !== "emergency";
-    document.title = v === "emergency" ? "Emergency | NomadMate by OutbackMind" : "NomadMate by OutbackMind";
+    if (gd) gd.hidden = v !== "guides";
+    document.title = TITLES[v] || TITLES.home;
     if (els.emergencyBtn) {
       if (v === "emergency") els.emergencyBtn.setAttribute("aria-current", "page"); else els.emergencyBtn.removeAttribute("aria-current");
     }
+    if (els.guidesBtn) {
+      if (v === "guides") els.guidesBtn.setAttribute("aria-current", "page"); else els.guidesBtn.removeAttribute("aria-current");
+    }
     if (lastView !== null && lastView !== v) {
       window.scrollTo(0, 0);
-      var target = v === "emergency" ? $("emergencyTitle") : $("main");
+      var target = v === "emergency" ? $("emergencyTitle") : (v === "guides" ? $("guidesTitle") : $("main"));
       if (target) { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }
     }
     if (v === "emergency") document.dispatchEvent(new CustomEvent("om:emergency-shown"));
     else document.dispatchEvent(new CustomEvent("om:emergency-hidden"));
+    if (v === "guides") document.dispatchEvent(new CustomEvent("om:guides-shown"));
     lastView = v;
   }
   window.addEventListener("hashchange", route);
@@ -278,13 +289,14 @@
     reportApiSuccess: reportApiSuccess,
     probe: probe,
     packStatus: refreshPackStatus,
-    pack: null
+    pack: null,
+    openCard: null
   };
 
   function init() {
-    els.connPill = $("connPill"); els.connText = $("connText"); els.emergencyBtn = $("emergencyBtn"); els.packStatus = $("packStatus");
-    var brand = $("brandLink"), back = $("backHome");
-    [brand, back].forEach(function (a) { if (a) a.addEventListener("click", function (e) { e.preventDefault(); if (location.hash) { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); } else { window.scrollTo(0, 0); } }); });
+    els.connPill = $("connPill"); els.connText = $("connText"); els.emergencyBtn = $("emergencyBtn"); els.guidesBtn = $("guidesBtn"); els.packStatus = $("packStatus");
+    var brand = $("brandLink"), back = $("backHome"), backG = $("backHomeGuides");
+    [brand, back, backG].forEach(function (a) { if (a) a.addEventListener("click", function (e) { e.preventDefault(); if (location.hash) { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); } else { window.scrollTo(0, 0); } }); });
     wireUpdateBar();
     initInstall();
     render();

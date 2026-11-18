@@ -400,6 +400,8 @@
   <symbol id="i-van" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 17V8a2 2 0 0 1 2-2h11l5 5v6M2 17h2m14 0h4M6 17a2 2 0 1 0 4 0m6 0a2 2 0 1 0 4 0M2 12h13"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-3-6.7L21 8m0-5v5h-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
 </svg>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -413,6 +415,10 @@
       <svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg>
       <span id="connText">Checking connection</span>
     </div>
+    <a id="guidesBtn" class="guides-top" href="#guides">
+      <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+      <span>Guides</span>
+    </a>
     <a id="emergencyBtn" class="emergency-top" href="#emergency">
       <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
       <span>Emergency</span>
@@ -430,8 +436,9 @@
     <div id="offlineBanner" class="offline-banner" role="note" hidden>
       <svg class="icon" aria-hidden="true"><use href="#i-wifi-off"/></svg>
       <div>
-        <p><strong>You are offline.</strong> Asking questions, trip plans and checklists need signal. The Emergency screen works without signal.</p>
+        <p><strong>You are offline.</strong> AI answers, trip plans and checklists need signal. The Emergency screen and the saved Guides work without signal, and Ask searches the saved guides.</p>
         <a class="offline-cta" href="#emergency">Open the Emergency screen</a>
+        <a class="offline-cta offline-cta-alt" href="#guides">Browse offline guides</a>
       </div>
     </div>
   </div>
@@ -456,8 +463,9 @@
     </div>
 
     <div class="grid">
-      <div class="card" id="askCard" data-needs-network data-offline-label="Asking questions">
+      <div class="card" id="askCard">
         <div class="label">Ask OutbackMind</div>
+        <p id="askOfflineNote" class="callout-inline ask-offline-note" role="note" hidden><strong>Offline.</strong> Normal Mode will search the guides saved on this phone. That is a keyword match, not an AI answer. Emergency Mode opens the Emergency screen.</p>
         <textarea id="question" aria-label="Your question for NomadMate" placeholder="Example: Someone has signs of heatstroke while camping remotely. What should I do right now?"></textarea>
 
         <div class="mode-wrap" role="radiogroup" aria-label="Answer mode">
@@ -495,6 +503,8 @@
           <li>Refresh history to review recent guidance.</li>
           <li>Treat emergency advice as a guide, not a replacement for official emergency services.</li>
         </ul>
+        <p class="mini-note">The saved Guides work without signal and show where each answer comes from.</p>
+        <div class="actions"><a class="btn-secondary guides-cta" href="#guides"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Browse Guides</a></div>
       </div>
     </div>
 
@@ -551,6 +561,26 @@
     </div>
   </div>
 </section>
+<section id="view-guides" class="guides-view" aria-labelledby="guidesTitle" hidden>
+  <div class="wrap">
+    <a class="back-link" href="#" id="backHomeGuides"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
+    <h1 id="guidesTitle" tabindex="-1">Guides</h1>
+    <form id="guideSearchForm" class="guide-search" role="search" autocomplete="off" aria-label="Search the guides">
+      <div id="guideSearchWrap">
+        <label for="guideSearch" class="guide-search-label">Search the guides (works without signal)</label>
+        <div class="guide-search-row">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="guideSearch" type="search" enterkeyhint="search" placeholder="Try: snake bite, tyre pressure sand, water per day" autocapitalize="none" spellcheck="false" />
+        </div>
+      </div>
+    </form>
+    <div id="guideStatus" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="guidesRoot" aria-live="off">
+      <noscript><p>This screen needs JavaScript. If you are in danger, call 000 (or 112 on a mobile phone).</p></noscript>
+      <p class="loading-note">Loading guides...</p>
+    </div>
+  </div>
+</section>
 </main>
 
 <section id="installArea" class="wrap install-area" aria-label="Install NomadMate" hidden>
@@ -575,6 +605,8 @@
 
 <script src="/js/offline.js"></script>
 <script src="/js/emergency.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/guides.js"></script>
 <script>
   // js/offline.js provides window.OM (connection state, config, service worker). This stub keeps the
   // app working as before if that file ever fails to load.
@@ -678,6 +710,8 @@ function renderRecommendedGear(items) {
     return "";
   }
 
+  // The API returns name, url and category. use_case and priority are shown only when the API sends them,
+  // so no empty text or an invented "Recommended" badge appears.
   return `
     <div style="margin-top:18px; padding-top:16px; border-top:1px solid #334155;">
       <div style="font-size:12px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; font-weight:bold;">
@@ -685,45 +719,49 @@ function renderRecommendedGear(items) {
       </div>
 
       <div style="display:flex; flex-direction:column; gap:8px;">
-        ${items.map(item => `
-          <div style="
-            background:#0b1220;
-            border:1px solid #334155;
-            border-radius:12px;
-            padding:10px 12px;
-          ">
+        ${items.map(item => {
+          const name = escapeHtml(item.name || "Recommended gear");
+          const url = typeof item.url === "string" && /^https:\/\//i.test(item.url) ? item.url : "";
+          const title = url
+            ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="color:#f59e0b; text-decoration:underline;">${name}</a>`
+            : name;
+          const useCase = item.use_case
+            ? `<div style="font-size:12px; color:#cbd5e1; line-height:1.4; margin-top:4px;">${escapeHtml(item.use_case)}</div>`
+            : "";
+          const badge = item.priority
+            ? `<div style="white-space:nowrap; font-size:10px; color:#10b981; border:1px solid rgba(16,185,129,0.4); border-radius:999px; padding:3px 7px; font-weight:700;">${escapeHtml(item.priority)}</div>`
+            : "";
+          const category = item.category
+            ? `<div style="font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.06em; margin-top:6px;">${escapeHtml(item.category)}</div>`
+            : "";
+          return `
+          <div style="background:#0b1220; border:1px solid #334155; border-radius:12px; padding:10px 12px;">
             <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
               <div>
-                <div style="font-size:14px; color:#f59e0b; font-weight:700;">
-                  ${escapeHtml(item.name || "Recommended Gear")}
-                </div>
-                <div style="font-size:12px; color:#cbd5e1; line-height:1.4; margin-top:4px;">
-                  ${escapeHtml(item.use_case || "")}
-                </div>
+                <div style="font-size:14px; font-weight:700; color:#f59e0b;">${title}</div>
+                ${useCase}
               </div>
-
-              <div style="
-                white-space:nowrap;
-                font-size:10px;
-                color:#10b981;
-                border:1px solid rgba(16,185,129,0.4);
-                border-radius:999px;
-                padding:3px 7px;
-                font-weight:700;
-              ">
-                ${escapeHtml(item.priority || "Recommended")}
-              </div>
+              ${badge}
             </div>
-
-            <div style="font-size:10px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.06em; margin-top:6px;">
-              ${escapeHtml(item.category || "Gear")}
-            </div>
-          </div>
-        `).join("")}
+            ${category}
+          </div>`;
+        }).join("")}
       </div>
     </div>
   `;
 }
+
+  // The API sends created_at as an ISO time in UTC without a "Z" (for example 2026-11-18T03:04:05.123456).
+  // Without the "Z" a browser reads it as local time and shows the wrong hour, so add it before formatting.
+  function formatCreatedAt(value) {
+    if (!value) return "";
+    const text = String(value);
+    const hasZone = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(text);
+    const parsed = new Date(hasZone ? text : text.replace(/\.(\d{3})\d+/, ".$1") + "Z");
+    if (isNaN(parsed.getTime())) return text;
+    return parsed.toLocaleString("en-AU", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
+  }
+
   async function loadHistory() {
     if (!OM.isOnline()) {
       historyEl.textContent = "Needs signal. Saved questions are not stored on this phone yet, so they cannot be shown offline.";
@@ -753,7 +791,7 @@ function renderRecommendedGear(items) {
               : '<span class="normal-badge">NORMAL</span>'}
           </div>
           <div class="history-a">${formatAnswer(item.answer)}</div>
-          <div class="history-time">${escapeHtml(item.created_at)}</div>
+          <div class="history-time">${escapeHtml(formatCreatedAt(item.created_at))}</div>
         </div>
       `).join("");
     } catch (error) {
@@ -833,7 +871,7 @@ function renderRecommendedGear(items) {
         </div>
 
         <div style="font-size:12px; color:#94a3b8; margin-top:5px;">
-          ${escapeHtml(item.created_at)}
+          ${escapeHtml(formatCreatedAt(item.created_at))}
         </div>
       </div>
     `).join("");
@@ -942,22 +980,71 @@ navigator.clipboard.writeText(formatted)
     });
   }
 
+  // ---- Ask: offline guide match (not an AI answer) -------------------------------------------------
+  // When the phone is offline, or the service fails, Normal Mode searches the guides saved on the phone.
+  // Emergency Mode is never queued and never depends on the AI: offline it opens the Emergency screen.
+  const askOfflineNote = document.getElementById("askOfflineNote");
+  const ASK_LABEL = "Ask OutbackMind";
+
+  function isServiceFailure(error) {
+    return isNetworkError(error) || !!(error && (error.status >= 500 || error.name === "SyntaxError"));
+  }
+
+  function updateAskForConnection() {
+    const offline = !OM.isOnline();
+    if (askOfflineNote) askOfflineNote.hidden = !offline;
+    askBtn.textContent = !offline ? ASK_LABEL : (getSelectedMode() === "emergency" ? "Open Emergency screen" : "Search saved guides");
+  }
+
+  async function showOfflineGuideMatch(question, reason, emergencyLink) {
+    outputCardEl.classList.remove("emergency");
+    outputHeaderEl.textContent = (window.OMGuides && window.OMGuides.label) || "Offline guide match, not an AI answer";
+    statusEl.textContent = reason;
+    outputEl.textContent = "";
+    if (emergencyLink) {
+      const p = document.createElement("p");
+      p.appendChild(document.createTextNode("If someone needs help now, "));
+      const a = document.createElement("a");
+      a.href = "#emergency";
+      a.style.color = "#fbbf24";
+      a.textContent = "open the offline Emergency screen";
+      p.appendChild(a);
+      p.appendChild(document.createTextNode("."));
+      outputEl.appendChild(p);
+    }
+    const holder = document.createElement("div");
+    outputEl.appendChild(holder);
+    if (window.OMGuides) {
+      await window.OMGuides.renderAskMatch(holder, question);
+    } else {
+      holder.textContent = "The saved guides are not available. Open the Emergency screen if someone needs help now.";
+    }
+  }
+
+  document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", updateAskForConnection));
+  document.addEventListener("om:connectivity", updateAskForConnection);
+  updateAskForConnection();
+
   askBtn.addEventListener("click", async () => {
     const question = questionEl.value.trim();
     const mode = getSelectedMode();
-
-    if (!question) {
-      statusEl.textContent = "Please enter a question.";
-      return;
-    }
 
     if (!OM.isOnline()) {
       // Emergency questions are never queued or answered later: send people to the offline Emergency screen.
       if (mode === "emergency") {
         location.hash = "#emergency";
-      } else {
-        statusEl.textContent = "Needs signal. Asking a question needs an internet connection.";
+        return;
       }
+      if (!question) {
+        statusEl.textContent = "Please enter a question.";
+        return;
+      }
+      await showOfflineGuideMatch(question, "Offline: showing saved guides on this phone. Your question was not sent or saved.", false);
+      return;
+    }
+
+    if (!question) {
+      statusEl.textContent = "Please enter a question.";
       return;
     }
 
@@ -989,7 +1076,9 @@ navigator.clipboard.writeText(formatted)
         if (data.detail) {
           errorText = data.detail;
         }
-        throw new Error(errorText);
+        const failure = new Error(errorText);
+        failure.status = response.status;
+        throw failure;
       }
 
       OM.reportApiSuccess();
@@ -1004,10 +1093,12 @@ navigator.clipboard.writeText(formatted)
       questionEl.value = "";
       await loadHistory();
     } catch (error) {
-      statusEl.textContent = friendlyError(error);
-      if (isNetworkError(error)) {
-        outputEl.innerHTML = 'Could not reach the service. <a href="#emergency" style="color:#fbbf24;">Open the offline Emergency screen</a> if someone needs help now.';
+      if (isServiceFailure(error)) {
+        // Network error or server failure: fall back to the saved guides. Never queued, never retried later.
+        if (isNetworkError(error)) OM.reportApiFailure();
+        await showOfflineGuideMatch(question, "Needs signal. NomadMate could not reach the AI service. Showing saved guides on this phone instead. Your question was not saved.", true);
       } else {
+        statusEl.textContent = friendlyError(error);
         outputEl.textContent = "Something went wrong while contacting OutbackMind.";
       }
     } finally {

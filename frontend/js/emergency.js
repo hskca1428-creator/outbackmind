@@ -475,7 +475,17 @@
     root.appendChild(s);
   }
 
-  document.addEventListener("om:emergency-shown", function () { if (data) maybeAutoStartGps(); });
+  // A guide that mirrors a first-aid card can ask for that card to be opened (window.OM.openCard = "card-<id>").
+  function openRequestedCard() {
+    var id = window.OM && window.OM.openCard;
+    if (!id || !data) return;
+    window.OM.openCard = null;
+    var d = document.getElementById(id);
+    if (!d) return;
+    d.open = true;
+    setTimeout(function () { try { d.scrollIntoView({ block: "start" }); } catch (e) {} var sm = d.querySelector("summary"); if (sm) { try { sm.focus({ preventScroll: true }); } catch (e2) { sm.focus(); } } }, 0);
+  }
+  document.addEventListener("om:emergency-shown", function () { if (data) { maybeAutoStartGps(); openRequestedCard(); } });
   document.addEventListener("om:emergency-hidden", function () { if (gps.watchId != null) { stopGps(true); gps.started = false; } });
   window.addEventListener("pagehide", function () { if (gps.watchId != null) stopGps(true); });
 
