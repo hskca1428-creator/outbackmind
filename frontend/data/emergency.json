@@ -18,8 +18,8 @@
         "source_url": "https://www.wa.gov.au/organisation/western-australia-police-force/outback-travel-bushwalking-and-prospecting"
       }
     ],
-    "status": "draft",
-    "last_reviewed": "2026-11-17"
+    "status": "approved",
+    "last_reviewed": "2026-11-18"
   },
   "numbers": [
     {
@@ -28,12 +28,22 @@
       "tel": "000",
       "display": "000",
       "primary": true,
-      "when": "Life-threatening or time-critical emergencies. Say police, fire or ambulance.",
-      "detail": "Free. Works from any fixed or mobile phone, satellite phone and certain VoIP services. Needs coverage on a mobile phone.",
+      "when": "Life-threatening or time-critical emergencies: someone is seriously injured or needs urgent medical help, your life or property is in danger, or you have just seen a serious accident or crime. Say police, fire or ambulance.",
+      "detail": "Free from any phone. Works from fixed and mobile phones, satellite phones and certain VoIP services. On a mobile you do not need to unlock the keypad or enter a PIN. A Telstra operator answers and puts you through. A mobile must be in range of a mobile network, and the call can use any available network. Phones need 4G or 5G with VoLTE emergency calling because 3G is switched off. Do not test your phone by calling 000.",
       "source_name": "Triple Zero (Australian Government)",
       "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved",
+      "extra_sources": [
+        {
+          "source_name": "ACMA - Emergency calls",
+          "source_url": "https://www.acma.gov.au/emergency-calls"
+        },
+        {
+          "source_name": "Department of Infrastructure - Emergency calls and the 3G switch-off (VoLTE)",
+          "source_url": "https://www.infrastructure.gov.au/emergency-calls"
+        }
+      ]
     },
     {
       "id": "112",
@@ -44,8 +54,14 @@
       "detail": "Cannot be called from a landline or satellite phone. It does not work without mobile coverage, just like 000.",
       "source_name": "Triple Zero (Australian Government)",
       "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved",
+      "extra_sources": [
+        {
+          "source_name": "ACMA - Emergency calls",
+          "source_url": "https://www.acma.gov.au/emergency-calls"
+        }
+      ]
     },
     {
       "id": "106",
@@ -53,11 +69,17 @@
       "tel": "106",
       "display": "106",
       "when": "For people who are deaf or have a hearing or speech difficulty. Needs a TTY (textphone).",
-      "detail": "National Relay Service. The NRS has other ways to reach Triple Zero too.",
+      "detail": "National Relay Service. The NRS can also transfer a captioned, internet, SMS, video or voice relay call to Triple Zero. You cannot use SMS to reach 106 or 000.",
       "source_name": "Triple Zero (Australian Government)",
       "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "last_reviewed": "2026-11-18",
+      "status": "approved",
+      "extra_sources": [
+        {
+          "source_name": "ACMA - Emergency calls",
+          "source_url": "https://www.acma.gov.au/emergency-calls"
+        }
+      ]
     },
     {
       "id": "ses",
@@ -65,22 +87,59 @@
       "tel": "132500",
       "display": "132 500",
       "when": "Flood, storm and tsunami help that is not life-threatening. Life-threatening: call 000.",
-      "detail": "State Emergency Service.",
+      "detail": "State Emergency Service. You cannot reach the SES through 000, because 000 only transfers to police, fire or ambulance.",
+      "source_name": "ACMA - Emergency calls",
+      "source_url": "https://www.acma.gov.au/emergency-calls",
+      "last_reviewed": "2026-11-18",
+      "status": "approved",
+      "extra_sources": [
+        {
+          "source_name": "Triple Zero (Australian Government)",
+          "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero"
+        }
+      ]
+    },
+    {
+      "id": "police-assist",
+      "label": "Police Assistance Line, not urgent",
+      "tel": "131444",
+      "display": "131 444",
+      "when": "Non-urgent police matters, such as reporting a crime that has already happened. Not for emergencies.",
+      "detail": "Does not replace 000. If a crime is happening now, or someone is hurt or in danger, call 000.",
       "source_name": "Triple Zero (Australian Government)",
       "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
-      "last_reviewed": "2026-11-17",
-      "status": "draft"
+      "extra_sources": [
+        {
+          "source_name": "Victoria Police - Police Assistance Line",
+          "source_url": "https://www.police.vic.gov.au/police-assistance-line-and-online-reporting"
+        }
+      ],
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
+    },
+    {
+      "id": "healthdirect",
+      "label": "healthdirect, nurse advice",
+      "tel": "1800022222",
+      "display": "1800 022 222",
+      "when": "Non-urgent health advice from a registered nurse, 24 hours a day, 7 days a week.",
+      "detail": "Known as NURSE-ON-CALL in Victoria. If someone is seriously injured or very unwell, call 000 and ask for an ambulance.",
+      "source_name": "healthdirect - Calling triple zero (000)",
+      "source_url": "https://www.healthdirect.gov.au/healthcare-and-services/emergency-and-urgent-care/calling-triple-zero",
+      "last_reviewed": "2026-11-18",
+      "status": "approved"
     }
   ],
   "operator_script": {
     "title": "What to tell the 000 operator",
     "intro": "Stay calm, speak slowly and clearly, and stay on the line.",
     "steps": [
-      "Say which service you need: police, fire or ambulance.",
-      "Say exactly where to send help. Read out the coordinates from the My location panel, then the nearest town, state, road name or landmark. The operator may ask for the town and state you are calling from.",
+      "A Telstra operator answers first. Say which service you need: police, fire or ambulance. If you need an interpreter, say your language.",
+      "Say exactly where to send help. Read out the coordinates from the My location panel, then the nearest town, state, road name or landmark. In remote areas, give nearby roads, landmarks and the property name. If you are driving, say which way you are heading and the last town you passed. The operator will ask for the town and state you are calling from.",
       "Say what has happened.",
       "Say how many people are hurt, and whether they are awake and breathing.",
-      "Follow the operator's instructions and do not hang up until told to."
+      "Follow the operator's instructions and do not hang up until told to.",
+      "If it is not safe to speak, or you cannot speak, stay on the line. When the recorded message asks you to press 55, do that and you will be put through to police."
     ],
     "source_name": "Triple Zero (Australian Government)",
     "source_url": "https://www.infrastructure.gov.au/media-communications/phone/triple-zero",
@@ -88,10 +147,18 @@
       {
         "source_name": "ACMA - Emergency calls",
         "source_url": "https://www.acma.gov.au/emergency-calls"
+      },
+      {
+        "source_name": "healthdirect - Calling triple zero (000)",
+        "source_url": "https://www.healthdirect.gov.au/healthcare-and-services/emergency-and-urgent-care/calling-triple-zero"
+      },
+      {
+        "source_name": "Triple Zero Victoria - Making a triple zero (000) call",
+        "source_url": "https://www.triplezero.vic.gov.au/making-triple-zero-000-call"
       }
     ],
-    "last_reviewed": "2026-11-17",
-    "status": "draft"
+    "last_reviewed": "2026-11-18",
+    "status": "approved"
   },
   "location_note": {
     "text": "GPS can work with no phone signal, but it can take a minute or more to settle, so wait in the open if you can. This panel only shows where you are. It does not send your location to anyone. You still need mobile coverage, a satellite phone, a CB or HF radio or a beacon to reach help. The free Emergency+ app can also show your location, street address or what3words.",
@@ -633,5 +700,31 @@
       "url": "https://www.acma.gov.au/emergency-calls",
       "last_reviewed": "2026-11-17"
     }
-  ]
+  ],
+  "ambulance_cost_note": {
+    "title": "Ambulance costs",
+    "text": "Calling 000 is free, but an ambulance is not always free. Medicare does not cover ambulance services, so you can be sent an invoice. Queensland and Tasmanian residents are generally covered by their state. Visitors to Queensland and Tasmania from other states are invoiced, and Tasmanians are not covered everywhere when interstate. South Australia says its ambulance service is not free or covered by Medicare. Check your ambulance cover or travel insurance before you travel. Costs and rules differ by state and change over time, so check the state ambulance service.",
+    "source_name": "Queensland Government - Ambulance treatment and transport (visitors)",
+    "source_url": "https://www.qld.gov.au/emergency/emergencies-services/qld-visitors-qas",
+    "extra_sources": [
+      {
+        "source_name": "Queensland Ambulance Service - Emergency ambulance care and costs",
+        "source_url": "https://www.ambulance.qld.gov.au/our-services/emergency-ambulance-response"
+      },
+      {
+        "source_name": "Tasmanian Department of Health - Ambulance costs if you live in Tasmania",
+        "source_url": "https://www.health.tas.gov.au/hospitals/ambulance/ambulance-costs/ambulance-costs-if-you-live-tasmania"
+      },
+      {
+        "source_name": "Tasmanian Department of Health - Ambulance costs if you are visiting Tasmania",
+        "source_url": "https://www.health.tas.gov.au/hospitals/ambulance/ambulance-costs/ambulance-costs-if-you-are-visiting-tasmania"
+      },
+      {
+        "source_name": "SA Ambulance Service - When to call 000 (costs)",
+        "source_url": "https://saambulance.sa.gov.au/when-to-call-000/"
+      }
+    ],
+    "last_reviewed": "2026-11-18",
+    "status": "approved"
+  }
 }

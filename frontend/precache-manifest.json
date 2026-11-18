@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "4516070b6698",
-  "built_at": "2026-11-18T07:42:32Z",
+  "version": "1dacc0de8709",
+  "built_at": "2026-11-18T07:57:54Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [
@@ -23,8 +23,8 @@
     {
       "url": "/data/emergency.json",
       "path": "data/emergency.json",
-      "hash": "d533476805b3bdc6",
-      "size": 33564
+      "hash": "de223eb1d038b97e",
+      "size": 39141
     },
     {
       "url": "/icons/apple-touch-icon.png",
@@ -89,8 +89,8 @@
     {
       "url": "/js/emergency.js",
       "path": "js/emergency.js",
-      "hash": "aa1a7a57b7999c86",
-      "size": 24299
+      "hash": "3815d81c1bd367b0",
+      "size": 24738
     },
     {
       "url": "/js/offline.js",

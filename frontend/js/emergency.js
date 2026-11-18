@@ -122,6 +122,17 @@
     body.appendChild(sourceLine(cav));
     note.appendChild(body);
     s.appendChild(note);
+    var amb = data.ambulance_cost_note;
+    if (amb) {
+      var an = el("div", { class: "callout callout-warn", role: "note" });
+      an.appendChild(icon("i-alert"));
+      var ab = el("div");
+      ab.appendChild(el("p", { class: "callout-title", text: amb.title || "Ambulance costs" }));
+      ab.appendChild(el("p", { text: amb.text }));
+      ab.appendChild(sourceLine(amb));
+      an.appendChild(ab);
+      s.appendChild(an);
+    }
     return s;
   }
 
