@@ -96,30 +96,6 @@
       font-size: 13px;
     }
 
-    .hero-card {
-      min-width: 260px;
-      background: linear-gradient(180deg, rgba(245,158,11,0.12), rgba(217,119,6,0.05));
-      border: 1px solid rgba(245,158,11,0.2);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card-title {
-      font-size: 13px;
-      color: #fde68a;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-
-    .hero-card p {
-      margin: 0;
-      color: #fef3c7;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
@@ -245,8 +221,6 @@
 
     .output-header {
       padding: 12px 16px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
       font-size: 13px;
       color: var(--muted-2);
       text-transform: uppercase;
@@ -267,10 +241,13 @@
       box-shadow: 0 0 0 1px rgba(185,28,28,0.15);
     }
 
-    .output.emergency .output-header {
+    .output.emergency .output-head {
       background: rgba(185,28,28,0.14);
-      color: #fecaca;
       border-bottom-color: rgba(185,28,28,0.3);
+    }
+
+    .output.emergency .output-header {
+      color: #fecaca;
     }
 
     .side-card-title {
@@ -457,11 +434,6 @@
           <div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Australia-focused</div>
         </div>
       </div>
-
-      <div class="hero-card">
-        <div class="hero-card-title">Current Setup</div>
-        <p>Live frontend, live API, structured answers, saved history, RAG knowledge, and emergency-specific responses.</p>
-      </div>
     </div>
 
     <div class="grid">
@@ -490,7 +462,13 @@
         <div class="status" id="status" role="status" aria-live="polite"></div>
 
         <div class="output" id="outputCard">
-          <div class="output-header" id="outputHeader">Latest Answer</div>
+          <div class="output-head">
+            <div class="output-header" id="outputHeader">Latest Answer</div>
+            <div class="output-tools" id="outputTools" hidden>
+              <button type="button" id="copyAnswerBtn" class="tool-btn">Copy</button>
+              <button type="button" id="newQuestionBtn" class="tool-btn">New question</button>
+            </div>
+          </div>
           <div class="output-body" id="output">Your answer will appear here.</div>
         </div>
       </div>
@@ -643,6 +621,7 @@
 <script src="/js/print.js"></script>
 <script src="/js/checklists.js"></script>
 <script src="/js/settings.js"></script>
+<script src="/js/collapse.js"></script>
 <script>
   // js/offline.js provides window.OM (connection state, config, service worker). This stub keeps the
   // app working as before if that file ever fails to load.
@@ -852,7 +831,7 @@ function renderRecommendedGear(items) {
       return;
     }
     historyEl.innerHTML = items.map(item => `
-        <div class="history-item">
+        <div class="history-item" data-mode="${item.mode === "emergency" ? "emergency" : "normal"}">
           <div class="history-top">
             <div class="history-q">Q: ${escapeHtml(item.question)}</div>
             ${item.mode === "emergency"
@@ -863,6 +842,11 @@ function renderRecommendedGear(items) {
           <div class="history-time">${escapeHtml(formatCreatedAt(item.created_at))}</div>
         </div>
       `).join("");
+    // Long saved answers show the first part with a "Show full answer" button. Emergency answers are always shown in full.
+    historyEl.querySelectorAll(".history-item").forEach(item => {
+      const a = item.querySelector(".history-a");
+      if (window.OMCollapse && a) window.OMCollapse.attach(a, { label: "answer", noClamp: () => item.getAttribute("data-mode") === "emergency" });
+    });
   }
 
   async function showHistoryFromCache(prefix) {
@@ -935,6 +919,7 @@ function renderRecommendedGear(items) {
         <div class="plan-time">${escapeHtml(formatCreatedAt(item.created_at))}</div>
       </div>
     `).join("");
+    tripHistory.querySelectorAll(".plan-body").forEach(b => { if (window.OMCollapse) window.OMCollapse.attach(b, { label: "plan" }); });
   }
 
   tripHistory.addEventListener("click", (e) => {
@@ -1102,6 +1087,39 @@ function renderRecommendedGear(items) {
   }
 
   // ---- Ask: offline guide match (not an AI answer) -------------------------------------------------
+  // Answer box: compact by default, with Copy and New question at the top. Emergency answers are never cut short.
+  const PLACEHOLDER_TEXT = "Your answer will appear here.";
+  const ERROR_TEXT = "Something went wrong while contacting OutbackMind.";
+  const outputToolsEl = document.getElementById("outputTools");
+  const copyAnswerBtn = document.getElementById("copyAnswerBtn");
+  const newQuestionBtn = document.getElementById("newQuestionBtn");
+  if (window.OMCollapse) {
+    window.OMCollapse.attach(outputEl, { label: "answer", observe: true, noClamp: () => outputCardEl.classList.contains("emergency") });
+    window.OMCollapse.attach(tripOutput, { label: "plan", observe: true });
+  }
+  function updateOutputTools() {
+    const t = (outputEl.textContent || "").trim();
+    outputToolsEl.hidden = !t || t === PLACEHOLDER_TEXT || t === ERROR_TEXT;
+  }
+  new MutationObserver(updateOutputTools).observe(outputEl, { childList: true, subtree: true, characterData: true });
+  copyAnswerBtn.addEventListener("click", () => {
+    const txt = (outputEl.innerText || outputEl.textContent || "").trim();
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject())
+      .then(() => { copyAnswerBtn.textContent = "Copied"; })
+      .catch(() => { copyAnswerBtn.textContent = "Could not copy"; })
+      .finally(() => setTimeout(() => { copyAnswerBtn.textContent = "Copy"; }, 1500));
+  });
+  newQuestionBtn.addEventListener("click", () => {
+    questionEl.value = "";
+    outputCardEl.classList.remove("emergency");
+    outputHeaderEl.textContent = "Latest Answer";
+    outputEl.textContent = PLACEHOLDER_TEXT;
+    statusEl.textContent = "";
+    const ask = document.getElementById("askCard");
+    if (ask) ask.scrollIntoView({ block: "start" });
+    questionEl.focus({ preventScroll: true });
+  });
+
   // When the phone is offline, or the service fails, Normal Mode searches the guides saved on the phone.
   // Emergency Mode is never queued and never depends on the AI: offline it opens the Emergency screen.
   const askOfflineNote = document.getElementById("askOfflineNote");
@@ -1221,7 +1239,7 @@ function renderRecommendedGear(items) {
         await showOfflineGuideMatch(question, "Needs signal. NomadMate could not reach the AI service. Showing saved guides on this phone instead. Your question was not saved.", true);
       } else {
         statusEl.textContent = friendlyError(error);
-        outputEl.textContent = "Something went wrong while contacting OutbackMind.";
+        outputEl.textContent = ERROR_TEXT;
       }
     } finally {
       askBtn.disabled = false;

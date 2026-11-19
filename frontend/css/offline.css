@@ -408,3 +408,34 @@ a:hover { color: #fde68a; }
   .tick-item, .plan-btn, .tick-label { transition: none !important; }
 }
 .guide-li > a.guide-title { display: inline-flex; align-items: center; min-height: 44px; font-weight: bold; font-size: 18px; text-decoration: none; padding: 6px 0; }
+
+/* ===================================================== UX quick-fix: compact answers, answer tools */
+.output-head { display: flex; align-items: center; justify-content: space-between; gap: 6px 10px; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); padding-right: 10px; }
+.output-head .output-header { flex: 1 1 auto; min-width: 0; }
+.output-tools { display: flex; gap: 8px; flex-wrap: wrap; padding: 6px 0; }
+.output-tools[hidden] { display: none; }
+.tool-btn {
+  min-height: 44px; padding: 8px 14px; border-radius: 10px; background: #0b1220; border: 1px solid #475569;
+  color: #fbbf24; font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.output.emergency .tool-btn { border-color: #f87171; color: #fecaca; }
+
+/* Long text is cut with a fade, never scrolled inside its own box. The button expands it in place. */
+.is-clamped { --clamp-bg: #0b1220; max-height: 15em; overflow: hidden; position: relative; box-sizing: border-box; }
+.output-body.is-clamped { max-height: 17em; }
+.is-clamped::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4em; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(11,18,32,0), var(--clamp-bg));
+}
+.collapse-toggle {
+  display: flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; margin: 6px 0 0; padding: 10px 14px;
+  border-radius: 10px; background: #0b1220; border: 1px solid #fbbf24; color: #fbbf24; font-weight: 700; font-size: 15px; cursor: pointer;
+}
+.collapse-toggle[hidden] { display: none; }
+.collapse-toggle[aria-expanded="true"] { border-color: #475569; color: #e2e8f0; }
+.output .collapse-toggle { margin: 0; border-radius: 0; border-width: 1px 0 0; border-color: var(--border); }
+.output .collapse-toggle[aria-expanded="false"] { border-color: #fbbf24; }
+@media (forced-colors: active) {
+  .collapse-toggle, .tool-btn { border: 2px solid CanvasText; }
+  .is-clamped::after { display: none; }
+}
