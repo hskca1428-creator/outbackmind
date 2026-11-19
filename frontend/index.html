@@ -372,6 +372,9 @@
   <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></symbol>
   <symbol id="i-external" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></symbol>
   <symbol id="i-cross" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5z"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 6v15l7-3 8 3 7-3V3l-7 3-8-3-7 3zM8 3v15M16 6v15"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11 12 3l9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
   <symbol id="i-van" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 17V8a2 2 0 0 1 2-2h11l5 5v6M2 17h2m14 0h4M6 17a2 2 0 1 0 4 0m6 0a2 2 0 1 0 4 0M2 12h13"/></symbol>
@@ -385,9 +388,9 @@
 </svg>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="topbar">
-  <a class="brand" href="#" id="brandLink" aria-label="NomadMate home">
+  <a class="brand" href="#" id="brandLink" aria-label="NomadMate by OutbackMind">
     <img src="/icons/icon-192.png" alt="" width="36" height="36" class="brand-icon" />
-    <span class="brand-text"><strong>NomadMate</strong><span class="brand-sub">by OutbackMind</span></span>
+    <span class="brand-text"><strong>NomadMate</strong> <span class="brand-sub">by OutbackMind</span></span>
   </a>
   <div class="topbar-right">
     <div id="connPill" class="conn-pill is-checking" role="status" aria-live="polite">
@@ -425,16 +428,21 @@
     <div class="hero">
       <div class="hero-left">
         <h1>NomadMate</h1>
-        <p>Your OutbackMind assistant for Australian camping, caravans, remote travel, and emergency guidance. Ask in Normal Mode for planning, or Emergency Mode for urgent step-by-step help.</p>
+        <p class="hero-by">by OutbackMind</p>
+        <p>Your assistant for Australian camping, caravans, remote travel and emergencies.</p>
 
         <div class="brand-badges">
-          <div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AI + RAG</div>
           <div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-van"/></svg>Caravan-ready</div>
           <div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Emergency Mode</div>
           <div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Australia-focused</div>
         </div>
       </div>
     </div>
+
+    <section id="homeTiles" class="home-tiles" aria-labelledby="homeTilesTitle" hidden>
+      <h2 id="homeTilesTitle" class="home-tiles-title">What do you need?</h2>
+      <ul id="tileGrid" class="tile-grid"></ul>
+    </section>
 
     <div class="grid">
       <div class="card" id="askCard">
@@ -613,6 +621,10 @@
   </div>
 </footer>
 
+<nav id="bottomNav" class="bottom-nav" aria-label="Main" hidden>
+  <ul id="bottomNavList" class="bn-list"></ul>
+</nav>
+
 <script src="/js/offline.js"></script>
 <script src="/js/emergency.js"></script>
 <script src="/js/search.js"></script>
@@ -622,6 +634,7 @@
 <script src="/js/checklists.js"></script>
 <script src="/js/settings.js"></script>
 <script src="/js/collapse.js"></script>
+<script src="/js/home.js"></script>
 <script>
   // js/offline.js provides window.OM (connection state, config, service worker). This stub keeps the
   // app working as before if that file ever fails to load.
@@ -645,7 +658,21 @@
       OM.reportApiFailure();
       return NEEDS_SIGNAL_MSG;
     }
-    return error && error.message ? error.message : "Something went wrong.";
+    const status = error && error.status;
+    if (status === 429) return "Too many requests just now. Please wait a minute and try again.";
+    if (status >= 500) return "NomadMate had a problem on its side. Please try again in a moment.";
+    // A short message the service chose to show (for example "Please ask a shorter question") is kept.
+    if (error && error.serverDetail) return error.serverDetail;
+    return "Something went wrong. Please try again in a moment.";
+  }
+
+  // Builds an error from a failed API response without ever showing "API returned 500" to a traveller.
+  function httpError(response, data) {
+    const failure = new Error("http " + response.status);
+    failure.status = response.status;
+    const d = data && data.detail;
+    if (typeof d === "string" && d.length > 0 && d.length <= 200 && !/[{}<>]/.test(d)) failure.serverDetail = d;
+    return failure;
   }
 
   const askBtn = document.getElementById("askBtn");
@@ -726,8 +753,14 @@
       .replaceAll("'", "&#39;");
   }
 
+  // **bold** from the AI is shown as bold. The text is HTML-escaped first, so the only tags that can
+  // appear are the <strong> and <a> added here. A bold span never crosses a line break.
+  function inlineMarkup(escaped) {
+    return escaped.replace(/\*\*(?=\S)([^\n]*?\S)\*\*/g, "<strong>$1</strong>");
+  }
+
   function formatAnswer(text) {
-    const linked = escapeHtml(text).replace(
+    const linked = inlineMarkup(escapeHtml(text)).replace(
       /(https?:\/\/[^\s<]+)/g,
       '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#f59e0b;">$1</a>'
     );
@@ -736,11 +769,11 @@
   }
 
   function formatPlan(text) {
-    return escapeHtml(text).replace(/\n/g, "<br>");
+    return inlineMarkup(escapeHtml(text)).replace(/\n/g, "<br>");
   }
 
   function formatChecklist(text) {
-    return escapeHtml(text).replace(/\n/g, "<br>");
+    return inlineMarkup(escapeHtml(text)).replace(/\n/g, "<br>");
   }
 
 function renderRecommendedGear(items) {
@@ -872,7 +905,7 @@ function renderRecommendedGear(items) {
     try {
       const response = await fetch(api("/history"), { headers: { "X-Client-Id": CLIENT_ID } });
       if (!response.ok) {
-        throw new Error(`History API returned ${response.status}`);
+        throw httpError(response);
       }
 
       OM.reportApiSuccess();
@@ -893,7 +926,7 @@ function renderRecommendedGear(items) {
       if (!shown) {
         historyEl.textContent = isNetworkError(error)
           ? "Needs signal. Saved questions will load when you are back online."
-          : `Failed to load history: ${error.message}`;
+          : "Could not load your saved questions right now. Please try again in a moment.";
       }
     }
   }
@@ -933,7 +966,7 @@ function renderRecommendedGear(items) {
       const formatted = `Trip Plan\n\n${item.request}\n\n${item.plan}\n\nGenerated by OutbackMind`;
       navigator.clipboard.writeText(formatted)
         .then(() => { btn.textContent = "Copied"; setTimeout(() => { btn.textContent = "Copy Plan"; }, 1500); })
-        .catch(() => { btn.textContent = "Failed"; });
+        .catch(() => { btn.textContent = "Could not copy"; setTimeout(() => { btn.textContent = "Copy Plan"; }, 1500); });
     } else if (window.OMPrint) {
       window.OMPrint.print({
         title: "Trip plan",
@@ -967,7 +1000,7 @@ function renderRecommendedGear(items) {
     try {
       const response = await fetch(api("/trip-plans"), { headers: { "X-Client-Id": CLIENT_ID } });
       if (!response.ok) {
-        throw new Error(`Trip Plans API returned ${response.status}`);
+        throw httpError(response);
       }
 
       OM.reportApiSuccess();
@@ -988,7 +1021,7 @@ function renderRecommendedGear(items) {
       if (!shown) {
         tripHistory.textContent = isNetworkError(error)
           ? "Needs signal. Saved plans will load when you are back online."
-          : `Failed to load plans: ${error.message}`;
+          : "Could not load your saved plans right now. Please try again in a moment.";
       }
     }
   }
@@ -1032,7 +1065,7 @@ function renderRecommendedGear(items) {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.detail || `Checklist API returned ${response.status}`);
+          throw httpError(response, data);
         }
 
         OM.reportApiSuccess();
@@ -1057,9 +1090,7 @@ function renderRecommendedGear(items) {
           checklistStatus.appendChild(a);
         }
       } catch (error) {
-        checklistStatus.textContent = isNetworkError(error)
-          ? friendlyError(error)
-          : `Could not generate checklist: ${error.message}`;
+        checklistStatus.textContent = friendlyError(error);
       } finally {
         checklistBtn.disabled = false;
       }
@@ -1211,13 +1242,7 @@ function renderRecommendedGear(items) {
       const data = await response.json();
 
       if (!response.ok) {
-        let errorText = `API returned ${response.status}`;
-        if (data.detail) {
-          errorText = data.detail;
-        }
-        const failure = new Error(errorText);
-        failure.status = response.status;
-        throw failure;
+        throw httpError(response, data);
       }
 
       OM.reportApiSuccess();
@@ -1276,7 +1301,7 @@ function renderRecommendedGear(items) {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.detail || "Failed to generate trip");
+          throw httpError(response, data);
         }
 
         OM.reportApiSuccess();

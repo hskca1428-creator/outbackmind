@@ -439,3 +439,87 @@ a:hover { color: #fde68a; }
   .collapse-toggle, .tool-btn { border: 2px solid CanvasText; }
   .is-clamped::after { display: none; }
 }
+
+/* ================================================================ D1: home tiles + phone bottom nav */
+.home-tiles { margin: 16px 0 26px; scroll-margin-top: 80px; }
+.home-tiles-title { margin: 0 0 12px; font-size: 20px; letter-spacing: -0.01em; }
+.tile-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile-item { margin: 0; display: flex; }
+.tile {
+  flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 132px; padding: 14px;
+  border-radius: 18px; background: #111827; border: 1px solid #334155; color: #f8fafc; text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+.tile:hover { color: #f8fafc; border-color: #f59e0b; background: #162033; transform: translateY(-1px); }
+.tile:active { transform: scale(0.98); }
+.tile-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 14px; background: #1f2937; color: #fbbf24; }
+.tile-icon .icon { width: 26px; height: 26px; margin: 0; }
+.tile-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tile-title { font-size: 18px; font-weight: bold; line-height: 1.2; }
+.tile-hint { font-size: 14px; color: #cbd5e1; line-height: 1.3; }
+.tile-avail { font-size: 12px; color: #cbd5e1; line-height: 1.3; margin-top: 2px; }
+.tile-avail::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: #10b981; vertical-align: 0; }
+.tile-avail-online::before { background: #f59e0b; }
+.tile-avail-mixed::before { background: #38bdf8; }
+.tile-emergency { background: #7f1d1d; border: 2px solid #fecaca; }
+.tile-emergency:hover { background: #991b1b; border-color: #fff; }
+.tile-emergency .tile-icon { background: #b91c1c; color: #fff; }
+.tile-emergency .tile-hint, .tile-emergency .tile-avail { color: #fee2e2; }
+html.is-offline .tile-avail-online { color: #fde68a; }
+
+@media (min-width: 700px) {
+  .tile-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tile { min-height: 150px; padding: 18px; }
+}
+@media (max-width: 699px) {
+  .brand-badges { display: none; }   /* the tiles replace the badge row on phones */
+  .hero { margin-bottom: 4px; }
+  .hero-left h1 { font-size: 30px; margin-bottom: 6px; }
+  .hero-left p { font-size: 16px; margin-bottom: 0; }
+  .wrap { padding-top: 18px; }
+}
+
+/* Bottom navigation: phones only */
+.bottom-nav { display: none; }
+@media (max-width: 699px) {
+  html.has-bottom-nav .bottom-nav {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    background: rgba(11, 18, 32, 0.98); border-top: 1px solid #334155;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  html.has-bottom-nav.is-typing .bottom-nav { display: none; }
+  html.has-bottom-nav body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  html.has-bottom-nav { scroll-padding-bottom: 80px; }
+  html.has-bottom-nav .update-bar { bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+.bn-list { list-style: none; margin: 0; padding: 0; display: flex; }
+.bn-item { flex: 1 1 0; min-width: 0; margin: 0; }
+.bn-link {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 62px; padding: 6px 2px; color: #cbd5e1; text-decoration: none; font-size: 12px; font-weight: bold; line-height: 1.2;
+  border-top: 3px solid transparent;
+}
+.bn-link .icon { width: 24px; height: 24px; margin: 0; }
+.bn-label { max-width: 100%; overflow-wrap: anywhere; text-align: center; }
+.bn-link:hover { color: #fde68a; }
+.bn-link[aria-current="page"] { color: #fbbf24; border-top-color: #fbbf24; background: #111827; }
+.bn-link:focus-visible { outline-offset: -4px; }
+
+/* Anchors on the home screen sit below the sticky top bar */
+#askCard, #planCard { scroll-margin-top: 84px; }
+
+@media (forced-colors: active) {
+  .tile, .tile-icon { border: 2px solid CanvasText; }
+  .bn-link[aria-current="page"] { border-top: 4px solid Highlight; }
+  .bottom-nav { border-top: 2px solid CanvasText; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
+  .tile:hover, .tile:active { transform: none; }
+}
+
+/* "by OutbackMind" line under the NomadMate heading (the top bar hides the brand text on small phones) */
+.hero-left p.hero-by { margin: -2px 0 8px; font-size: 14px; color: #cbd5e1; letter-spacing: 0.02em; }
+@media (min-width: 481px) { .hero-left p.hero-by { display: none; } }
+@media (max-width: 699px) { html.has-bottom-nav #guidesBtn { display: none; } }   /* Guides is in the bottom bar */

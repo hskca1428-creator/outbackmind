@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "39d8ca353f46",
-  "built_at": "2026-11-19T08:02:21Z",
+  "version": "bee052557774",
+  "built_at": "2026-11-19T09:44:20Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -13,10 +13,22 @@
       "size": 788
     },
     {
+      "url": "/config/home.json",
+      "path": "config/home.json",
+      "hash": "eaa363b3025fb881",
+      "size": 1692
+    },
+    {
+      "url": "/config/nav.json",
+      "path": "config/nav.json",
+      "hash": "f60be72cb343f6d5",
+      "size": 911
+    },
+    {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "55d9a050859066ad",
-      "size": 25055
+      "hash": "c9559ebfa83de175",
+      "size": 29750
     },
     {
       "url": "/data/checklists.json",
@@ -99,14 +111,14 @@
     {
       "url": "/",
       "path": "index.html",
-      "hash": "07a79a3b23e940b8",
-      "size": 56517
+      "hash": "a2ebc956a311dcee",
+      "size": 58323
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "07a79a3b23e940b8",
-      "size": 56517
+      "hash": "a2ebc956a311dcee",
+      "size": 58323
     },
     {
       "url": "/js/checklists.js",
@@ -131,6 +143,12 @@
       "path": "js/guides.js",
       "hash": "4a89800f0e07e867",
       "size": 16452
+    },
+    {
+      "url": "/js/home.js",
+      "path": "js/home.js",
+      "hash": "02ca9957b67f6c4c",
+      "size": 7595
     },
     {
       "url": "/js/offline.js",
