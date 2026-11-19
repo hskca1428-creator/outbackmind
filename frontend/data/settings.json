@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "note": "Wording for the Saved data and settings screen. Edit here, then run scripts/build_offline_pack.py.",
+  "saved_here": "Saved on this device means stored inside this browser on this phone. Nothing here is sent anywhere by the Saved data screen.",
+  "privacy": "Questions you ask online and trip plans you make are also stored on the NomadMate server under an anonymous ID (a random code, not your name), so you can see them again. Checklists made by the generator are kept only on this device, because the server does not keep them. Ticks on the built-in checklists stay on this device only.",
+  "memory_mode": "This browser is not letting NomadMate save data (private browsing can do this). Everything still works, but your ticks, saved questions and plans will be lost when you close the page. Use Back up now to keep a copy.",
+  "backup": "A backup is a file with your saved questions, plans, checklists, ticks and the anonymous ID that links to your history on the server. Keep it private. If your phone clears this app's data, import the file to get it all back.",
+  "clear": "This removes your saved questions, plans, checklists and ticks from this device. It does not remove the guides, the Emergency screen or the offline pack, and it does not delete anything on the server. Your anonymous ID is kept.",
+  "ios_eviction": {
+    "title": "iPhone and iPad: saved data can be deleted",
+    "text_safari": "On iPhone and iPad, Safari can delete the saved data of a website (including this app's offline copy and anything saved here) after seven days of Safari use without opening it. Add NomadMate to your Home Screen to avoid this: tap Share, then Add to Home Screen. Back up now if you have saved something you need.",
+    "text_home_screen": "NomadMate is on your Home Screen. Apple's WebKit team says apps added to the Home Screen count their days of use separately and are not expected to lose their saved data. Open the app now and then, and keep a backup of anything you need.",
+    "source_name": "WebKit blog: Full Third-Party Cookie Blocking and More (7-day cap on script-writable storage, and Home Screen web apps)",
+    "source_url": "https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/",
+    "source_note": "Published 24 March 2020. Apple can change how Safari stores data, so check your own phone before you rely on it.",
+    "last_reviewed": "2026-11-19",
+    "status": "approved"
+  }
+}

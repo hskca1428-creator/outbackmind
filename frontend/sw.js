@@ -11,7 +11,7 @@
  *   or cached. Requests with ?probe are never intercepted, so the online/offline probe tells the truth.
  * - Kill switch: copy sw-killswitch.js over this file.
  */
-const PACK_VERSION = "c752b47e727f";
+const PACK_VERSION = "0fec4428c8ea";
 const CACHE_PREFIX = "om-shell-";
 const CACHE_NAME = CACHE_PREFIX + PACK_VERSION;
 const NETWORK_TIMEOUT_MS = 3000;

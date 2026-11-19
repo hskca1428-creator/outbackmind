@@ -389,6 +389,7 @@
       out.textContent = "";
       var k = sel.value;
       try { localStorage.setItem("om_state", k); } catch (e) {}
+      if (window.OMStore) window.OMStore.setMeta("om_state", k);
       if (k && data.states[k]) {
         out.appendChild(el("h3", { text: data.states[k].name }));
         out.appendChild(linkList(data.states[k].links));
@@ -399,6 +400,10 @@
     var saved = "";
     try { saved = localStorage.getItem("om_state") || ""; } catch (e) {}
     if (saved && data.states[saved]) sel.value = saved;
+    if (!saved && window.OMStore) {
+      // localStorage was cleared: restore the choice from the copy kept in IndexedDB.
+      window.OMStore.getMeta("om_state", "").then(function (v) { if (v && data.states[v] && !sel.value) { sel.value = v; show(); } });
+    }
     sel.addEventListener("change", show);
     s.appendChild(label); s.appendChild(sel); s.appendChild(out);
     show();

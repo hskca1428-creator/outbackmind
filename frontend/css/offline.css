@@ -39,7 +39,7 @@ textarea::placeholder { color: #94a3b8; opacity: 1; }
 button, .btn-primary, .btn-secondary { min-height: 44px; }
 button .icon { margin-right: 8px; }
 .mode-pill { min-height: 44px; }
-.copy-plan-btn, a[href*="/pdf"] { min-height: 44px; display: inline-flex !important; align-items: center; padding: 10px 14px !important; font-size: 14px !important; }
+.copy-plan-btn, a[href*="/pdf"]:not([hidden]) { min-height: 44px; display: inline-flex !important; align-items: center; padding: 10px 14px !important; font-size: 14px !important; }
 #tripHistory a, .history a { text-decoration: underline; }
 .history-time, .history-a { overflow-wrap: anywhere; }
 
@@ -341,3 +341,70 @@ a:hover { color: #fde68a; }
 @media (prefers-reduced-motion: reduce) {
   .cat-card, .guide-li, .guides-top { transition: none !important; }
 }
+
+/* ===================================================== Stage 3: saved data, checklists, settings, print */
+.saved-note { margin: 0 0 10px; color: #cbd5e1; }
+.history-item + .history-item { margin-top: 12px; }
+.plan-item { margin-bottom: 15px; }
+.plan-body { margin-top: 6px; line-height: 1.6; overflow-wrap: anywhere; }
+.plan-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.plan-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 14px;
+  border-radius: 10px; background: #0b1220; border: 1px solid #475569; color: #fbbf24; font-weight: 700;
+  font-size: 14px; text-decoration: none; cursor: pointer;
+}
+.plan-btn[hidden] { display: none; }
+.plan-time { font-size: 13px; color: #94a3b8; margin-top: 8px; }
+
+.footer-nav { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 10px; }
+.footer-nav a { display: inline-flex; align-items: center; min-height: 44px; font-weight: bold; }
+.checklists-sub { margin: 26px 0 10px; }
+
+/* tick lists */
+.tick-wrap { max-width: 70ch; }
+.tick-progress { font-weight: bold; color: #fbbf24; margin: 4px 0 8px; }
+.tick-section { margin: 0 0 18px; }
+.tick-section h3 { margin: 16px 0 8px; font-size: 18px; }
+.tick-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tick-item { background: rgba(17,24,39,0.92); border: 1px solid #475569; border-radius: 12px; padding: 4px 12px 8px; }
+.tick-item.is-done { border-color: #15803d; }
+.tick-item.is-done .tick-text { text-decoration: line-through; text-decoration-thickness: 2px; color: #cbd5e1; }
+.tick-label { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px 0 4px; cursor: pointer; line-height: 1.5; font-size: 17px; }
+.tick-label input[type="checkbox"] { flex: none; width: 28px; height: 28px; margin: 2px 0 0; accent-color: #f59e0b; cursor: pointer; }
+.tick-text { overflow-wrap: anywhere; }
+.tick-guides { display: block; font-size: 14px; margin: 0 0 2px 40px; color: #cbd5e1; }
+.tick-guides a { display: inline-block; min-height: 24px; padding: 6px 0; }
+.tick-actions { margin: 10px 0 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+.btn-danger { border-color: #f87171; color: #fecaca; }
+.checklist-plain { white-space: pre-wrap; line-height: 1.6; }
+.ai-checklist { margin-top: 10px; }
+
+/* settings */
+.set-section { margin: 0 0 24px; padding: 14px 16px; background: rgba(17,24,39,0.92); border: 1px solid #475569; border-radius: 14px; }
+.set-section h2 { margin: 0 0 8px; font-size: 20px; }
+.set-lead { margin: 0 0 10px; line-height: 1.55; }
+.set-facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 10px 0; }
+.set-facts dt { color: #cbd5e1; font-weight: bold; }
+.set-facts dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .set-facts { grid-template-columns: 1fr; gap: 0; } .set-facts dd { margin-bottom: 8px; } }
+
+/* print: only the #printArea is printed (see js/print.js) */
+.print-area { display: none; }
+@media print {
+  body > *:not(#printArea) { display: none !important; }
+  #printArea { display: block !important; color: #000; background: #fff; font: 12pt/1.5 Arial, Helvetica, sans-serif; padding: 0; }
+  #printArea h1 { font-size: 20pt; margin: 0 0 6pt; }
+  #printArea h2 { font-size: 14pt; margin: 14pt 0 4pt; }
+  #printArea .print-meta { color: #333; margin: 0 0 4pt; }
+  #printArea .print-list { list-style: none; padding: 0; margin: 0; }
+  #printArea .print-list li { margin: 0 0 4pt; page-break-inside: avoid; }
+  #printArea .print-foot { margin-top: 14pt; font-size: 10pt; color: #333; border-top: 1px solid #999; padding-top: 6pt; }
+  html, body { background: #fff !important; }
+}
+@media (forced-colors: active) {
+  .tick-item, .set-section, .plan-btn { border: 2px solid CanvasText; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tick-item, .plan-btn, .tick-label { transition: none !important; }
+}
+.guide-li > a.guide-title { display: inline-flex; align-items: center; min-height: 44px; font-weight: bold; font-size: 18px; text-decoration: none; padding: 6px 0; }

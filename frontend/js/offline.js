@@ -140,17 +140,21 @@
     var h = location.hash || "";
     if (h === "#emergency") return "emergency";
     if (/^#guides(\/|$)/.test(h)) return "guides";
+    if (/^#checklists(\/|$)/.test(h)) return "checklists";
+    if (h === "#settings") return "settings";
     return "home";
   }
   var lastView = null;
-  var TITLES = { emergency: "Emergency | NomadMate by OutbackMind", guides: "Guides | NomadMate by OutbackMind", home: "NomadMate by OutbackMind" };
+  var TITLES = { emergency: "Emergency | NomadMate by OutbackMind", guides: "Guides | NomadMate by OutbackMind", checklists: "Checklists | NomadMate by OutbackMind", settings: "Saved data and settings | NomadMate by OutbackMind", home: "NomadMate by OutbackMind" };
   function route() {
     var v = currentView();
-    var home = $("view-home"), em = $("view-emergency"), gd = $("view-guides");
+    var home = $("view-home"), em = $("view-emergency"), gd = $("view-guides"), cl = $("view-checklists"), st = $("view-settings");
     if (!home || !em) return;
     home.hidden = v !== "home";
     em.hidden = v !== "emergency";
     if (gd) gd.hidden = v !== "guides";
+    if (cl) cl.hidden = v !== "checklists";
+    if (st) st.hidden = v !== "settings";
     document.title = TITLES[v] || TITLES.home;
     if (els.emergencyBtn) {
       if (v === "emergency") els.emergencyBtn.setAttribute("aria-current", "page"); else els.emergencyBtn.removeAttribute("aria-current");
@@ -160,12 +164,14 @@
     }
     if (lastView !== null && lastView !== v) {
       window.scrollTo(0, 0);
-      var target = v === "emergency" ? $("emergencyTitle") : (v === "guides" ? $("guidesTitle") : $("main"));
+      var target = v === "emergency" ? $("emergencyTitle") : (v === "guides" ? $("guidesTitle") : (v === "checklists" ? $("checklistsTitle") : (v === "settings" ? $("settingsTitle") : $("main"))));
       if (target) { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }
     }
     if (v === "emergency") document.dispatchEvent(new CustomEvent("om:emergency-shown"));
     else document.dispatchEvent(new CustomEvent("om:emergency-hidden"));
     if (v === "guides") document.dispatchEvent(new CustomEvent("om:guides-shown"));
+    if (v === "checklists") document.dispatchEvent(new CustomEvent("om:checklists-shown"));
+    if (v === "settings") document.dispatchEvent(new CustomEvent("om:settings-shown"));
     lastView = v;
   }
   window.addEventListener("hashchange", route);
@@ -296,7 +302,8 @@
   function init() {
     els.connPill = $("connPill"); els.connText = $("connText"); els.emergencyBtn = $("emergencyBtn"); els.guidesBtn = $("guidesBtn"); els.packStatus = $("packStatus");
     var brand = $("brandLink"), back = $("backHome"), backG = $("backHomeGuides");
-    [brand, back, backG].forEach(function (a) { if (a) a.addEventListener("click", function (e) { e.preventDefault(); if (location.hash) { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); } else { window.scrollTo(0, 0); } }); });
+    var backs = [brand, back, backG].concat(Array.prototype.slice.call(document.querySelectorAll(".back-home")));
+    backs.forEach(function (a) { if (a) a.addEventListener("click", function (e) { e.preventDefault(); if (location.hash) { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); } else { window.scrollTo(0, 0); } }); });
     wireUpdateBar();
     initInstall();
     render();

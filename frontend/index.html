@@ -402,6 +402,8 @@
   <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-3-6.7L21 8m0-5v5h-5"/></symbol>
   <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6h11M9 12h11M9 18h11M4.5 6l1 1 2-2M4.5 12l1 1 2-2M4.5 18l1 1 2-2"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
 </svg>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -436,7 +438,7 @@
     <div id="offlineBanner" class="offline-banner" role="note" hidden>
       <svg class="icon" aria-hidden="true"><use href="#i-wifi-off"/></svg>
       <div>
-        <p><strong>You are offline.</strong> AI answers, trip plans and checklists need signal. The Emergency screen and the saved Guides work without signal, and Ask searches the saved guides.</p>
+        <p><strong>You are offline.</strong> New AI answers, trip plans and checklists need signal. The Emergency screen, the Guides, the built-in Checklists and everything saved on this phone (questions, plans, ticks) work without signal, and Ask searches the saved guides.</p>
         <a class="offline-cta" href="#emergency">Open the Emergency screen</a>
         <a class="offline-cta offline-cta-alt" href="#guides">Browse offline guides</a>
       </div>
@@ -504,17 +506,20 @@
           <li>Treat emergency advice as a guide, not a replacement for official emergency services.</li>
         </ul>
         <p class="mini-note">The saved Guides work without signal and show where each answer comes from.</p>
-        <div class="actions"><a class="btn-secondary guides-cta" href="#guides"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Browse Guides</a></div>
+        <p class="mini-note">Built-in checklists have tick boxes that are saved on this device. Your recent questions and plans are saved here too, so you can read them without signal.</p>
+        <div class="actions"><a class="btn-secondary guides-cta" href="#guides"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Browse Guides</a><a class="btn-secondary guides-cta" id="checklistsBtn" href="#checklists"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Checklists</a><a class="btn-secondary guides-cta" id="settingsBtn" href="#settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>Saved data</a></div>
       </div>
     </div>
 
-    <div class="card" id="historyCard" data-needs-network data-offline-label="Recent questions" style="margin-top: 22px;">
+    <div class="card" id="historyCard" style="margin-top: 22px;">
       <div class="label">Recent Questions</div>
+      <p class="mini-note saved-note" id="historySaved" role="status" aria-live="polite"></p>
       <div id="history" class="history">Loading history...</div>
     </div>
+    <div id="iosNoteHome"></div>
   </div>
 
-  <div class="card" id="planCard" data-needs-network data-offline-label="Trip planning and saved plans" style="margin-top:30px;">
+  <div class="card" id="planCard" data-needs-network data-offline-label="Trip planning" style="margin-top:30px;">
   <h2 style="margin-bottom:10px;">Trip Planner</h2>
 
   <textarea id="tripInput" aria-label="Describe the trip you want planned" placeholder="Plan a 3-day camping trip in Victoria with a 4WD..."
@@ -522,21 +527,25 @@
 
   <div style="margin-top:10px;">
     <button id="planBtn">Generate Trip Plan</button>
-    <button id="refreshPlansBtn">Refresh Plans</button>
   </div>
 
   <div id="tripStatus" role="status" aria-live="polite" style="margin-top:10px; color:#94a3b8;"></div>
 
   <div id="tripOutput" style="margin-top:15px;"></div>
+</div>
 
-  <h3 style="margin-top:25px;">Saved Plans</h3>
+<div class="card" id="savedPlansCard" style="margin-top:30px;">
+  <h3 style="margin:0 0 6px;">Saved Plans</h3>
+  <p class="mini-note saved-note" id="plansSaved" role="status" aria-live="polite"></p>
+  <div class="actions"><button id="refreshPlansBtn" class="btn-secondary">Refresh Plans</button></div>
   <div id="tripHistory"></div>
 </div>
 
 <div class="card" id="checklistCard" data-needs-network data-offline-label="The checklist generator" style="margin:30px auto 0; max-width:1100px;">
   <div class="label">Checklist Generator</div>
   <h2 style="margin:0 0 10px;">Build a trip checklist</h2>
-  <p class="mini-note">Describe the trip, vehicle, travellers, and conditions. OutbackMind will create a practical Australian packing and preparation checklist.</p>
+  <p class="mini-note">Describe the trip, vehicle, travellers, and conditions. OutbackMind will create a practical Australian packing and preparation checklist. It is saved on this device so you can tick it off without signal.</p>
+  <p class="mini-note"><a href="#checklists">Open the built-in checklists</a> (weekend camping, remote 4WD, caravan, extreme heat, flood season). They work without signal.</p>
 
   <textarea id="checklistInput" aria-label="Describe the trip for your checklist" placeholder="Example: Create a checklist for a 3-day remote camping trip in Western Australia for two people travelling by 4WD"></textarea>
 
@@ -581,6 +590,28 @@
     </div>
   </div>
 </section>
+<section id="view-checklists" class="guides-view" aria-labelledby="checklistsTitle" hidden>
+  <div class="wrap">
+    <a class="back-link back-home" href="#" id="backHomeChecklists"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
+    <h1 id="checklistsTitle" tabindex="-1">Checklists</h1>
+    <div id="checklistsStatus" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="checklistsRoot" aria-live="off">
+      <noscript><p>This screen needs JavaScript. If you are in danger, call 000 (or 112 on a mobile phone).</p></noscript>
+      <p class="loading-note">Loading checklists...</p>
+    </div>
+  </div>
+</section>
+<section id="view-settings" class="guides-view" aria-labelledby="settingsTitle" hidden>
+  <div class="wrap">
+    <a class="back-link back-home" href="#" id="backHomeSettings"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
+    <h1 id="settingsTitle" tabindex="-1">Saved data and settings</h1>
+    <div id="settingsStatus" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="settingsRoot" aria-live="off">
+      <noscript><p>This screen needs JavaScript. If you are in danger, call 000 (or 112 on a mobile phone).</p></noscript>
+      <p class="loading-note">Loading...</p>
+    </div>
+  </div>
+</section>
 </main>
 
 <section id="installArea" class="wrap install-area" aria-label="Install NomadMate" hidden>
@@ -598,6 +629,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
+    <nav class="footer-nav" aria-label="More NomadMate screens"><a href="#guides">Guides</a><a href="#checklists">Checklists</a><a href="#settings">Saved data and settings</a></nav>
     <p>NomadMate by OutbackMind. Guidance only. In an emergency, call 000.</p>
     <p class="mini-note" id="packStatus">Offline pack: checking...</p>
   </div>
@@ -607,6 +639,10 @@
 <script src="/js/emergency.js"></script>
 <script src="/js/search.js"></script>
 <script src="/js/guides.js"></script>
+<script src="/js/store.js"></script>
+<script src="/js/print.js"></script>
+<script src="/js/checklists.js"></script>
+<script src="/js/settings.js"></script>
 <script>
   // js/offline.js provides window.OM (connection state, config, service worker). This stub keeps the
   // app working as before if that file ever fails to load.
@@ -657,22 +693,45 @@
   let latestChecklist = "";
 
   // Anonymous per-browser id so each visitor only sees their own history.
-  const CLIENT_ID = (() => {
-    const KEY = "outbackmind_client_id";
+  // It is kept in localStorage and mirrored into IndexedDB (js/store.js). If the browser clears localStorage but
+  // keeps IndexedDB (or the other way round), the id is restored so the server history stays reachable.
+  const CLIENT_KEY = "outbackmind_client_id";
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  let clientIdWasNew = false;
+  let CLIENT_ID = (() => {
     let id = null;
-    try { id = localStorage.getItem(KEY); } catch (e) {}
-    const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-    if (!id || !valid.test(id)) {
+    try { id = localStorage.getItem(CLIENT_KEY); } catch (e) {}
+    if (!id || !UUID_RE.test(id)) {
+      clientIdWasNew = true;
       id = (window.crypto && crypto.randomUUID)
         ? crypto.randomUUID()
         : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
             const r = Math.random() * 16 | 0;
             return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
           });
-      try { localStorage.setItem(KEY, id); } catch (e) {}
+      try { localStorage.setItem(CLIENT_KEY, id); } catch (e) {}
     }
     return id;
   })();
+  const Store = window.OMStore || null;
+  function adoptClientId(id) {
+    CLIENT_ID = id;
+    try { localStorage.setItem(CLIENT_KEY, id); } catch (e) {}
+    if (Store) Store.setMeta("client_id", id);
+  }
+  OM.getClientId = () => CLIENT_ID;
+  OM.setClientId = (id) => { if (UUID_RE.test(id)) { adoptClientId(id); loadHistory(); loadTripPlans(); } };
+  const storeReady = Store
+    ? Store.ready.then(async () => {
+        const saved = await Store.getMeta("client_id", null);
+        if (saved && UUID_RE.test(saved) && saved.toLowerCase() !== CLIENT_ID.toLowerCase()) {
+          if (clientIdWasNew) adoptClientId(saved.toLowerCase());   // localStorage was cleared: restore the old id
+          else await Store.setMeta("client_id", CLIENT_ID);         // localStorage is the truth: refresh the mirror
+        } else if (!saved) {
+          await Store.setMeta("client_id", CLIENT_ID);
+        }
+      }).catch(() => {})
+    : Promise.resolve();
 
   function getSelectedMode() {
     const checked = document.querySelector('input[name="mode"]:checked');
@@ -762,27 +821,37 @@ function renderRecommendedGear(items) {
     return parsed.toLocaleString("en-AU", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
   }
 
-  async function loadHistory() {
-    if (!OM.isOnline()) {
-      historyEl.textContent = "Needs signal. Saved questions are not stored on this phone yet, so they cannot be shown offline.";
+  // ---- Saved lists: copy kept on this device (js/store.js) ------------------------------------------------
+  // Every list is also written to IndexedDB after a successful fetch. Offline, or if the service fails, the saved
+  // copy is shown with "Saved copy from <date and time>", and the Refresh buttons say "needs signal".
+  const historySavedEl = document.getElementById("historySaved");
+  const plansSavedEl = document.getElementById("plansSaved");
+  let currentPlans = [];
+
+  function nowIso() { return new Date().toISOString(); }
+
+  function savedNote(el, state, stamp) {
+    if (!el) return;
+    const persistent = Store && Store.mode() === "indexeddb";
+    if (!persistent) {
+      el.textContent = "Not saved on this device: this browser is not letting NomadMate keep data (private browsing can do this). Shown for this visit only.";
+    } else if (state === "cache") {
+      el.textContent = stamp
+        ? "Saved copy from " + formatCreatedAt(stamp) + ". Needs signal to refresh."
+        : "Saved copy on this device. Needs signal to refresh.";
+    } else if (state === "empty") {
+      el.textContent = "Nothing is saved on this device yet. Questions and plans you load while online are saved here automatically.";
+    } else {
+      el.textContent = "Saved on this device. Last updated " + formatCreatedAt(stamp || nowIso()) + ".";
+    }
+  }
+
+  function renderHistory(items) {
+    if (!items.length) {
+      historyEl.textContent = "No saved questions yet.";
       return;
     }
-    historyEl.textContent = "Loading...";
-    try {
-      const response = await fetch(api("/history"), { headers: { "X-Client-Id": CLIENT_ID } });
-      if (!response.ok) {
-        throw new Error(`History API returned ${response.status}`);
-      }
-
-      OM.reportApiSuccess();
-      const items = await response.json();
-
-      if (!items.length) {
-        historyEl.textContent = "No saved questions yet.";
-        return;
-      }
-
-      historyEl.innerHTML = items.map(item => `
+    historyEl.innerHTML = items.map(item => `
         <div class="history-item">
           <div class="history-top">
             <div class="history-q">Q: ${escapeHtml(item.question)}</div>
@@ -794,122 +863,158 @@ function renderRecommendedGear(items) {
           <div class="history-time">${escapeHtml(formatCreatedAt(item.created_at))}</div>
         </div>
       `).join("");
+  }
+
+  async function showHistoryFromCache(prefix) {
+    const items = Store ? await Store.listHistory() : [];
+    if (!items.length) {
+      historyEl.textContent = (prefix || "") + "Nothing saved on this device yet. Questions you ask while online are saved here, so you can read them without signal.";
+      savedNote(historySavedEl, "empty");
+      return false;
+    }
+    renderHistory(items);
+    savedNote(historySavedEl, "cache", Store ? await Store.getMeta("history_synced_at", null) : null);
+    return true;
+  }
+
+  async function loadHistory() {
+    await storeReady;
+    if (!OM.isOnline()) {
+      await showHistoryFromCache("Needs signal to refresh. ");
+      return;
+    }
+    const hadCache = await showHistoryFromCache("");
+    if (!hadCache) historyEl.textContent = "Loading...";
+    try {
+      const response = await fetch(api("/history"), { headers: { "X-Client-Id": CLIENT_ID } });
+      if (!response.ok) {
+        throw new Error(`History API returned ${response.status}`);
+      }
+
+      OM.reportApiSuccess();
+      const items = await response.json();
+      if (Store) {
+        await Store.saveHistory(items);
+        const all = await Store.listHistory();
+        renderHistory(all.length ? all : items);
+        if (!all.length) historyEl.textContent = "No saved questions yet.";
+        savedNote(historySavedEl, "live", await Store.getMeta("history_synced_at", null));
+      } else {
+        renderHistory(items);
+        savedNote(historySavedEl, "live");
+      }
     } catch (error) {
-      historyEl.textContent = isNetworkError(error)
-        ? (OM.reportApiFailure(), "Needs signal. Saved questions will load when you are back online.")
-        : `Failed to load history: ${error.message}`;
+      if (isNetworkError(error)) OM.reportApiFailure();
+      const shown = await showHistoryFromCache("");
+      if (!shown) {
+        historyEl.textContent = isNetworkError(error)
+          ? "Needs signal. Saved questions will load when you are back online."
+          : `Failed to load history: ${error.message}`;
+      }
     }
   }
 
-  async function loadTripPlans() {
-  if (!OM.isOnline()) {
-    tripHistory.textContent = "Needs signal. Saved plans are not stored on this phone yet, so they cannot be shown offline.";
-    return;
-  }
-  tripHistory.textContent = "Loading...";
-
-  try {
-    const response = await fetch(api("/trip-plans"), { headers: { "X-Client-Id": CLIENT_ID } });
-    if (!response.ok) {
-      throw new Error(`Trip Plans API returned ${response.status}`);
-    }
-
-    OM.reportApiSuccess();
-    const items = await response.json();
-
+  function renderPlans(items) {
+    currentPlans = items;
     if (!items.length) {
       tripHistory.textContent = "No saved plans yet.";
       return;
     }
-
-    tripHistory.innerHTML = items.map(item => `
-      <div class="history-item" style="margin-bottom:15px;">
+    const online = OM.isOnline();
+    tripHistory.innerHTML = items.map((item, idx) => `
+      <div class="history-item plan-item">
         <div><strong>${escapeHtml(item.request)}</strong></div>
-
-        <div id="trip-plan-${item.id}" style="margin-top:5px;">
-          ${formatPlan(item.plan)}
+        <div class="plan-body">${formatPlan(item.plan)}</div>
+        <div class="plan-actions">
+          <button type="button" class="plan-btn copy-plan-btn" data-idx="${idx}">Copy Plan</button>
+          <button type="button" class="plan-btn print-plan-btn" data-idx="${idx}">Print or save as PDF</button>
+          ${item.server_id != null && !item.local
+            ? `<a class="plan-btn pdf-link" ${online ? "" : "hidden"} href="${api("/trip-plans/" + encodeURIComponent(item.server_id) + "/pdf")}?client_id=${encodeURIComponent(CLIENT_ID)}" target="_blank" rel="noopener noreferrer">Download PDF (needs signal)</a>`
+            : ""}
         </div>
-
-        <div style="margin-top:8px;">
-          <button
-            class="copy-plan-btn"
-            data-plan-id="${item.id}"
-            style="
-              display:inline-block;
-              padding:6px 10px;
-              border-radius:8px;
-              background:#0b1220;
-              border:1px solid #334155;
-              color:#f59e0b;
-              font-weight:600;
-              font-size:12px;
-              margin-right:8px;
-              cursor:pointer;
-            "
-          >
-            Copy Plan
-          </button>
-
-          <a
-            href="${api("/trip-plans/" + encodeURIComponent(item.id) + "/pdf")}?client_id=${encodeURIComponent(CLIENT_ID)}"
-            target="_blank"
-            rel="noopener noreferrer"
-            style="
-              display:inline-block;
-              padding:6px 10px;
-              border-radius:8px;
-              background:#0b1220;
-              border:1px solid #334155;
-              color:#f59e0b;
-              text-decoration:none;
-              font-weight:600;
-              font-size:12px;
-            "
-          >
-            Download PDF
-          </a>
-        </div>
-
-        <div style="font-size:12px; color:#94a3b8; margin-top:5px;">
-          ${escapeHtml(formatCreatedAt(item.created_at))}
-        </div>
+        <div class="plan-time">${escapeHtml(formatCreatedAt(item.created_at))}</div>
       </div>
     `).join("");
+  }
 
-    document.querySelectorAll(".copy-plan-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const id = btn.getAttribute("data-plan-id");
-    const el = document.getElementById(`trip-plan-${id}`);
+  tripHistory.addEventListener("click", (e) => {
+    const copyBtn = e.target.closest(".copy-plan-btn");
+    const printBtn = e.target.closest(".print-plan-btn");
+    const btn = copyBtn || printBtn;
+    if (!btn) return;
+    const item = currentPlans[Number(btn.getAttribute("data-idx"))];
+    if (!item) return;
+    if (copyBtn) {
+      const formatted = `Trip Plan\n\n${item.request}\n\n${item.plan}\n\nGenerated by OutbackMind`;
+      navigator.clipboard.writeText(formatted)
+        .then(() => { btn.textContent = "Copied"; setTimeout(() => { btn.textContent = "Copy Plan"; }, 1500); })
+        .catch(() => { btn.textContent = "Failed"; });
+    } else if (window.OMPrint) {
+      window.OMPrint.print({
+        title: "Trip plan",
+        lines: [item.request ? "For: " + item.request : "", "Made by the NomadMate AI and not checked against official sources. Saved on this device. " + formatCreatedAt(item.created_at)].filter(Boolean),
+        sections: [{ paragraphs: String(item.plan || "").split(/\n+/).filter(Boolean) }],
+        footer: ["Guidance only. Check conditions with the land manager. In an emergency, call 000."]
+      });
+    }
+  });
 
-    if (!el) {
-      btn.textContent = "Error";
+  async function showPlansFromCache(prefix) {
+    const items = Store ? await Store.listPlans() : [];
+    if (!items.length) {
+      tripHistory.textContent = (prefix || "") + "Nothing saved on this device yet. Plans you make or load while online are saved here, so you can read them without signal.";
+      savedNote(plansSavedEl, "empty");
+      return false;
+    }
+    renderPlans(items.map(p => ({ id: p.id, server_id: p.server_id, local: p.local, request: p.request, plan: p.plan, created_at: p.created_at })));
+    savedNote(plansSavedEl, "cache", await Store.getMeta("plans_synced_at", null));
+    return true;
+  }
+
+  async function loadTripPlans() {
+    await storeReady;
+    if (!OM.isOnline()) {
+      await showPlansFromCache("Needs signal to refresh. ");
       return;
     }
+    const hadCache = await showPlansFromCache("");
+    if (!hadCache) tripHistory.textContent = "Loading...";
+    try {
+      const response = await fetch(api("/trip-plans"), { headers: { "X-Client-Id": CLIENT_ID } });
+      if (!response.ok) {
+        throw new Error(`Trip Plans API returned ${response.status}`);
+      }
 
-       const rawText = el.innerText;
-
-// Clean + formatted version
-const formatted = `Trip Plan\n\n${rawText}\n\nGenerated by OutbackMind`;
-
-navigator.clipboard.writeText(formatted)
-  .then(() => {
-    btn.textContent = "Copied";
-    setTimeout(() => {
-      btn.textContent = "Copy Plan";
-    }, 1500);
-  })
-  .catch(() => {
-    btn.textContent = "Failed";
-  });
-      });
-    });
-
-  } catch (error) {
-    tripHistory.textContent = isNetworkError(error)
-      ? (OM.reportApiFailure(), "Needs signal. Saved plans will load when you are back online.")
-      : `Failed to load plans: ${error.message}`;
+      OM.reportApiSuccess();
+      const items = await response.json();
+      if (Store) {
+        await Store.savePlans(items);
+        const all = await Store.listPlans();
+        if (all.length) renderPlans(all.map(p => ({ id: p.id, server_id: p.server_id, local: p.local, request: p.request, plan: p.plan, created_at: p.created_at })));
+        else tripHistory.textContent = "No saved plans yet.";
+        savedNote(plansSavedEl, "live", await Store.getMeta("plans_synced_at", null));
+      } else {
+        renderPlans(items.map(p => ({ id: p.id, server_id: p.id, request: p.request, plan: p.plan, created_at: p.created_at })));
+        savedNote(plansSavedEl, "live");
+      }
+    } catch (error) {
+      if (isNetworkError(error)) OM.reportApiFailure();
+      const shown = await showPlansFromCache("");
+      if (!shown) {
+        tripHistory.textContent = isNetworkError(error)
+          ? "Needs signal. Saved plans will load when you are back online."
+          : `Failed to load plans: ${error.message}`;
+      }
+    }
   }
-}
+
+  // Refresh buttons need signal; the saved lists do not.
+  function updateRefreshButtons() {
+    const online = OM.isOnline();
+    if (refreshBtn) { refreshBtn.disabled = !online; refreshBtn.textContent = online ? "Refresh History" : "Refresh needs signal"; }
+    if (refreshPlansBtn) { refreshPlansBtn.disabled = !online; refreshPlansBtn.textContent = online ? "Refresh Plans" : "Refresh needs signal"; }
+    tripHistory.querySelectorAll(".pdf-link").forEach(a => { a.hidden = !online; });
+  }
 
   if (checklistBtn) {
     checklistBtn.addEventListener("click", async () => {
@@ -947,9 +1052,25 @@ navigator.clipboard.writeText(formatted)
 
         OM.reportApiSuccess();
         latestChecklist = data.checklist || "";
-        checklistOutput.innerHTML = formatChecklist(latestChecklist);
-        checklistStatus.textContent = "Checklist generated.";
         copyChecklistBtn.disabled = !latestChecklist;
+        // The server does not keep generated checklists, so save this one on this device.
+        let rec = null;
+        if (Store && latestChecklist) rec = await Store.saveChecklist({ request, text: latestChecklist });
+        if (rec && window.OMChecklists) {
+          checklistOutput.textContent = "";
+          checklistOutput.appendChild(window.OMChecklists.renderRecord(rec, { noCopy: true }));
+        } else {
+          checklistOutput.innerHTML = formatChecklist(latestChecklist);
+        }
+        checklistStatus.textContent = rec
+          ? (Store.mode() === "indexeddb" ? "Checklist generated and saved on this device. Tick items as you go. " : "Checklist generated. Not saved: this browser is not letting NomadMate keep data. ")
+          : "Checklist generated.";
+        if (rec && Store.mode() === "indexeddb") {
+          const a = document.createElement("a");
+          a.href = "#checklists/a/" + encodeURIComponent(rec.id);
+          a.textContent = "Open it in Checklists";
+          checklistStatus.appendChild(a);
+        }
       } catch (error) {
         checklistStatus.textContent = isNetworkError(error)
           ? friendlyError(error)
@@ -1091,6 +1212,7 @@ navigator.clipboard.writeText(formatted)
         : "Response received and saved.";
 
       questionEl.value = "";
+      if (Store && data.answer) await Store.addLocalHistory({ question, mode, answer: data.answer, created_at: nowIso() });
       await loadHistory();
     } catch (error) {
       if (isServiceFailure(error)) {
@@ -1143,6 +1265,7 @@ navigator.clipboard.writeText(formatted)
         tripOutput.innerHTML = formatPlan(data.plan || "");
         tripStatus.textContent = "Trip plan generated and saved.";
         tripInput.value = "";
+        if (Store && data.plan) await Store.addLocalPlan({ request, plan: data.plan });
         await loadTripPlans();
       } catch (error) {
         tripStatus.textContent = friendlyError(error);
@@ -1160,19 +1283,29 @@ navigator.clipboard.writeText(formatted)
     refreshPlansBtn.addEventListener("click", loadTripPlans);
   }
 
-  // Wait for config (API address) before the first calls. OM.configReady never rejects.
-  OM.configReady.then(() => {
+  // Wait for config (API address) and for on-device storage before the first calls. Neither promise rejects.
+  Promise.all([OM.configReady, storeReady]).then(() => {
     loadHistory();
     loadTripPlans();
+    updateRefreshButtons();
   });
+  updateRefreshButtons();
 
-  // Refresh saved lists when the connection comes back.
+  // Refresh saved lists when the connection comes back, and keep the Refresh buttons honest.
   document.addEventListener("om:connectivity", (e) => {
+    updateRefreshButtons();
     if (e.detail && e.detail.online && e.detail.changed) {
       loadHistory();
       loadTripPlans();
     }
   });
+  // After a restore or "Clear saved data" on the settings screen, redraw the lists from the device copy.
+  document.addEventListener("om:local-data-changed", () => { loadHistory(); loadTripPlans(); });
+
+  // iPhone and iPad (Safari, not the Home Screen app): saved data can be deleted if the app is not opened.
+  if (window.OMSettings && window.OMSettings.isIos() && !window.OMSettings.isStandalone()) {
+    window.OMSettings.iosNote().then((box) => { const h = document.getElementById("iosNoteHome"); if (box && h) h.appendChild(box); }).catch(() => {});
+  }
 </script>
 </body>
 </html>

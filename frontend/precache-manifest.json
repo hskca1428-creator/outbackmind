@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "c752b47e727f",
-  "built_at": "2026-11-18T10:41:13Z",
+  "version": "0fec4428c8ea",
+  "built_at": "2026-11-19T07:22:09Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -15,8 +15,14 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "7e85f7706aeb1a9d",
-      "size": 18977
+      "hash": "c52e589aab9877c9",
+      "size": 23086
+    },
+    {
+      "url": "/data/checklists.json",
+      "path": "data/checklists.json",
+      "hash": "af87478aaba77006",
+      "size": 47407
     },
     {
       "url": "/data/emergency.json",
@@ -29,6 +35,12 @@
       "path": "data/knowledge.json",
       "hash": "6a0c6040b6d4cba4",
       "size": 134902
+    },
+    {
+      "url": "/data/settings.json",
+      "path": "data/settings.json",
+      "hash": "2e2397d04122cb69",
+      "size": 2453
     },
     {
       "url": "/data/synonyms.json",
@@ -87,20 +99,26 @@
     {
       "url": "/",
       "path": "index.html",
-      "hash": "0d8141700afe8e3f",
-      "size": 43462
+      "hash": "5f20b68818184f53",
+      "size": 54604
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "0d8141700afe8e3f",
-      "size": 43462
+      "hash": "5f20b68818184f53",
+      "size": 54604
+    },
+    {
+      "url": "/js/checklists.js",
+      "path": "js/checklists.js",
+      "hash": "05d78b8ba28c832d",
+      "size": 22738
     },
     {
       "url": "/js/emergency.js",
       "path": "js/emergency.js",
-      "hash": "8e28f1b223eb0708",
-      "size": 25686
+      "hash": "9ff50a6d24a25c3f",
+      "size": 26015
     },
     {
       "url": "/js/guides.js",
@@ -111,8 +129,14 @@
     {
       "url": "/js/offline.js",
       "path": "js/offline.js",
-      "hash": "716634458b2360f8",
-      "size": 14710
+      "hash": "01d06ff28f2906c1",
+      "size": 15437
+    },
+    {
+      "url": "/js/print.js",
+      "path": "js/print.js",
+      "hash": "b8112972d1e8007c",
+      "size": 2011
     },
     {
       "url": "/js/search.js",
@@ -121,10 +145,22 @@
       "size": 7059
     },
     {
+      "url": "/js/settings.js",
+      "path": "js/settings.js",
+      "hash": "edb262a4efdadfdb",
+      "size": 16155
+    },
+    {
+      "url": "/js/store.js",
+      "path": "js/store.js",
+      "hash": "778b3a001a7d550b",
+      "size": 22382
+    },
+    {
       "url": "/manifest.webmanifest",
       "path": "manifest.webmanifest",
-      "hash": "5a69f58d9bd493b1",
-      "size": 1130
+      "hash": "cd1deccc7444010d",
+      "size": 1666
     },
     {
       "url": "/offline.html",
