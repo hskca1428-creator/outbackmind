@@ -1,4 +1,4 @@
-/* NomadMate "Saved data and settings" screen (Stage 3). Route: #settings.
+/* NomadMate "Saved" screen (backup, restore and settings) (Stage 3). Route: #settings.
  * Shows what is saved on this device, the offline pack status, storage use, and lets the user back up, restore and
  * clear local data. Wording comes from /data/settings.json. Text is always added with textContent.
  */
@@ -71,6 +71,12 @@
     root.textContent = "";
     var frag = document.createDocumentFragment();
     var persistent = S && S.mode() === "indexeddb";
+
+    // --- what is saved, with a way to open each list (the Saved tile and bottom bar land here)
+    var hubSec = section("Your saved items", "setHubTitle");
+    var hubList = el("ul", { class: "hub-list", id: "savedHub" });
+    hubSec.appendChild(hubList);
+    frag.appendChild(hubSec);
 
     // --- where data is saved
     var s1 = section("Saved on this device", "setSavedTitle");
@@ -165,8 +171,32 @@
     frag.appendChild(s5);
 
     root.appendChild(frag);
-    refreshCounts(dl); refreshPack(packP); refreshStorage(stP);
+    refreshCounts(dl); refreshPack(packP); refreshStorage(stP); refreshHub(hubList);
   }
+
+  function snippet(t) { t = String(t || "").replace(/\s+/g, " ").trim(); return t.length > 90 ? t.slice(0, 87) + "..." : t; }
+  function refreshHub(list) {
+    var S = window.OMStore;
+    if (!S || !list) return;
+    Promise.all([S.counts(), S.listHistory(), S.listPlans(), S.listChecklists()]).then(function (r) {
+      var c = r[0];
+      list.textContent = "";
+      function row(title, count, latest, href, linkText, id) {
+        var li = el("li", { class: "hub-item", id: id });
+        li.appendChild(el("p", { class: "hub-title", text: title }));
+        li.appendChild(el("p", { class: "hub-count", text: count }));
+        if (latest) li.appendChild(el("p", { class: "hub-latest mini-note", text: "Newest: " + latest }));
+        li.appendChild(el("a", { class: "btn-secondary hub-open", href: href, text: linkText }));
+        list.appendChild(li);
+      }
+      function n(k, one, many) { return k + " " + (k === 1 ? one : many); }
+      row("Questions", n(c.history, "saved question", "saved questions"), snippet(r[1][0] && r[1][0].question), "#ask", "Open recent questions", "hubQuestions");
+      row("Trip plans", n(c.plans, "saved trip plan", "saved trip plans"), snippet(r[2][0] && r[2][0].request), "#plans", "Open trip plans", "hubPlans");
+      row("Checklists", n(c.checklists, "saved AI checklist", "saved AI checklists") + ", " + n(c.ticked_items, "ticked item", "ticked items"), snippet(r[3][0] && r[3][0].request), "#checklists", "Open checklists", "hubChecklists");
+    }).catch(function () {});
+  }
+
+  document.addEventListener("om:local-data-changed", function () { refreshHub(document.getElementById("savedHub")); });
 
   function refreshCounts(dl) {
     var S = window.OMStore;
@@ -264,7 +294,7 @@
   function show() {
     if (!root) return;
     var S = window.OMStore;
-    Promise.all([ready(), S ? S.ready : Promise.resolve()]).then(function (r) { render(r[0]); setStatus("Saved data and settings"); })
+    Promise.all([ready(), S ? S.ready : Promise.resolve()]).then(function (r) { render(r[0]); setStatus("Saved"); })
       .catch(function () {
         root.textContent = "";
         root.appendChild(el("p", { class: "guide-empty", text: "This screen could not be loaded. If you are online, reload the page." }));

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "bee052557774",
-  "built_at": "2026-11-19T09:44:20Z",
+  "version": "32fa09953bf3",
+  "built_at": "2026-11-19T11:05:49Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -15,20 +15,20 @@
     {
       "url": "/config/home.json",
       "path": "config/home.json",
-      "hash": "eaa363b3025fb881",
-      "size": 1692
+      "hash": "ed2707ab6793bc94",
+      "size": 2114
     },
     {
       "url": "/config/nav.json",
       "path": "config/nav.json",
-      "hash": "f60be72cb343f6d5",
-      "size": 911
+      "hash": "3e7f240e1bc6ac34",
+      "size": 1075
     },
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "c9559ebfa83de175",
-      "size": 29750
+      "hash": "a7fcb49a309623fc",
+      "size": 31452
     },
     {
       "url": "/data/checklists.json",
@@ -51,8 +51,8 @@
     {
       "url": "/data/settings.json",
       "path": "data/settings.json",
-      "hash": "2e2397d04122cb69",
-      "size": 2453
+      "hash": "e0f84dbc45d1e947",
+      "size": 2430
     },
     {
       "url": "/data/synonyms.json",
@@ -111,14 +111,14 @@
     {
       "url": "/",
       "path": "index.html",
-      "hash": "a2ebc956a311dcee",
-      "size": 58323
+      "hash": "a1493369dc57e12a",
+      "size": 60056
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "a2ebc956a311dcee",
-      "size": 58323
+      "hash": "a1493369dc57e12a",
+      "size": 60056
     },
     {
       "url": "/js/checklists.js",
@@ -129,8 +129,8 @@
     {
       "url": "/js/collapse.js",
       "path": "js/collapse.js",
-      "hash": "0b2316ba34c9bb53",
-      "size": 3421
+      "hash": "ea380e7f64c5e944",
+      "size": 5296
     },
     {
       "url": "/js/emergency.js",
@@ -147,14 +147,14 @@
     {
       "url": "/js/home.js",
       "path": "js/home.js",
-      "hash": "02ca9957b67f6c4c",
-      "size": 7595
+      "hash": "f0b2d7da0b3ea950",
+      "size": 8685
     },
     {
       "url": "/js/offline.js",
       "path": "js/offline.js",
-      "hash": "01d06ff28f2906c1",
-      "size": 15437
+      "hash": "0718ae791fe4d3ee",
+      "size": 16207
     },
     {
       "url": "/js/print.js",
@@ -171,8 +171,8 @@
     {
       "url": "/js/settings.js",
       "path": "js/settings.js",
-      "hash": "edb262a4efdadfdb",
-      "size": 16155
+      "hash": "c7673a0f255e2ee9",
+      "size": 18109
     },
     {
       "url": "/js/store.js",

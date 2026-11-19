@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "note": "Wording for the Saved data and settings screen. Edit here, then run scripts/build_offline_pack.py.",
-  "saved_here": "Saved on this device means stored inside this browser on this phone. Nothing here is sent anywhere by the Saved data screen.",
+  "note": "Wording for the Saved screen. Edit here, then run scripts/build_offline_pack.py.",
+  "saved_here": "Saved on this device means stored inside this browser on this phone. Nothing here is sent anywhere by the Saved screen.",
   "privacy": "Questions you ask online and trip plans you make are also stored on the NomadMate server under an anonymous ID (a random code, not your name), so you can see them again. Checklists made by the generator are kept only on this device, because the server does not keep them. Ticks on the built-in checklists stay on this device only.",
   "memory_mode": "This browser is not letting NomadMate save data (private browsing can do this). Everything still works, but your ticks, saved questions and plans will be lost when you close the page. Use Back up now to keep a copy.",
   "backup": "A backup is a file with your saved questions, plans, checklists, ticks and the anonymous ID that links to your history on the server. Keep it private. If your phone clears this app's data, import the file to get it all back.",

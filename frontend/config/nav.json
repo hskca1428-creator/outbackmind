@@ -2,10 +2,46 @@
   "schema": 1,
   "note": "Bottom navigation bar on phones (3 to 5 items). Emergency is not here on purpose: it stays in the top bar on every screen. Edit this file to change, reorder or hide items; no code change is needed. 'home': true marks the Home item. Targets work the same way as in home.json.",
   "items": [
-    { "id": "home", "label": "Home", "icon": "home", "href": "#", "home": true, "order": 1, "enabled": true },
-    { "id": "ask", "label": "Ask", "icon": "chat", "href": "#ask", "anchor": "askCard", "focus": "question", "order": 2, "enabled": true },
-    { "id": "guides", "label": "Guides", "icon": "book", "href": "#guides", "order": 3, "enabled": true },
-    { "id": "checklists", "label": "Checklists", "icon": "list", "href": "#checklists", "order": 4, "enabled": true },
-    { "id": "saved", "label": "Saved", "icon": "bookmark", "href": "#settings", "order": 5, "enabled": true }
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "home",
+      "href": "#",
+      "home": true,
+      "order": 1,
+      "enabled": true
+    },
+    {
+      "id": "ask",
+      "label": "Ask",
+      "icon": "chat",
+      "href": "#ask",
+      "order": 2,
+      "enabled": true
+    },
+    {
+      "id": "guides",
+      "label": "Guides",
+      "icon": "book",
+      "href": "#guides",
+      "order": 3,
+      "enabled": true
+    },
+    {
+      "id": "checklists",
+      "label": "Checklists",
+      "icon": "list",
+      "href": "#checklists",
+      "order": 4,
+      "enabled": true
+    },
+    {
+      "id": "saved",
+      "label": "Saved",
+      "icon": "bookmark",
+      "href": "#settings",
+      "order": 5,
+      "enabled": true
+    }
   ]
 }

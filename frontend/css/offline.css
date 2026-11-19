@@ -523,3 +523,26 @@ html.is-offline .tile-avail-online { color: #fde68a; }
 .hero-left p.hero-by { margin: -2px 0 8px; font-size: 14px; color: #cbd5e1; letter-spacing: 0.02em; }
 @media (min-width: 481px) { .hero-left p.hero-by { display: none; } }
 @media (max-width: 699px) { html.has-bottom-nav #guidesBtn { display: none; } }   /* Guides is in the bottom bar */
+
+/* ================================================================ D2: separate screens */
+.ask-view .grid, .plans-view .wrap > .card { margin-top: 6px; }
+.screen-gap { height: 22px; }
+.plans-view .card, .ask-view .card { max-width: 100%; }
+.plans-view #planBtn { min-height: 44px; }
+#history .history-item[hidden], #tripHistory .plan-item[hidden] { display: none !important; }
+.list-toggle { margin-top: 12px; border-radius: 12px; border: 1px solid #f59e0b; }
+
+/* Saved screen: one row per saved list, each with a way to open it */
+.hub-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+.hub-item { margin: 0; padding: 14px 16px; border-radius: 16px; background: #111827; border: 1px solid #334155; }
+.hub-item p { margin: 0 0 4px; }
+.hub-title { font-weight: bold; font-size: 18px; }
+.hub-count { color: #f8fafc; }
+.hub-latest { overflow-wrap: anywhere; }
+.hub-open { display: inline-flex; align-items: center; margin-top: 8px; min-height: 44px; padding: 10px 16px; border-radius: 12px; border: 1px solid #475569; background: #0b1220; color: var(--text); font-weight: bold; text-decoration: none; }
+@media (min-width: 700px) { .hub-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (forced-colors: active) { .hub-item { border: 2px solid CanvasText; } }
+#outputCard { scroll-margin-top: 84px; }
+.home-fallback { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+.home-fallback a { display: inline-flex; align-items: center; min-height: 48px; padding: 10px 18px; border-radius: 14px; text-decoration: none; font-weight: bold; border: 1px solid #334155; }
+.home-fallback .btn-primary { border-color: #f59e0b; }

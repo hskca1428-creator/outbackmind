@@ -141,20 +141,27 @@
     if (h === "#emergency") return "emergency";
     if (/^#guides(\/|$)/.test(h)) return "guides";
     if (/^#checklists(\/|$)/.test(h)) return "checklists";
-    if (h === "#settings") return "settings";
+    if (h === "#settings" || h === "#saved") return "settings";
+    if (h === "#ask") return "ask";
+    if (h === "#plans") return "plans";
     return "home";
   }
   var lastView = null;
-  var TITLES = { emergency: "Emergency | NomadMate by OutbackMind", guides: "Guides | NomadMate by OutbackMind", checklists: "Checklists | NomadMate by OutbackMind", settings: "Saved data and settings | NomadMate by OutbackMind", home: "NomadMate by OutbackMind" };
+  var TITLES = { emergency: "Emergency | NomadMate by OutbackMind", guides: "Guides | NomadMate by OutbackMind", checklists: "Checklists | NomadMate by OutbackMind", settings: "Saved | NomadMate by OutbackMind", ask: "Ask | NomadMate by OutbackMind", plans: "Trip plans | NomadMate by OutbackMind", home: "NomadMate by OutbackMind" };
   function route() {
     var v = currentView();
-    var home = $("view-home"), em = $("view-emergency"), gd = $("view-guides"), cl = $("view-checklists"), st = $("view-settings");
+    var home = $("view-home"), em = $("view-emergency"), gd = $("view-guides"), cl = $("view-checklists"), st = $("view-settings"), ak = $("view-ask"), pl = $("view-plans");
     if (!home || !em) return;
     home.hidden = v !== "home";
     em.hidden = v !== "emergency";
     if (gd) gd.hidden = v !== "guides";
     if (cl) cl.hidden = v !== "checklists";
     if (st) st.hidden = v !== "settings";
+    // Ask and Trip plans have their own screens. If this page has no such screen (old cached page), show the home screen instead.
+    if (ak) ak.hidden = v !== "ask";
+    if (pl) pl.hidden = v !== "plans";
+    if (!ak && v === "ask") home.hidden = false;
+    if (!pl && v === "plans") home.hidden = false;
     document.title = TITLES[v] || TITLES.home;
     if (els.emergencyBtn) {
       if (v === "emergency") els.emergencyBtn.setAttribute("aria-current", "page"); else els.emergencyBtn.removeAttribute("aria-current");
@@ -164,7 +171,7 @@
     }
     if (lastView !== null && lastView !== v) {
       window.scrollTo(0, 0);
-      var target = v === "emergency" ? $("emergencyTitle") : (v === "guides" ? $("guidesTitle") : (v === "checklists" ? $("checklistsTitle") : (v === "settings" ? $("settingsTitle") : $("main"))));
+      var target = v === "emergency" ? $("emergencyTitle") : (v === "guides" ? $("guidesTitle") : (v === "checklists" ? $("checklistsTitle") : (v === "settings" ? $("settingsTitle") : (v === "ask" ? ($("askTitle") || $("main")) : (v === "plans" ? ($("plansTitle") || $("main")) : $("main"))))));
       if (target) { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }
     }
     if (v === "emergency") document.dispatchEvent(new CustomEvent("om:emergency-shown"));
@@ -172,6 +179,8 @@
     if (v === "guides") document.dispatchEvent(new CustomEvent("om:guides-shown"));
     if (v === "checklists") document.dispatchEvent(new CustomEvent("om:checklists-shown"));
     if (v === "settings") document.dispatchEvent(new CustomEvent("om:settings-shown"));
+    if (v === "ask") document.dispatchEvent(new CustomEvent("om:ask-shown"));
+    if (v === "plans") document.dispatchEvent(new CustomEvent("om:plans-shown"));
     lastView = v;
   }
   window.addEventListener("hashchange", route);

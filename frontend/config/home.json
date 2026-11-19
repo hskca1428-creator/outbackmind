@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "note": "Home screen tiles. Edit this file to change, reorder, rename or hide a tile; no code change is needed. Each target is a hash route (#guides, #checklists, #settings, #emergency) or an anchor on the home screen (#ask, #plans) whose element id is in 'anchor'. 'icon' is the name of an inline SVG symbol in index.html (i-<icon>). 'availability' is offline, online or mixed.",
+  "note": "Home screen tiles. Edit this file to change, reorder, rename or hide a tile; no code change is needed. Each href is a screen route (#ask, #plans, #guides, #checklists, #settings (Saved), #emergency). 'anchor' (optional) scrolls to an element id on the home screen instead of opening a screen. 'icon' is the name of an inline SVG symbol in index.html (i-<icon>). 'availability' is offline, online or mixed. 'screens' sets how many saved questions and plans show before 'Show all'.",
   "title": "What do you need?",
   "availability_labels": {
     "offline": "Works without signal",
@@ -8,11 +8,70 @@
     "mixed": "Some parts need signal"
   },
   "tiles": [
-    { "id": "ask", "title": "Ask", "hint": "Ask a question", "icon": "chat", "href": "#ask", "anchor": "askCard", "focus": "question", "availability": "mixed", "order": 1, "enabled": true },
-    { "id": "emergency", "title": "Emergency", "hint": "First aid and 000", "icon": "alert", "href": "#emergency", "availability": "offline", "tone": "emergency", "order": 2, "enabled": true },
-    { "id": "guides", "title": "Guides", "hint": "Search the saved guides", "icon": "book", "href": "#guides", "availability": "offline", "order": 3, "enabled": true },
-    { "id": "checklists", "title": "Checklists", "hint": "Tick as you go", "icon": "list", "href": "#checklists", "availability": "offline", "order": 4, "enabled": true },
-    { "id": "plans", "title": "Trip plans", "hint": "Plan and save trips", "icon": "map", "href": "#plans", "anchor": "planCard", "focus": "tripInput", "availability": "mixed", "order": 5, "enabled": true },
-    { "id": "saved", "title": "Saved", "hint": "Saved on this phone", "icon": "bookmark", "href": "#settings", "availability": "offline", "order": 6, "enabled": true }
-  ]
+    {
+      "id": "ask",
+      "title": "Ask",
+      "hint": "Ask a question",
+      "icon": "chat",
+      "href": "#ask",
+      "availability": "mixed",
+      "order": 1,
+      "enabled": true
+    },
+    {
+      "id": "emergency",
+      "title": "Emergency",
+      "hint": "First aid and 000",
+      "icon": "alert",
+      "href": "#emergency",
+      "availability": "offline",
+      "tone": "emergency",
+      "order": 2,
+      "enabled": true
+    },
+    {
+      "id": "guides",
+      "title": "Guides",
+      "hint": "Search the saved guides",
+      "icon": "book",
+      "href": "#guides",
+      "availability": "offline",
+      "order": 3,
+      "enabled": true
+    },
+    {
+      "id": "checklists",
+      "title": "Checklists",
+      "hint": "Tick as you go",
+      "icon": "list",
+      "href": "#checklists",
+      "availability": "offline",
+      "order": 4,
+      "enabled": true
+    },
+    {
+      "id": "plans",
+      "title": "Trip plans",
+      "hint": "Plan and save trips",
+      "icon": "map",
+      "href": "#plans",
+      "availability": "mixed",
+      "order": 5,
+      "enabled": true
+    },
+    {
+      "id": "saved",
+      "title": "Saved",
+      "hint": "Saved on this phone",
+      "icon": "bookmark",
+      "href": "#settings",
+      "availability": "offline",
+      "order": 6,
+      "enabled": true
+    }
+  ],
+  "screens": {
+    "recent_questions_limit": 5,
+    "saved_plans_limit": 3
+  }
 }

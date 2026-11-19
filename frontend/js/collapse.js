@@ -76,5 +76,42 @@
     return api;
   }
 
-  window.OMCollapse = { attach: attach };
+  /* A list that shows the newest few items and a "Show all N <noun>" button (aria-expanded) for the rest.
+   * Call it again after the list is re-rendered. The limit comes from the box's data-limit attribute. */
+  function limitList(box, itemSel, opts) {
+    if (!box) return null;
+    opts = opts || {};
+    var st = box._omLimit;
+    if (!st) {
+      if (!box.id) box.id = "om-list-" + (++uid);
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "collapse-toggle list-toggle"; btn.hidden = true;
+      btn.setAttribute("aria-controls", box.id);
+      box.parentNode.insertBefore(btn, box.nextSibling);
+      st = box._omLimit = { expanded: false, btn: btn, noun: "items", sel: itemSel };
+      btn.addEventListener("click", function () {
+        st.expanded = !st.expanded;
+        st.refresh();
+        if (!st.expanded && box.getBoundingClientRect().top < 0) box.scrollIntoView({ block: "start" });
+      });
+      st.refresh = function () {
+        var limit = parseInt(box.getAttribute("data-limit"), 10) || 5;
+        var items = box.querySelectorAll(st.sel), n = items.length;
+        Array.prototype.forEach.call(items, function (it, i) { it.hidden = !st.expanded && i >= limit; });
+        if (n <= limit) { btn.hidden = true; return; }
+        btn.hidden = false;
+        btn.setAttribute("aria-expanded", st.expanded ? "true" : "false");
+        btn.textContent = st.expanded ? "Show fewer " + st.noun : "Show all " + n + " " + st.noun;
+      };
+    }
+    st.sel = itemSel; if (opts.noun) st.noun = opts.noun;
+    if (!st.watch && window.MutationObserver) {   // the list may be replaced by a plain message ("No saved questions yet")
+      st.watch = new MutationObserver(function () { st.refresh(); });
+      st.watch.observe(box, { childList: true });
+    }
+    st.refresh();
+    return st;
+  }
+
+  window.OMCollapse = { attach: attach, limitList: limitList };
 })();

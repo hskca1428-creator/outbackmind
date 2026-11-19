@@ -7,7 +7,8 @@
 (function () {
   "use strict";
 
-  var ROUTE_RE = /^#(emergency|guides|checklists|settings)?(\/.*)?$/;   // routes handled by js/offline.js
+  var ROUTE_RE = /^#(emergency|guides|checklists|settings|saved|ask|plans)?(\/.*)?$/;   // routes handled by js/offline.js
+  function norm(h) { return h === "#saved" ? "#settings" : h; }   // #saved and #settings are the same screen
   var anchors = {};   // "#ask" -> { id, focus }
 
   function el(tag, cls, text) {
@@ -98,14 +99,15 @@
     var h = location.hash || "";
     if (/^#guides(\/|$)/.test(h)) return "#guides";
     if (/^#checklists(\/|$)/.test(h)) return "#checklists";
-    if (h === "#settings" || h === "#emergency") return h;
+    if (h === "#settings" || h === "#saved") return "#settings";
+    if (h === "#emergency" || h === "#ask" || h === "#plans") return h;
     if (anchors[h]) return h;
     return "#";
   }
   function markCurrent() {
     var cur = currentHref();
     Array.prototype.forEach.call(document.querySelectorAll("#bottomNav .bn-link"), function (a) {
-      if (a.getAttribute("href") === cur) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+      if (norm(a.getAttribute("href")) === cur) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
   }
 
@@ -144,9 +146,23 @@
     if (isField(e.target)) { clearTimeout(typingTimer); typingTimer = setTimeout(function () { document.documentElement.classList.remove("is-typing"); }, 250); }
   });
 
+  /* Lists on the Ask and Trip plans screens show the newest few; the limits come from config/home.json "screens". */
+  function applyScreens(cfg) {
+    var sc = cfg && cfg.screens;
+    if (!sc || typeof sc !== "object") return;
+    [["recent_questions_limit", "history"], ["saved_plans_limit", "tripHistory"]].forEach(function (pair) {
+      var n = sc[pair[0]], box = document.getElementById(pair[1]);
+      if (box && typeof n === "number" && n >= 1 && n <= 50) { box.setAttribute("data-limit", String(Math.floor(n))); if (window.OMCollapse && box._omLimit) box._omLimit.refresh(); }
+    });
+  }
+
   function init() {
     Promise.all([load("/config/home.json"), load("/config/nav.json")]).then(function (r) {
       renderTiles(r[0]);
+      applyScreens(r[0]);
+      // No tiles (config missing or invalid): show plain links so every screen is still one tap away.
+      var fb = document.getElementById("homeFallback"), tl = document.getElementById("homeTiles");
+      if (fb && tl && tl.hidden) fb.hidden = false;
       renderNav(r[1]);
       markCurrent();
       if (anchors[location.hash]) setTimeout(function () { goAnchor(location.hash, false); }, 50);

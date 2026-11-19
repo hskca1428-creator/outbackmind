@@ -444,6 +444,17 @@
       <ul id="tileGrid" class="tile-grid"></ul>
     </section>
 
+    <nav id="homeFallback" class="home-fallback" aria-label="NomadMate screens" hidden>
+      <a class="btn-primary" href="#ask">Ask</a><a class="btn-secondary" href="#plans">Trip plans</a><a class="btn-secondary" href="#guides">Guides</a><a class="btn-secondary" href="#checklists">Checklists</a><a class="btn-secondary" href="#settings">Saved</a>
+    </nav>
+
+    <div id="iosNoteHome"></div>
+  </div>
+</section>
+<section id="view-ask" class="guides-view ask-view" aria-labelledby="askTitle" hidden>
+  <div class="wrap">
+    <a class="back-link back-home" href="#" id="backHomeAsk"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
+    <h1 id="askTitle" tabindex="-1">Ask</h1>
     <div class="grid">
       <div class="card" id="askCard">
         <div class="label">Ask OutbackMind</div>
@@ -493,19 +504,24 @@
         </ul>
         <p class="mini-note">The saved Guides work without signal and show where each answer comes from.</p>
         <p class="mini-note">Built-in checklists have tick boxes that are saved on this device. Your recent questions and plans are saved here too, so you can read them without signal.</p>
-        <div class="actions"><a class="btn-secondary guides-cta" href="#guides"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Browse Guides</a><a class="btn-secondary guides-cta" id="checklistsBtn" href="#checklists"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Checklists</a><a class="btn-secondary guides-cta" id="settingsBtn" href="#settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>Saved data</a></div>
+        <div class="actions"><a class="btn-secondary guides-cta" href="#guides"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Browse Guides</a><a class="btn-secondary guides-cta" id="checklistsBtn" href="#checklists"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Checklists</a><a class="btn-secondary guides-cta" id="settingsBtn" href="#settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>Saved</a></div>
       </div>
     </div>
 
-    <div class="card" id="historyCard" style="margin-top: 22px;">
+    <div class="screen-gap"></div>
+    <div class="card" id="historyCard">
       <div class="label">Recent Questions</div>
       <p class="mini-note saved-note" id="historySaved" role="status" aria-live="polite"></p>
-      <div id="history" class="history">Loading history...</div>
+      <div id="history" class="history" data-limit="5">Loading history...</div>
+      <p class="mini-note"><a href="#settings">See what is saved on this phone</a></p>
     </div>
-    <div id="iosNoteHome"></div>
   </div>
-
-  <div class="card" id="planCard" data-needs-network data-offline-label="Trip planning" style="margin-top:30px;">
+</section>
+<section id="view-plans" class="guides-view plans-view" aria-labelledby="plansTitle" hidden>
+  <div class="wrap">
+    <a class="back-link back-home" href="#" id="backHomePlans"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
+    <h1 id="plansTitle" tabindex="-1">Trip plans</h1>
+    <div class="card" id="planCard" data-needs-network data-offline-label="Trip planning" >
   <h2 style="margin-bottom:10px;">Trip Planner</h2>
 
   <textarea id="tripInput" aria-label="Describe the trip you want planned" placeholder="Plan a 3-day camping trip in Victoria with a 4WD..."
@@ -519,15 +535,15 @@
 
   <div id="tripOutput" style="margin-top:15px;"></div>
 </div>
-
-<div class="card" id="savedPlansCard" style="margin-top:30px;">
+    <div class="screen-gap"></div>
+    <div class="card" id="savedPlansCard">
   <h3 style="margin:0 0 6px;">Saved Plans</h3>
   <p class="mini-note saved-note" id="plansSaved" role="status" aria-live="polite"></p>
   <div class="actions"><button id="refreshPlansBtn" class="btn-secondary">Refresh Plans</button></div>
-  <div id="tripHistory"></div>
+  <div id="tripHistory" data-limit="3"></div>
 </div>
-
-<div class="card" id="checklistCard" data-needs-network data-offline-label="The checklist generator" style="margin:30px auto 0; max-width:1100px;">
+    <div class="screen-gap"></div>
+    <div class="card" id="checklistCard" data-needs-network data-offline-label="The checklist generator">
   <div class="label">Checklist Generator</div>
   <h2 style="margin:0 0 10px;">Build a trip checklist</h2>
   <p class="mini-note">Describe the trip, vehicle, travellers, and conditions. OutbackMind will create a practical Australian packing and preparation checklist. It is saved on this device so you can tick it off without signal.</p>
@@ -543,7 +559,7 @@
   <div id="checklistStatus" class="status" role="status" aria-live="polite"></div>
   <div id="checklistOutput" class="checklist-output"></div>
 </div>
-
+  </div>
 </section>
 
 <section id="view-emergency" class="emergency-view" aria-labelledby="emergencyTitle" hidden>
@@ -590,7 +606,7 @@
 <section id="view-settings" class="guides-view" aria-labelledby="settingsTitle" hidden>
   <div class="wrap">
     <a class="back-link back-home" href="#" id="backHomeSettings"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Back to NomadMate</a>
-    <h1 id="settingsTitle" tabindex="-1">Saved data and settings</h1>
+    <h1 id="settingsTitle" tabindex="-1">Saved</h1>
     <div id="settingsStatus" class="sr-only" role="status" aria-live="polite"></div>
     <div id="settingsRoot" aria-live="off">
       <noscript><p>This screen needs JavaScript. If you are in danger, call 000 (or 112 on a mobile phone).</p></noscript>
@@ -615,7 +631,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <nav class="footer-nav" aria-label="More NomadMate screens"><a href="#guides">Guides</a><a href="#checklists">Checklists</a><a href="#settings">Saved data and settings</a></nav>
+    <nav class="footer-nav" aria-label="More NomadMate screens"><a href="#ask">Ask</a><a href="#plans">Trip plans</a><a href="#guides">Guides</a><a href="#checklists">Checklists</a><a href="#settings">Saved</a></nav>
     <p>NomadMate by OutbackMind. Guidance only. In an emergency, call 000.</p>
     <p class="mini-note" id="packStatus">Offline pack: checking...</p>
   </div>
@@ -880,6 +896,8 @@ function renderRecommendedGear(items) {
       const a = item.querySelector(".history-a");
       if (window.OMCollapse && a) window.OMCollapse.attach(a, { label: "answer", noClamp: () => item.getAttribute("data-mode") === "emergency" });
     });
+    // Only the newest few are listed; "Show all" reveals the rest.
+    if (window.OMCollapse) window.OMCollapse.limitList(historyEl, ".history-item", { noun: "saved questions" });
   }
 
   async function showHistoryFromCache(prefix) {
@@ -953,6 +971,7 @@ function renderRecommendedGear(items) {
       </div>
     `).join("");
     tripHistory.querySelectorAll(".plan-body").forEach(b => { if (window.OMCollapse) window.OMCollapse.attach(b, { label: "plan" }); });
+    if (window.OMCollapse) window.OMCollapse.limitList(tripHistory, ".plan-item", { noun: "saved plans" });
   }
 
   tripHistory.addEventListener("click", (e) => {
@@ -1131,6 +1150,10 @@ function renderRecommendedGear(items) {
   function updateOutputTools() {
     const t = (outputEl.textContent || "").trim();
     outputToolsEl.hidden = !t || t === PLACEHOLDER_TEXT || t === ERROR_TEXT;
+    // On the Ask screen the answer arrives below the question box. If it is below the fold, bring it into view.
+    if (!outputToolsEl.hidden && outputCardEl.clientWidth && outputCardEl.getBoundingClientRect().top > window.innerHeight * 0.55) {
+      outputCardEl.scrollIntoView({ block: "start" });
+    }
   }
   new MutationObserver(updateOutputTools).observe(outputEl, { childList: true, subtree: true, characterData: true });
   copyAnswerBtn.addEventListener("click", () => {
