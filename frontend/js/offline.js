@@ -35,7 +35,7 @@
     var pill = els.connPill;
     if (pill) {
       var text, icon, cls;
-      if (!state.checked && state.online) { text = "Checking connection"; icon = "#i-wifi"; cls = "is-checking"; }
+      if (!state.checked && state.online) { text = "Checking"; icon = "#i-wifi"; cls = "is-checking"; }
       else if (!state.online) { text = "Offline"; icon = "#i-wifi-off"; cls = "is-offline"; }
       else if (state.apiDown) { text = "Service unreachable"; icon = "#i-alert"; cls = "is-degraded"; }
       else { text = "Online"; icon = "#i-wifi"; cls = "is-online"; }
@@ -182,6 +182,7 @@
     if (v === "ask") document.dispatchEvent(new CustomEvent("om:ask-shown"));
     if (v === "plans") document.dispatchEvent(new CustomEvent("om:plans-shown"));
     lastView = v;
+    document.documentElement.removeAttribute("data-boot");   // D3: the early screen hint in index.html has done its job
   }
   window.addEventListener("hashchange", route);
 

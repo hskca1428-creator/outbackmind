@@ -7,6 +7,18 @@
   <meta name="description" content="NomadMate by OutbackMind: outback and caravan travel help for Australia, with an Emergency screen that opens without phone signal." />
   <meta name="theme-color" content="#0b1220" />
   <meta name="color-scheme" content="dark" />
+  <script>
+    /* D3: tell the stylesheet which screen the address points at, before the first paint, so a deep link does not flash the Home screen first.
+       js/offline.js removes this attribute as soon as it has routed. If it never runs, the right screen is still the one showing. */
+    (function () { var h = location.hash || "", v = "home";
+      if (h === "#emergency") v = "emergency"; else if (/^#guides(\/|$)/.test(h)) v = "guides"; else if (/^#checklists(\/|$)/.test(h)) v = "checklists";
+      else if (h === "#settings" || h === "#saved") v = "settings"; else if (h === "#ask") v = "ask"; else if (h === "#plans") v = "plans";
+      document.documentElement.setAttribute("data-boot", v);
+      /* The phone top bar drops its Guides button once the bottom bar is drawn (js/home.js). Start without it, so the top bar keeps one line.
+         home.js clears this; the timer clears it too if home.js never runs, so the Guides button can always come back. */
+      document.documentElement.setAttribute("data-nav-boot", "1");
+      setTimeout(function () { document.documentElement.removeAttribute("data-nav-boot"); }, 5000); })();
+  </script>
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/icons/favicon.ico" sizes="48x48" />
@@ -389,13 +401,13 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="topbar">
   <a class="brand" href="#" id="brandLink" aria-label="NomadMate by OutbackMind">
-    <img src="/icons/icon-192.png" alt="" width="36" height="36" class="brand-icon" />
+    <img src="/icons/favicon.svg" alt="" width="38" height="38" class="brand-icon" />
     <span class="brand-text"><strong>NomadMate</strong> <span class="brand-sub">by OutbackMind</span></span>
   </a>
   <div class="topbar-right">
     <div id="connPill" class="conn-pill is-checking" role="status" aria-live="polite">
       <svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg>
-      <span id="connText">Checking connection</span>
+      <span id="connText">Checking</span>
     </div>
     <a id="guidesBtn" class="guides-top" href="#guides">
       <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>

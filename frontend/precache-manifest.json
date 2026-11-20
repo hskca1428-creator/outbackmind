@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "32fa09953bf3",
-  "built_at": "2026-11-19T11:05:49Z",
+  "version": "ad71acc97c4e",
+  "built_at": "2026-11-20T01:35:19Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -27,8 +27,8 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "a7fcb49a309623fc",
-      "size": 31452
+      "hash": "af7da4ef9bb52af6",
+      "size": 38177
     },
     {
       "url": "/data/checklists.json",
@@ -63,62 +63,62 @@
     {
       "url": "/icons/apple-touch-icon.png",
       "path": "icons/apple-touch-icon.png",
-      "hash": "6db6b8202761e580",
-      "size": 5163
+      "hash": "ee5b3d888b183b87",
+      "size": 6278
     },
     {
       "url": "/icons/favicon-32.png",
       "path": "icons/favicon-32.png",
-      "hash": "6c19ace581ea86a5",
-      "size": 460
+      "hash": "d193d9959de6db69",
+      "size": 1390
     },
     {
       "url": "/icons/favicon.ico",
       "path": "icons/favicon.ico",
-      "hash": "f650280085f4b347",
-      "size": 2641
+      "hash": "721484b4f63ee8c2",
+      "size": 4802
     },
     {
       "url": "/icons/favicon.svg",
       "path": "icons/favicon.svg",
-      "hash": "bb57b63f52c7a493",
-      "size": 429
+      "hash": "827e0cc280bdbf7d",
+      "size": 1122
     },
     {
       "url": "/icons/icon-192.png",
       "path": "icons/icon-192.png",
-      "hash": "f7c6af2d7b3c4501",
-      "size": 5535
+      "hash": "4c51464026cb5b8c",
+      "size": 6634
     },
     {
       "url": "/icons/icon-512.png",
       "path": "icons/icon-512.png",
-      "hash": "8a3830c17488a94c",
-      "size": 18210
+      "hash": "672c1c54a13e5607",
+      "size": 20028
     },
     {
       "url": "/icons/icon-maskable-512.png",
       "path": "icons/icon-maskable-512.png",
-      "hash": "8a3830c17488a94c",
-      "size": 18210
+      "hash": "672c1c54a13e5607",
+      "size": 20028
     },
     {
       "url": "/icons/icon.svg",
       "path": "icons/icon.svg",
-      "hash": "1c700ab37c53e6a8",
-      "size": 1221
+      "hash": "d322838603396d5c",
+      "size": 1250
     },
     {
       "url": "/",
       "path": "index.html",
-      "hash": "a1493369dc57e12a",
-      "size": 60056
+      "hash": "1f4ffa1c7c8653e9",
+      "size": 61198
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "a1493369dc57e12a",
-      "size": 60056
+      "hash": "1f4ffa1c7c8653e9",
+      "size": 61198
     },
     {
       "url": "/js/checklists.js",
@@ -147,14 +147,14 @@
     {
       "url": "/js/home.js",
       "path": "js/home.js",
-      "hash": "f0b2d7da0b3ea950",
-      "size": 8685
+      "hash": "b5a746a250652676",
+      "size": 8817
     },
     {
       "url": "/js/offline.js",
       "path": "js/offline.js",
-      "hash": "0718ae791fe4d3ee",
-      "size": 16207
+      "hash": "61f4da8570df5cf0",
+      "size": 16317
     },
     {
       "url": "/js/print.js",
@@ -183,8 +183,8 @@
     {
       "url": "/manifest.webmanifest",
       "path": "manifest.webmanifest",
-      "hash": "cd1deccc7444010d",
-      "size": 1666
+      "hash": "d29852020cfd9720",
+      "size": 1787
     },
     {
       "url": "/offline.html",

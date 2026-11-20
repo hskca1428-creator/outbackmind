@@ -164,6 +164,7 @@
       var fb = document.getElementById("homeFallback"), tl = document.getElementById("homeTiles");
       if (fb && tl && tl.hidden) fb.hidden = false;
       renderNav(r[1]);
+      document.documentElement.removeAttribute("data-nav-boot");   // D3: the early layout hint from index.html is no longer needed
       markCurrent();
       if (anchors[location.hash]) setTimeout(function () { goAnchor(location.hash, false); }, 50);
     });

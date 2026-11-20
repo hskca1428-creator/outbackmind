@@ -546,3 +546,105 @@ html.is-offline .tile-avail-online { color: #fde68a; }
 .home-fallback { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
 .home-fallback a { display: inline-flex; align-items: center; min-height: 48px; padding: 10px 18px; border-radius: 14px; text-decoration: none; font-weight: bold; border: 1px solid #334155; }
 .home-fallback .btn-primary { border-color: #f59e0b; }
+
+/* ================================================================ D3: design tokens and polish
+ * Visual only. No behaviour, data or markup changes. The app is dark by design (glare-friendly outdoors and at night);
+ * it declares color-scheme: dark so form controls and scrollbars match. High contrast and forced-colours are handled below. */
+:root {
+  color-scheme: dark;
+  /* type scale */
+  --font: Arial, "Helvetica Neue", Helvetica, sans-serif;   /* kept from the tested layout; the tiles and bottom bar were sized for it */
+  --fs-xs: 12px; --fs-sm: 14px; --fs-md: 16px; --fs-lg: 18px; --fs-xl: 22px; --fs-2xl: 30px; --fs-3xl: 38px;
+  --lh-tight: 1.2; --lh-body: 1.6;
+  /* spacing scale (4px base) */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+  /* shape */
+  --r-sm: 10px; --r-md: 14px; --r-lg: 18px; --r-pill: 999px;
+  --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 10px 28px rgba(0, 0, 0, 0.35);
+  /* surfaces and lines */
+  --surface-0: #0b1220; --surface-1: #111827; --surface-2: #1f2937;
+  --line: #334155; --line-strong: #64748b;
+  --amber: #fbbf24;
+  --radius: var(--r-lg);
+}
+body { font-family: var(--font); line-height: 1.5; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+h1, h2, h3 { line-height: var(--lh-tight); }
+.hero-left h1 { font-size: var(--fs-3xl); }
+.home-tiles-title, .em-section h2, .set-section h2 { font-size: var(--fs-xl); }
+.side-card-title, .tile-title, .hub-title { font-size: var(--fs-lg); }
+.label, .output-header { font-size: var(--fs-xs); letter-spacing: 0.09em; }
+@media (max-width: 699px) { .hero-left h1 { font-size: var(--fs-2xl); } }
+
+/* cards, tiles and inner panels share a radius and a shadow */
+.card, .em-section, .set-section { border-radius: var(--r-lg); box-shadow: var(--shadow-1); }
+.history-item, .plan-item, .output, .checklist-output, .hub-item, .aid-card, .gps-panel, .tick-item { border-radius: var(--r-md); }
+.tile { border-radius: var(--r-lg); box-shadow: var(--shadow-1); min-height: 132px; }
+.tile-icon { border-radius: var(--r-md); }
+.tile:hover { box-shadow: var(--shadow-2); }
+.tile-emergency { box-shadow: 0 6px 22px rgba(185, 28, 28, 0.38); }
+
+/* one button language: 44px minimum, same radius, clear hover / pressed / disabled states */
+button, .btn-primary, .btn-secondary { border-radius: var(--r-md); font-family: inherit; letter-spacing: 0.005em; }
+.btn-primary { box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-secondary:hover, .tool-btn:hover, .hub-open:hover { border-color: var(--amber); }
+button:active:not(:disabled), .btn-primary:active, .btn-secondary:active { transform: translateY(1px) scale(0.99); }
+.mode-pill, .badge, .conn-pill, .tag, .emergency-badge, .normal-badge { border-radius: var(--r-pill); }
+textarea, #stateSelect, input[type="text"], input[type="search"] { border-radius: var(--r-md); }
+
+/* focus: a clear amber ring everywhere; white on the red Emergency controls so it never blends in */
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.emergency-top:focus-visible, .tile-emergency:focus-visible, .call-btn:focus-visible, .call-primary:focus-visible, .offline-cta:focus-visible { outline-color: #fff; }
+.bn-link:focus-visible { outline-color: var(--amber); outline-offset: -4px; }
+
+/* top bar: quieter surface, logo with a fine ring, Emergency stays the loudest thing on screen */
+.topbar { background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(11, 18, 32, 0.97)); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 rgba(251, 191, 36, 0.14), 0 6px 16px rgba(0, 0, 0, 0.25); }
+.brand-icon { width: 38px; height: 38px; border-radius: 9px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 2px 6px rgba(0, 0, 0, 0.4); }
+.brand-text strong { font-size: var(--fs-lg); letter-spacing: -0.01em; }
+.emergency-top { box-shadow: 0 2px 10px rgba(185, 28, 28, 0.5); font-size: var(--fs-md); }
+.guides-top { border-radius: var(--r-md); }
+
+/* bottom bar: lifted from the page, bigger active marker */
+@media (max-width: 699px) {
+  html.has-bottom-nav .bottom-nav { box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); }
+}
+.bn-link { font-size: var(--fs-xs); border-top-width: 3px; }
+.bn-link[aria-current="page"] { background: linear-gradient(180deg, rgba(251, 191, 36, 0.12), #111827 70%); }
+.bn-link .icon { width: 24px; height: 24px; }
+
+/* the home screen keeps its footer below the first screen while the tiles load (stops the page jumping) */
+#view-home { min-height: calc(100vh - 72px); }
+@supports (height: 100svh) { #view-home { min-height: calc(100svh - 72px); } }
+
+/* touch feedback only where motion is welcome */
+@media (prefers-reduced-motion: reduce) {
+  button:active:not(:disabled), .btn-primary:active, .btn-secondary:active { transform: none; }
+  .tile, .tile:hover, .tile:active { transition: none; transform: none; }
+}
+
+/* more contrast when the person asks for it */
+@media (prefers-contrast: more) {
+  :root { --line: #94a3b8; }
+  .card, .em-section, .set-section, .tile, .hub-item, .history-item, .aid-card, .topbar, .bottom-nav { border-color: #cbd5e1; }
+  .tile-hint, .tile-avail, .brand-sub, .mini-note, .history-time, .label, .output-header { color: #f1f5f9; }
+  .btn-secondary, .tool-btn, .hub-open, .collapse-toggle { border-color: #e2e8f0; }
+}
+@media (forced-colors: active) {
+  .brand-icon { forced-color-adjust: none; }
+  .tile-emergency, .emergency-top, .call-primary { border: 3px solid Highlight; }
+  button, .btn-primary, .btn-secondary { border: 2px solid ButtonText; }
+}
+
+/* D3: no page jump while loading. A deep link shows its own screen from the first paint (see the data-boot hint in index.html),
+   every screen keeps the footer below the first screen while its content arrives, and the top bar has a fixed height. */
+html[data-boot]:not([data-boot="home"]) #view-home { display: none; }
+html[data-boot="ask"] #view-ask, html[data-boot="plans"] #view-plans, html[data-boot="guides"] #view-guides, html[data-boot="checklists"] #view-checklists,
+html[data-boot="settings"] #view-settings, html[data-boot="emergency"] #view-emergency { display: block !important; }
+#view-ask, #view-plans, #view-guides, #view-checklists, #view-settings, #view-emergency { min-height: calc(100vh - 72px); }
+@supports (height: 100svh) { #view-ask, #view-plans, #view-guides, #view-checklists, #view-settings, #view-emergency { min-height: calc(100svh - 72px); } }
+.topbar { min-height: 65px; }
+.conn-pill { min-width: 88px; justify-content: center; }
+@media (max-width: 699px) { html[data-nav-boot] #guidesBtn { display: none; } }
+#savedHub:empty { min-height: 420px; }
+@media (min-width: 700px) { #savedHub:empty { min-height: 170px; } }
