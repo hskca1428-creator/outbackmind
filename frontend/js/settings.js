@@ -161,6 +161,7 @@
       }
       clearTimeout(t); armed = false; clearBtn.textContent = "Clear saved data";
       S.clearLocalData().then(function () {
+        if (window.OMQueue) window.OMQueue.clearAll();
         clearMsg.textContent = "Cleared. Your saved questions, plans, checklists and ticks are gone from this device.";
         document.dispatchEvent(new CustomEvent("om:local-data-changed"));
         refreshCounts(dl);

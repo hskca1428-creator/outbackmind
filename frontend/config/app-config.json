@@ -24,5 +24,23 @@
     "good_accuracy_m": 50,
     "stale_after_s": 60,
     "timeout_ms": 30000
+  },
+  "queue": {
+    "note": "Questions saved while offline (Normal Mode only; Emergency is never saved) and sent when the app is open and back online. Edit these numbers to tune it; no code change is needed.",
+    "enabled": true,
+    "max_items": 20,
+    "max_question_chars": 1000,
+    "max_answer_chars": 8000,
+    "max_attempts": 5,
+    "send_timeout_ms": 60000,
+    "backoff_s": [
+      30,
+      60,
+      120,
+      300
+    ],
+    "rate_limit_wait_s": 60,
+    "keep_answered": 5,
+    "stale_sending_s": 90
   }
 }

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "ad71acc97c4e",
-  "built_at": "2026-11-20T01:35:19Z",
+  "version": "db77a79d7256",
+  "built_at": "2026-11-20T10:05:28Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -9,8 +9,8 @@
     {
       "url": "/config/app-config.json",
       "path": "config/app-config.json",
-      "hash": "7ce7f95cf84b3e11",
-      "size": 788
+      "hash": "b32c58134a3db6fe",
+      "size": 1303
     },
     {
       "url": "/config/home.json",
@@ -27,8 +27,8 @@
     {
       "url": "/css/offline.css",
       "path": "css/offline.css",
-      "hash": "af7da4ef9bb52af6",
-      "size": 38177
+      "hash": "d46cf33ab250c312",
+      "size": 41164
     },
     {
       "url": "/data/checklists.json",
@@ -111,14 +111,26 @@
     {
       "url": "/",
       "path": "index.html",
-      "hash": "1f4ffa1c7c8653e9",
-      "size": 61198
+      "hash": "f74a47e818db7b3d",
+      "size": 30170
     },
     {
       "url": "/index.html",
       "path": "index.html",
-      "hash": "1f4ffa1c7c8653e9",
-      "size": 61198
+      "hash": "f74a47e818db7b3d",
+      "size": 30170
+    },
+    {
+      "url": "/js/app.js",
+      "path": "js/app.js",
+      "hash": "5b69a8f8bb9e4aaf",
+      "size": 33715
+    },
+    {
+      "url": "/js/boot.js",
+      "path": "js/boot.js",
+      "hash": "352e4aece64a4a6a",
+      "size": 1291
     },
     {
       "url": "/js/checklists.js",
@@ -147,8 +159,8 @@
     {
       "url": "/js/home.js",
       "path": "js/home.js",
-      "hash": "b5a746a250652676",
-      "size": 8817
+      "hash": "6a522c76d724421d",
+      "size": 8884
     },
     {
       "url": "/js/offline.js",
@@ -163,6 +175,18 @@
       "size": 2011
     },
     {
+      "url": "/js/queue-ui.js",
+      "path": "js/queue-ui.js",
+      "hash": "0ab8efb3829d6377",
+      "size": 5791
+    },
+    {
+      "url": "/js/queue.js",
+      "path": "js/queue.js",
+      "hash": "7eed004975acdce8",
+      "size": 15098
+    },
+    {
       "url": "/js/search.js",
       "path": "js/search.js",
       "hash": "131a96a7ac4f48a6",
@@ -171,8 +195,8 @@
     {
       "url": "/js/settings.js",
       "path": "js/settings.js",
-      "hash": "c7673a0f255e2ee9",
-      "size": 18109
+      "hash": "bcf6bba95695735e",
+      "size": 18164
     },
     {
       "url": "/js/store.js",

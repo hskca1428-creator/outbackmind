@@ -166,6 +166,7 @@
       renderNav(r[1]);
       document.documentElement.removeAttribute("data-nav-boot");   // D3: the early layout hint from index.html is no longer needed
       markCurrent();
+      document.dispatchEvent(new CustomEvent("om:home-rendered"));
       if (anchors[location.hash]) setTimeout(function () { goAnchor(location.hash, false); }, 50);
     });
   }
