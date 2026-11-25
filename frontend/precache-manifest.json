@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "db77a79d7256",
-  "built_at": "2026-11-20T10:05:28Z",
+  "version": "0f849e83d998",
+  "built_at": "2026-11-25T09:10:44Z",
   "content_reviewed_from": "2026-11-18",
   "content_reviewed_to": "2026-11-18",
   "draft_items": [],
@@ -163,6 +163,12 @@
       "size": 8884
     },
     {
+      "url": "/js/offline-page.js",
+      "path": "js/offline-page.js",
+      "hash": "570f6598fb94dab2",
+      "size": 441
+    },
+    {
       "url": "/js/offline.js",
       "path": "js/offline.js",
       "hash": "61f4da8570df5cf0",
@@ -213,8 +219,8 @@
     {
       "url": "/offline.html",
       "path": "offline.html",
-      "hash": "a734bc3ae0b6ed95",
-      "size": 1880
+      "hash": "7918fd35f5f41ec2",
+      "size": 1816
     }
   ]
 }
